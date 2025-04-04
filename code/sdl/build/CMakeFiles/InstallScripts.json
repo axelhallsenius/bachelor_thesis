@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/haxxel/exjobb/bachelor_thesis/sdl/build/cmake_install.cmake",
-		"/home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
