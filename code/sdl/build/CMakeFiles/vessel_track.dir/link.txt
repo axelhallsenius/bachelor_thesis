@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/vessel_track.dir/link.d CMakeFiles/vessel_track.dir/vessel_track.c.o -o vessel_track  -Wl,-rpath,/home/haxxel/exjobb/bachelor_thesis/sdl/build libSDL3.so.0.3.0

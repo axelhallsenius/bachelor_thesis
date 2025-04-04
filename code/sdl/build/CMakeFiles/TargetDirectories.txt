@@ -1,0 +1,8 @@
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/CMakeFiles/vessel_track.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/CMakeFiles/edit_cache.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/CMakeFiles/rebuild_cache.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/CMakeFiles/SDL3-shared.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/CMakeFiles/SDL3_test.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/CMakeFiles/SDL_uclibc.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/CMakeFiles/edit_cache.dir
+/home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/CMakeFiles/rebuild_cache.dir
