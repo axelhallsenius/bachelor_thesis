@@ -1,9 +1,9 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_ime.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_ime.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_ime.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_ime.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_ibus.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_ime.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_ibus.h \
  /usr/include/ibus-1.0/ibus.h /usr/include/ibus-1.0/ibusversion.h \
  /usr/include/ibus-1.0/ibusshare.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
@@ -345,4 +345,4 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_ime.c.o: \
  /usr/include/ibus-1.0/ibusxevent.h \
  /usr/include/ibus-1.0/ibusaccelgroup.h /usr/include/ibus-1.0/ibustypes.h \
  /usr/include/ibus-1.0/ibuskeysyms-compat.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_fcitx.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_fcitx.h

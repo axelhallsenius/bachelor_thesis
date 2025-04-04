@@ -1,17 +1,17 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmopengles.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmopengles.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmopengles.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_blit.h \
  /usr/include/fcntl.h /usr/include/features.h /usr/include/bits/types.h \
  /usr/include/bits/fcntl.h /usr/include/bits/fcntl-linux.h \
  /usr/include/bits/types/struct_iovec.h \
@@ -38,14 +38,14 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmopengles.c.o:
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
  /usr/include/gbm.h /usr/include/EGL/egl.h /usr/include/EGL/eglplatform.h \
  /usr/include/KHR/khrplatform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmopengles.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_egl_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_egl.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_platform_defines.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmopengles.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_egl_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_egl.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_platform_defines.h \
  /usr/include/EGL/eglext.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmsym.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmsym.h \
  /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \

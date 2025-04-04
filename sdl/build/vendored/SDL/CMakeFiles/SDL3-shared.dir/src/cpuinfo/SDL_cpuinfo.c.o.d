@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/cpuinfo/SDL_cpuinfo.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/cpuinfo/SDL_cpuinfo.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/cpuinfo/SDL_cpuinfo.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/cpuinfo/SDL_cpuinfo_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/cpuinfo/SDL_cpuinfo_c.h \
  /usr/include/unistd.h /usr/include/features.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/wordsize.h /usr/include/bits/types.h \

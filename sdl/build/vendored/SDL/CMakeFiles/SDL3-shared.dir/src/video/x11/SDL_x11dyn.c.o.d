@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/x11/SDL_x11dyn.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11dyn.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11dyn.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11dyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11dyn.h \
  /usr/include/X11/Xlib.h /usr/include/sys/types.h /usr/include/X11/X.h \
  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h \
@@ -59,4 +59,4 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/x11/SDL_x11dyn.c.o: \
  /usr/include/X11/extensions/scrnsaver.h \
  /usr/include/X11/extensions/saver.h /usr/include/X11/extensions/shape.h \
  /usr/include/X11/extensions/shapeconst.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11sym.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11sym.h

@@ -1,18 +1,18 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/x11/SDL_x11shape.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11shape.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11shape.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/../SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/../SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/../SDL_blit.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/../../core/linux/SDL_dbus.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/../SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/../SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/../SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/../../core/linux/SDL_dbus.h \
  /usr/include/dbus-1.0/dbus/dbus.h \
  /usr/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
  /usr/include/dbus-1.0/dbus/dbus-macros.h \
@@ -33,8 +33,8 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/x11/SDL_x11shape.c.o: \
  /usr/include/dbus-1.0/dbus/dbus-signature.h \
  /usr/include/dbus-1.0/dbus/dbus-syntax.h \
  /usr/include/dbus-1.0/dbus/dbus-threads.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/../../core/linux/SDL_ime.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11dyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/../../core/linux/SDL_ime.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11dyn.h \
  /usr/include/X11/Xlib.h /usr/include/sys/types.h /usr/include/X11/X.h \
  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
  /usr/include/X11/Xutil.h /usr/include/X11/keysym.h \
@@ -90,22 +90,22 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/x11/SDL_x11shape.c.o: \
  /usr/include/X11/extensions/scrnsaver.h \
  /usr/include/X11/extensions/saver.h /usr/include/X11/extensions/shape.h \
  /usr/include/X11/extensions/shapeconst.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11sym.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11clipboard.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11events.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11keyboard.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11modes.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11mouse.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11opengl.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_opengl.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_platform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_opengl_glext.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11sym.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11clipboard.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11events.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11keyboard.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11modes.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11mouse.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11opengl.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_opengl.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_platform.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_opengl_glext.h \
  /usr/include/GL/glx.h /usr/include/GL/gl.h /usr/include/GL/glxext.h \
  /usr/include/inttypes.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11settings.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/xsettings-client.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11window.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11settings.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/xsettings-client.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11window.h \
  /usr/include/EGL/egl.h /usr/include/EGL/eglplatform.h \
  /usr/include/KHR/khrplatform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11shape.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11shape.h

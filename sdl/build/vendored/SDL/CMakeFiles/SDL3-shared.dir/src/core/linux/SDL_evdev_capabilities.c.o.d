@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_evdev_capabilities.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_evdev_capabilities.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_evdev_capabilities.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_evdev_capabilities.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_evdev_capabilities.h \
  /usr/include/linux/input.h /usr/include/sys/time.h \
  /usr/include/features.h /usr/include/bits/types.h \
  /usr/include/bits/types/time_t.h \

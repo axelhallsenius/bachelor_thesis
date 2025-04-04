@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_evdev_kbd.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd.h \
  /usr/include/unistd.h /usr/include/features.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/wordsize.h /usr/include/bits/types.h \
@@ -40,25 +40,25 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_evdev_kbd.c.o: \
  /usr/include/bits/types/struct_sigstack.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/sigthread.h \
  /usr/include/bits/types/__sigset_t.h /usr/include/bits/signal_ext.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_events_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/../video/SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/../video/SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/../video/SDL_blit.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_clipboardevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_displayevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_dropevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_keyboard_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_keymap_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_mouse_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_touch_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_pen_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/../SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../events/SDL_windowevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd_default_accents.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd_default_keymap.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_events_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/../video/SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/../video/SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/../video/SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_clipboardevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_displayevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_dropevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_keyboard_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_keymap_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_mouse_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_touch_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_pen_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/../SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../events/SDL_windowevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd_default_accents.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_evdev_kbd_default_keymap.h

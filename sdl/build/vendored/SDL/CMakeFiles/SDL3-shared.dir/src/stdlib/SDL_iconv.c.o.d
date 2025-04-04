@@ -1,7 +1,7 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/stdlib/SDL_iconv.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/stdlib/SDL_iconv.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/stdlib/SDL_iconv.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
  /usr/include/iconv.h /usr/include/features.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h \
  /usr/include/errno.h /usr/include/bits/errno.h \

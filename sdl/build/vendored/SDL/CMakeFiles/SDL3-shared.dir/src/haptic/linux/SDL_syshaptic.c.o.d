@@ -1,11 +1,11 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/haptic/linux/SDL_syshaptic.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/SDL_syshaptic.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/SDL_syshaptic.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/../SDL_syshaptic.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/../../joystick/SDL_sysjoystick.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/../../joystick/SDL_joystick_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/../../joystick/linux/SDL_sysjoystick_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/../SDL_syshaptic.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/../../joystick/SDL_sysjoystick.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/../../joystick/SDL_joystick_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/../../joystick/linux/SDL_sysjoystick_c.h \
  /usr/include/linux/input.h /usr/include/sys/time.h \
  /usr/include/features.h /usr/include/bits/types.h \
  /usr/include/bits/types/time_t.h \
@@ -22,8 +22,8 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/haptic/linux/SDL_syshaptic.c.o: \
  /usr/include/asm/posix_types.h /usr/include/asm/posix_types_64.h \
  /usr/include/asm-generic/posix_types.h \
  /usr/include/linux/input-event-codes.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/../../core/linux/SDL_evdev_capabilities.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/haptic/linux/../../core/linux/SDL_udev.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/../../core/linux/SDL_evdev_capabilities.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/haptic/linux/../../core/linux/SDL_udev.h \
  /usr/include/libudev.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/sysmacros.h \

@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/filesystem/posix/SDL_sysfsops.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/filesystem/posix/SDL_sysfsops.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/filesystem/posix/SDL_sysfsops.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/filesystem/posix/../SDL_sysfilesystem.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/filesystem/posix/../SDL_sysfilesystem.h \
  /usr/include/stdio.h /usr/include/string.h /usr/include/errno.h \
  /usr/include/features.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \

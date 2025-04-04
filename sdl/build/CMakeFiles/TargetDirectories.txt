@@ -1,8 +1,0 @@
-/home/haxxel/exjobb/sdl/build/CMakeFiles/hello.dir
-/home/haxxel/exjobb/sdl/build/CMakeFiles/edit_cache.dir
-/home/haxxel/exjobb/sdl/build/CMakeFiles/rebuild_cache.dir
-/home/haxxel/exjobb/sdl/build/vendored/SDL/CMakeFiles/SDL3-shared.dir
-/home/haxxel/exjobb/sdl/build/vendored/SDL/CMakeFiles/SDL3_test.dir
-/home/haxxel/exjobb/sdl/build/vendored/SDL/CMakeFiles/SDL_uclibc.dir
-/home/haxxel/exjobb/sdl/build/vendored/SDL/CMakeFiles/edit_cache.dir
-/home/haxxel/exjobb/sdl/build/vendored/SDL/CMakeFiles/rebuild_cache.dir

@@ -1,9 +1,9 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/dialog/unix/SDL_portaldialog.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/dialog/unix/SDL_portaldialog.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dialog/unix/SDL_portaldialog.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/dialog/unix/../SDL_dialog_utils.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/dialog/unix/../../core/linux/SDL_dbus.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dialog/unix/../SDL_dialog_utils.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dialog/unix/../../core/linux/SDL_dbus.h \
  /usr/include/dbus-1.0/dbus/dbus.h \
  /usr/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
  /usr/include/dbus-1.0/dbus/dbus-macros.h \

@@ -1,52 +1,52 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/SDL_video.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_video.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_video.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_blit.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_clipboard_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_egl_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_egl.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_platform_defines.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_clipboard_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_egl_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_egl.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_platform_defines.h \
  /usr/include/EGL/egl.h /usr/include/EGL/eglplatform.h \
  /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdint.h \
  /usr/include/EGL/eglext.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_pixels_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_rect_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/SDL_video_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_events_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/../video/SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_clipboardevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_displayevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_dropevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_keyboard_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_keymap_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_mouse_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_touch_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_pen_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/../SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../events/SDL_windowevents_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../SDL_hints_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../SDL_properties_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../timer/SDL_timer_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../camera/SDL_camera_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../camera/../SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../render/SDL_sysrender.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../render/../video/SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../render/SDL_yuv_sw_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/../main/SDL_main_callbacks.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_opengl.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_platform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_opengl_glext.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_pixels_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_rect_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/SDL_video_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_events_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/../video/SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_clipboardevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_displayevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_dropevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_keyboard_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_keymap_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_mouse_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_touch_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_pen_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/../SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../events/SDL_windowevents_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../SDL_hints_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../SDL_properties_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../timer/SDL_timer_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../camera/SDL_camera_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../camera/../SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../render/SDL_sysrender.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../render/../video/SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../render/SDL_yuv_sw_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/../main/SDL_main_callbacks.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_opengl.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_platform.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_opengl_glext.h \
  /usr/include/sys/types.h /usr/include/sys/stat.h /usr/include/features.h \
  /usr/include/bits/types.h /usr/include/bits/types/struct_timespec.h \
  /usr/include/bits/types/time_t.h /usr/include/bits/stat.h \
@@ -66,5 +66,5 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/SDL_video.c.o: \
  /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
  /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
  /usr/include/linux/close_range.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylandmessagebox.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/SDL_x11messagebox.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylandmessagebox.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/SDL_x11messagebox.h

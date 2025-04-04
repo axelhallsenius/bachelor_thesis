@@ -1,9 +1,9 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmvulkan.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvulkan.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvulkan.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_vulkan_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../wayland/SDL_waylanddyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_vulkan_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../wayland/SDL_waylanddyn.h \
  /usr/include/wayland-cursor.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdint.h \
  /usr/include/wayland-util.h /usr/include/math.h \
@@ -17,28 +17,28 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmvulkan.c.o: \
  /usr/include/xkbcommon/xkbcommon-compose.h \
  /usr/include/wayland-client-core.h /usr/include/wayland-util.h \
  /usr/include/wayland-version.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../wayland/SDL_waylandsym.h \
- /home/haxxel/exjobb/sdl/build/vendored/SDL/wayland-generated-protocols/wayland-client-protocol.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../wayland/SDL_waylandsym.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/wayland-generated-protocols/wayland-client-protocol.h \
  /usr/include/wayland-client.h /usr/include/wayland-client-core.h \
  /usr/include/wayland-client-protocol.h /usr/include/wayland-egl.h \
  /usr/include/wayland-egl-core.h /usr/include/libdecor-0/libdecor.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vk_platform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_core.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codecs_common.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std_encode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std_encode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std_decode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std_decode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_av1std.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_av1std_decode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_av1std.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_wayland.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vk_platform.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_core.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codecs_common.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std_encode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std_encode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h264std_decode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_h265std_decode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_av1std.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_av1std_decode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/../vk_video/vulkan_video_codec_av1std.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_wayland.h \
  /usr/include/xcb/xcb.h /usr/include/sys/types.h /usr/include/sys/uio.h \
  /usr/include/features.h /usr/include/bits/types/struct_iovec.h \
  /usr/include/bits/uio_lim.h /usr/include/bits/uio-ext.h \
@@ -63,20 +63,20 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmvulkan.c.o: \
  /usr/include/bits/types/struct___jmp_buf_tag.h \
  /usr/include/bits/pthread_stack_min-dynamic.h /usr/include/xcb/xproto.h \
  /usr/include/xcb/xcb.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_xcb.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_xcb.h \
  /usr/include/X11/Xlib.h /usr/include/X11/X.h \
  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_xlib.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/../SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/.././khronos/vulkan/vulkan_xlib.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/../SDL_blit.h \
  /usr/include/fcntl.h /usr/include/bits/fcntl.h \
  /usr/include/bits/fcntl-linux.h /usr/include/linux/falloc.h \
  /usr/include/bits/stat.h /usr/include/bits/struct_stat.h \
@@ -90,9 +90,9 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmvulkan.c.o: \
  /usr/include/xf86drmMode.h /usr/include/libdrm/drm_mode.h \
  /usr/include/gbm.h /usr/include/EGL/egl.h /usr/include/EGL/eglplatform.h \
  /usr/include/KHR/khrplatform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmsym.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmsym.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmvulkan.h \
  /usr/include/sys/ioctl.h /usr/include/bits/ioctls.h \
  /usr/include/asm/ioctls.h /usr/include/asm-generic/ioctls.h \
  /usr/include/linux/ioctl.h /usr/include/bits/ioctl-types.h \

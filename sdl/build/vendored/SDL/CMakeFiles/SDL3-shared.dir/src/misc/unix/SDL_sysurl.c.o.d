@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/misc/unix/SDL_sysurl.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/misc/unix/SDL_sysurl.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/misc/unix/SDL_sysurl.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/misc/unix/../SDL_sysurl.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/misc/unix/../SDL_sysurl.h \
  /usr/include/stdio.h /usr/include/stdlib.h /usr/include/string.h \
  /usr/include/unistd.h /usr/include/features.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \

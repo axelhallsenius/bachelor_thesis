@@ -1,5 +1,5 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/process/SDL_process.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/process/SDL_process.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/process/SDL_process.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/process/SDL_sysprocess.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/process/SDL_sysprocess.h

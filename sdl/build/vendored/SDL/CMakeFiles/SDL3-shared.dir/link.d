@@ -1,5 +1,5 @@
 ../../libSDL3.so.0.3.0: \
-  /home/haxxel/exjobb/sdl/vendored/SDL/src/dynapi/SDL_dynapi.sym \
+  /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dynapi/SDL_dynapi.sym \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtbeginS.o \
   CMakeFiles/SDL3-shared.dir/src/SDL.c.o \
@@ -313,7 +313,7 @@
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crtn.o
 
-/home/haxxel/exjobb/sdl/vendored/SDL/src/dynapi/SDL_dynapi.sym:
+/home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dynapi/SDL_dynapi.sym:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../lib/crti.o:
 

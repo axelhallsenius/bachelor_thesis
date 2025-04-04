@@ -1,4 +1,4 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/SDL_guid.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_guid.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_guid.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h

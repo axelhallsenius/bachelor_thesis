@@ -1,11 +1,11 @@
 vendored/SDL/CMakeFiles/SDL_uclibc.dir/src/libm/e_log.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/libm/e_log.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/libm/e_log.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/build/vendored/SDL/include-config-/build_config/SDL_build_config.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_platform_defines.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/dynapi/SDL_dynapi.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/dynapi/SDL_dynapi_overrides.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/include-config-/build_config/SDL_build_config.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_platform_defines.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dynapi/SDL_dynapi.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/dynapi/SDL_dynapi_overrides.h \
  /usr/include/sys/types.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \
  /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
@@ -51,66 +51,66 @@ vendored/SDL/CMakeFiles/SDL_uclibc.dir/src/libm/e_log.c.o: \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/float.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_assert.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_asyncio.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_atomic.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_audio.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_endian.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_mutex.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_thread.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_properties.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_iostream.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_bits.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_blendmode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_camera.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_pixels.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_surface.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_rect.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_clipboard.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_cpuinfo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_dialog.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_events.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_gamepad.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_guid.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_joystick.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_power.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_sensor.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_keyboard.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_keycode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_scancode.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_mouse.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_pen.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_touch.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_filesystem.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_gpu.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_haptic.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_hidapi.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_hints.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_init.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_loadso.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_locale.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_log.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_messagebox.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_metal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_misc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_platform.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_process.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_render.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_storage.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_system.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_time.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_timer.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_tray.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_version.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_oldnames.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_intrin.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_assert.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_asyncio.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_atomic.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_audio.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_endian.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_mutex.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_thread.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_properties.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_iostream.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_bits.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_blendmode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_camera.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_pixels.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_surface.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_rect.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_clipboard.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_cpuinfo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_dialog.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_events.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_gamepad.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_guid.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_joystick.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_power.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_sensor.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_keyboard.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_keycode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_scancode.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_mouse.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_pen.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_touch.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_filesystem.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_gpu.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_haptic.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_hidapi.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_hints.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_init.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_loadso.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_locale.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_log.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_messagebox.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_metal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_misc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_platform.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_process.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_render.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_storage.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_system.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_time.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_timer.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_tray.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_version.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_oldnames.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_intrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/mmintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/mm_malloc.h \
@@ -212,8 +212,8 @@ vendored/SDL/CMakeFiles/SDL_uclibc.dir/src/libm/e_log.c.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/prfchwintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/keylockerintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/amxfp16intrin.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_main.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_utils_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_hashtable.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/libm/math_libm.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/libm/math_private.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_main.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_utils_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_hashtable.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/libm/math_libm.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/libm/math_private.h

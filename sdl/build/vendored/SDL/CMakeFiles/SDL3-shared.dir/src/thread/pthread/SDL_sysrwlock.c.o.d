@@ -1,7 +1,7 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/thread/pthread/SDL_sysrwlock.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/thread/pthread/SDL_sysrwlock.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/thread/pthread/SDL_sysrwlock.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
  /usr/include/errno.h /usr/include/features.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \

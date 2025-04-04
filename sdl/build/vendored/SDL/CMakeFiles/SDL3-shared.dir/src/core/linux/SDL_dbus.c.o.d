@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_dbus.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_dbus.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_dbus.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/SDL_dbus.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/SDL_dbus.h \
  /usr/include/dbus-1.0/dbus/dbus.h \
  /usr/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
  /usr/include/dbus-1.0/dbus/dbus-macros.h \
@@ -23,4 +23,4 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/linux/SDL_dbus.c.o: \
  /usr/include/dbus-1.0/dbus/dbus-signature.h \
  /usr/include/dbus-1.0/dbus/dbus-syntax.h \
  /usr/include/dbus-1.0/dbus/dbus-threads.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/linux/../../stdlib/SDL_vacopy.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/linux/../../stdlib/SDL_vacopy.h

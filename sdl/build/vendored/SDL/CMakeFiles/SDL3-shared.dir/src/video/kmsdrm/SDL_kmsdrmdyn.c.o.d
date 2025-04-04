@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmdyn.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmdyn.h \
  /usr/include/xf86drm.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
  /usr/include/sys/types.h \
@@ -19,4 +19,4 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/kmsdrm/SDL_kmsdrmdyn.c.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h \
  /usr/include/gbm.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmsym.h
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/kmsdrm/SDL_kmsdrmsym.h

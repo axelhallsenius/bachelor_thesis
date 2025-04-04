@@ -1,12 +1,12 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/camera/pipewire/SDL_camera_pipewire.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/camera/pipewire/SDL_camera_pipewire.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/camera/pipewire/SDL_camera_pipewire.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/camera/pipewire/../SDL_syscamera.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/camera/pipewire/../../SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/camera/pipewire/../../video/SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/camera/pipewire/../../video/SDL_blit.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/camera/pipewire/../../core/linux/SDL_dbus.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/camera/pipewire/../SDL_syscamera.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/camera/pipewire/../../SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/camera/pipewire/../../video/SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/camera/pipewire/../../video/SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/camera/pipewire/../../core/linux/SDL_dbus.h \
  /usr/include/dbus-1.0/dbus/dbus.h \
  /usr/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
  /usr/include/dbus-1.0/dbus/dbus-macros.h \

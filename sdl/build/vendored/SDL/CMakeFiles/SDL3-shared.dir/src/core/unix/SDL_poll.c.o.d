@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/core/unix/SDL_poll.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/unix/SDL_poll.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/unix/SDL_poll.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/core/unix/SDL_poll.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/core/unix/SDL_poll.h \
  /usr/include/poll.h /usr/include/sys/poll.h /usr/include/features.h \
  /usr/include/bits/poll.h /usr/include/bits/types/__sigset_t.h \
  /usr/include/bits/types/struct_timespec.h /usr/include/errno.h \

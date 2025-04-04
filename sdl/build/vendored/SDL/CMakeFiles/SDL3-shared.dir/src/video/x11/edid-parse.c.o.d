@@ -1,7 +1,7 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/x11/edid-parse.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/edid-parse.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/edid-parse.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/x11/edid.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/x11/edid.h \
  /usr/include/stdlib.h /usr/include/string.h /usr/include/math.h \
  /usr/include/stdio.h

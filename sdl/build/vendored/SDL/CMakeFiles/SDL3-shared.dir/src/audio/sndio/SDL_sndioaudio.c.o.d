@@ -1,7 +1,7 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/audio/sndio/SDL_sndioaudio.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/audio/sndio/SDL_sndioaudio.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/audio/sndio/SDL_sndioaudio.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
  /usr/include/stdio.h /usr/include/signal.h /usr/include/features.h \
  /usr/include/bits/types.h /usr/include/bits/signum-generic.h \
  /usr/include/bits/signum-arch.h /usr/include/bits/types/sig_atomic_t.h \
@@ -25,6 +25,6 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/audio/sndio/SDL_sndioaudio.c.o: \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/sigthread.h \
  /usr/include/bits/types/__sigset_t.h /usr/include/bits/signal_ext.h \
  /usr/include/poll.h /usr/include/sys/poll.h /usr/include/bits/poll.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/audio/sndio/../SDL_sysaudio.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/audio/sndio/SDL_sndioaudio.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/audio/sndio/../SDL_sysaudio.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/audio/sndio/SDL_sndioaudio.h \
  /usr/include/sndio.h /usr/include/sys/types.h

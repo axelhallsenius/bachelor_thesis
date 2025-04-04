@@ -1,9 +1,9 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/joystick/SDL_steam_virtual_gamepad.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/joystick/SDL_steam_virtual_gamepad.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/joystick/SDL_steam_virtual_gamepad.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/joystick/SDL_joystick_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/joystick/SDL_steam_virtual_gamepad.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/joystick/SDL_joystick_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/joystick/SDL_steam_virtual_gamepad.h \
  /usr/include/sys/types.h /usr/include/sys/stat.h /usr/include/features.h \
  /usr/include/bits/types.h /usr/include/bits/types/struct_timespec.h \
  /usr/include/bits/types/time_t.h /usr/include/bits/stat.h \

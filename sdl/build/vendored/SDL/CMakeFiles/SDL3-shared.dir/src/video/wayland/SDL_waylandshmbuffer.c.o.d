@@ -1,7 +1,7 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/wayland/SDL_waylandshmbuffer.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylandshmbuffer.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylandshmbuffer.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
  /usr/include/errno.h /usr/include/features.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
@@ -41,23 +41,23 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/wayland/SDL_waylandshmbuffer.c
  /usr/include/bits/mman-map-flags-generic.h \
  /usr/include/bits/mman-linux.h /usr/include/bits/mman-shared.h \
  /usr/include/bits/mman_ext.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylandshmbuffer.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylandvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylandshmbuffer.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylandvideo.h \
  /usr/include/EGL/egl.h /usr/include/EGL/eglplatform.h \
  /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdint.h \
  /usr/include/wayland-util.h /usr/include/math.h /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/../SDL_sysvideo.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_error.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_video.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/../SDL_surface_c.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/../SDL_blit.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/../../core/linux/SDL_dbus.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/../SDL_sysvideo.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_vulkan.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_stdinc.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_error.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_video.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_begin_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/include/SDL3/SDL_close_code.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/../SDL_surface_c.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/../SDL_blit.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/../../core/linux/SDL_dbus.h \
  /usr/include/dbus-1.0/dbus/dbus.h \
  /usr/lib/dbus-1.0/include/dbus/dbus-arch-deps.h \
  /usr/include/dbus-1.0/dbus/dbus-macros.h \
@@ -76,8 +76,8 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/wayland/SDL_waylandshmbuffer.c
  /usr/include/dbus-1.0/dbus/dbus-signature.h \
  /usr/include/dbus-1.0/dbus/dbus-syntax.h \
  /usr/include/dbus-1.0/dbus/dbus-threads.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/../../core/linux/SDL_ime.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylanddyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/../../core/linux/SDL_ime.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylanddyn.h \
  /usr/include/wayland-cursor.h /usr/include/xkbcommon/xkbcommon.h \
  /usr/include/stdio.h /usr/include/xkbcommon/xkbcommon-names.h \
  /usr/include/xkbcommon/xkbcommon-keysyms.h \
@@ -85,8 +85,8 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/wayland/SDL_waylandshmbuffer.c
  /usr/include/xkbcommon/xkbcommon-compose.h \
  /usr/include/wayland-client-core.h /usr/include/wayland-util.h \
  /usr/include/wayland-version.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylandsym.h \
- /home/haxxel/exjobb/sdl/build/vendored/SDL/wayland-generated-protocols/wayland-client-protocol.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylandsym.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/wayland-generated-protocols/wayland-client-protocol.h \
  /usr/include/wayland-client.h /usr/include/wayland-client-core.h \
  /usr/include/wayland-client-protocol.h /usr/include/wayland-egl.h \
  /usr/include/wayland-egl-core.h /usr/include/libdecor-0/libdecor.h \

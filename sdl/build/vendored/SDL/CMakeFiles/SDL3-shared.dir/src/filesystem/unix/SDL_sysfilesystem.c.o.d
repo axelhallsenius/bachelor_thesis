@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/filesystem/unix/SDL_sysfilesystem.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/filesystem/unix/SDL_sysfilesystem.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/filesystem/unix/SDL_sysfilesystem.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/filesystem/unix/../SDL_sysfilesystem.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/filesystem/unix/../SDL_sysfilesystem.h \
  /usr/include/stdio.h /usr/include/sys/stat.h /usr/include/features.h \
  /usr/include/bits/types.h /usr/include/bits/types/struct_timespec.h \
  /usr/include/bits/types/time_t.h /usr/include/bits/stat.h \

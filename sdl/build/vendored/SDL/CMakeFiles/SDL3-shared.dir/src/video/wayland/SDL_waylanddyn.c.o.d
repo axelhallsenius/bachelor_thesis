@@ -1,8 +1,8 @@
 vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/wayland/SDL_waylanddyn.c.o: \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylanddyn.c \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylanddyn.c \
  /usr/include/stdc-predef.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/SDL_internal.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylanddyn.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/SDL_internal.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylanddyn.h \
  /usr/include/wayland-cursor.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdint.h \
  /usr/include/wayland-util.h /usr/include/math.h \
@@ -16,8 +16,8 @@ vendored/SDL/CMakeFiles/SDL3-shared.dir/src/video/wayland/SDL_waylanddyn.c.o: \
  /usr/include/xkbcommon/xkbcommon-compose.h \
  /usr/include/wayland-client-core.h /usr/include/wayland-util.h \
  /usr/include/wayland-version.h \
- /home/haxxel/exjobb/sdl/vendored/SDL/src/video/wayland/SDL_waylandsym.h \
- /home/haxxel/exjobb/sdl/build/vendored/SDL/wayland-generated-protocols/wayland-client-protocol.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/vendored/SDL/src/video/wayland/SDL_waylandsym.h \
+ /home/haxxel/exjobb/bachelor_thesis/sdl/build/vendored/SDL/wayland-generated-protocols/wayland-client-protocol.h \
  /usr/include/wayland-client.h /usr/include/wayland-client-core.h \
  /usr/include/wayland-client-protocol.h /usr/include/wayland-egl.h \
  /usr/include/wayland-egl-core.h /usr/include/libdecor-0/libdecor.h \
