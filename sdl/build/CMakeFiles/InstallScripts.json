@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/haxxel/exjobb/sdl/build/cmake_install.cmake",
+		"/home/haxxel/exjobb/sdl/build/vendored/SDL/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
