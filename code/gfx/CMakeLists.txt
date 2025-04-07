@@ -17,3 +17,4 @@ add_executable(vessel_tracker vessel_tracker.cpp)
 target_link_libraries(vessel_tracker PRIVATE SDL3::SDL3)
 # This tries to add ImGui
 add_subdirectory(gui)
+#add_subdirectory(shapes)
