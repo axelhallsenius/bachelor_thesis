@@ -16,6 +16,7 @@
 #include "gui/imgui.h"
 #include "gui/imgui_impl_sdl3.h"
 #include "gui/imgui_impl_sdlrenderer3.h"
+#include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
 #include "shapes/shapes.h"
 // Dear ImGui: standalone example application for SDL3 + SDL_Renderer
@@ -200,6 +201,17 @@ int main(int, char**)
     rect.w = 100;
     rect.h = 200;
     SDL_RenderFillRect(renderer, &rect);
+
+    SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
+
+    filledCircleRGBA(
+      renderer, 
+      150, 150, 
+      8, 
+      0.0f, 255.0f, 0.0f, 255.0f
+    );
+
+    
 
 
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
