@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(vessel_tracker)
+project(ImGui)
 
 set(IMGUI_SRC
   imgui.cpp
@@ -10,7 +10,8 @@ set(IMGUI_SRC
   imgui_tables.cpp
   imgui_widgets.cpp
 )
-set(IMGUI_H 
+
+set(IMGUI_HEADERS
   imconfig.h
   imgui.h
   imgui_impl_sdl3.h
@@ -20,4 +21,12 @@ set(IMGUI_H
   imstb_textedit.h
   imstb_truetype.h
 )
-target_sources(vessel_tracker PRIVATE ${IMGUI_SRC} ${IMGUI_H})
+
+add_library(ImGui STATIC ${IMGUI_SRC} ${IMGUI_HEADERS})
+
+target_include_directories(ImGui PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_SOURCE_DIR}/vendored/SDL/include
+)
+
+target_link_libraries(ImGui PUBLIC SDL3::SDL3)

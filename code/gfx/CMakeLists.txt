@@ -10,13 +10,21 @@ add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 
 # Build SDL3_gfx from the 'SDL3_gfx' directory
 add_subdirectory(SDL3_gfx EXCLUDE_FROM_ALL)
+add_subdirectory(shapes)
+add_subdirectory(gui EXCLUDE_FROM_ALL)
 
 add_executable(${PROJECT_NAME} vessel_tracker.cpp)
 
 # Link SDL3 and SDL3_gfx to your executable
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_gfx_Shared)
+target_link_libraries(${PROJECT_NAME} 
+PRIVATE 
+  SDL3::SDL3 
+  SDL3_gfx_Shared
+  shapes
+  ImGui
+)
+# target_include_directories(${PROJECT_NAME} PRIVATE shapes)
 
-add_subdirectory(gui EXCLUDE_FROM_ALL)
 
 # If SDL3_gfx is built as a shared library, make sure your executable knows where to find it at runtime
 set_target_properties(${PROJECT_NAME} PROPERTIES

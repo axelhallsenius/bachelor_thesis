@@ -18,7 +18,7 @@
 #include "gui/imgui_impl_sdlrenderer3.h"
 #include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
-#include "shapes/shapes.h"
+#include "shapes.h"
 // Dear ImGui: standalone example application for SDL3 + SDL_Renderer
 // (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 
@@ -82,27 +82,15 @@ int main(int, char**)
   // Load Fonts
   io.Fonts->AddFontFromFileTTF("gui/fonts/DroidSans.ttf", 24.0f);
 
-  // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
-  // - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
-  // - If the file cannot be loaded, the function will return a nullptr. Please handle those errors in your application (e.g. use an assertion, or display an error and quit).
-  // - The fonts will be rasterized at a given size (w/ oversampling) and stored into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame below will call.
-  // - Use '#define IMGUI_ENABLE_FREETYPE' in your imconfig file to use Freetype for higher quality font rendering.
-  // - Read 'docs/FONTS.md' for more instructions and details.
-  // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
-  // - Our Emscripten build process allows embedding fonts to be accessible at runtime from the "fonts/" folder. See Makefile.emscripten for details.
-  //io.Fonts->AddFontDefault();
-  //io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
-  //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
-  //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
-  //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-  //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
-  //IM_ASSERT(font != nullptr);
-
-  // Our state
+   // Our state
   bool show_demo_window = false;
   bool show_another_window = false;
-  bool show_testing_func = true;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+  bool show_vessel = false;
+  bool show_observer = false;
+  bool show_vessel_path = false;
+  bool show_observer_path = false;
 
   // Main loop
   bool done = false;
@@ -152,7 +140,7 @@ int main(int, char**)
       static float f = 0.0f;
       static int counter = 0;
 
-      ImGui::Begin("Path Selection");                          // Create a window called "Hello, world!" and append into it.
+      ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
       ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
@@ -184,17 +172,9 @@ int main(int, char**)
     ImGui::Render();
     //SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-
     SDL_RenderClear(renderer);
 
-    //render other stuff
-    //testing_func(renderer);
-    //Uint32 px = (Uint32) SDL_rand(400);
-    //Uint32 py = (Uint32) SDL_rand(400);
-    if (!SDL_RenderPoint(renderer, 100, 100)){
-      printf("Failed SDL_RenderPoint()\n");
-    }
-
+    //render shapes
     SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
     SDL_FRect rect;
     rect.x = rect.y = 100;
@@ -210,6 +190,9 @@ int main(int, char**)
       8, 
       0.0f, 255.0f, 0.0f, 255.0f
     );
+
+
+    //testing_func();
 
     
 
