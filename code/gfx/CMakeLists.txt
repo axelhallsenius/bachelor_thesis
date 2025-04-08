@@ -9,9 +9,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 
 # Build SDL3_gfx from the 'SDL3_gfx' directory
-add_subdirectory(SDL3_gfx EXCLUDE_FROM_ALL)
+add_subdirectory(SDL3_gfx)
+add_subdirectory(gui)
 add_subdirectory(shapes)
-add_subdirectory(gui EXCLUDE_FROM_ALL)
 
 add_executable(${PROJECT_NAME} vessel_tracker.cpp)
 
@@ -20,8 +20,8 @@ target_link_libraries(${PROJECT_NAME}
 PRIVATE 
   SDL3::SDL3 
   SDL3_gfx_Shared
+  # ImGui
   shapes
-  ImGui
 )
 # target_include_directories(${PROJECT_NAME} PRIVATE shapes)
 

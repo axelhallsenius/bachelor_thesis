@@ -18,7 +18,7 @@
 #include "gui/imgui_impl_sdlrenderer3.h"
 #include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
-#include "shapes.h"
+#include "shapes/shapes.h"
 // Dear ImGui: standalone example application for SDL3 + SDL_Renderer
 // (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 
@@ -69,8 +69,8 @@ int main(int, char**)
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO(); (void)io;
-  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+  // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+  // io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
   // Setup Dear ImGui style
   ImGui::StyleColorsDark();
@@ -85,9 +85,10 @@ int main(int, char**)
    // Our state
   bool show_demo_window = false;
   bool show_another_window = false;
-  ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+  ImVec4 clear_color = ImVec4(0.816f, 0.922f, 0.988f, 1.00f);
 
-  bool show_vessel = false;
+
+  bool show_vessel = true;
   bool show_observer = false;
   bool show_vessel_path = false;
   bool show_observer_path = false;
@@ -130,10 +131,12 @@ int main(int, char**)
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
+    static int xpos = 100;
+    static int ypos = 100;
 
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-    if (show_demo_window)
-      ImGui::ShowDemoWindow(&show_demo_window);
+    // if (show_demo_window)
+    //   ImGui::ShowDemoWindow(&show_demo_window);
 
     // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
     {
@@ -143,6 +146,16 @@ int main(int, char**)
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
       ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+      ImGui::Checkbox("Show Grid", &show_demo_window);      // Edit bools storing our window open/close state
+
+      ImGui::Checkbox("Show Vessel", &show_vessel);      // Edit bools storing our window open/close state
+      ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
+      
+      ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
+      ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
+      ImGui::DragInt("X pos", &xpos, 1);
+      ImGui::DragInt("Y pos", &ypos, 1);
+
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
 
@@ -175,21 +188,24 @@ int main(int, char**)
     SDL_RenderClear(renderer);
 
     //render shapes
-    SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
-    SDL_FRect rect;
-    rect.x = rect.y = 100;
-    rect.w = 100;
-    rect.h = 200;
-    SDL_RenderFillRect(renderer, &rect);
+    // SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
+    // SDL_FRect rect;
+    // rect.x = rect.y = 100;
+    // rect.w = 100;
+    // rect.h = 200;
+    // SDL_RenderFillRect(renderer, &rect);
 
-    SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
+    // SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
 
-    filledCircleRGBA(
-      renderer, 
-      150, 150, 
-      8, 
-      0.0f, 255.0f, 0.0f, 255.0f
-    );
+    if (show_vessel){
+      filledCircleRGBA(
+        renderer, 
+        xpos, ypos, 
+        6, 
+        40.0f, 200.0f, 40.0f, 255.0f
+      );
+    }
+    
 
 
     //testing_func();

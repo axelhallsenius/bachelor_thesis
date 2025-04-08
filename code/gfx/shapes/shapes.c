@@ -6,11 +6,14 @@
 
 #define POINT_SIZE 4;
 
-void testing_func(SDL_Renderer *renderer){
-  Uint32 px = (Uint32) SDL_rand(400);
-  Uint32 py = (Uint32) SDL_rand(400);
-  if (!SDL_RenderPoint(renderer, px, py)){
-    printf("Failed SDL_RenderPoint()\n");
-  }
-}
+// void draw_point(point *p, Uint8 R, Uint8 G, Uint8 B, Uint8 A){
+// }
+
+// void testing_func(SDL_Renderer *renderer){
+//   Uint32 px = (Uint32) SDL_rand(400);
+//   Uint32 py = (Uint32) SDL_rand(400);
+//   if (!SDL_RenderPoint(renderer, px, py)){
+//     printf("Failed SDL_RenderPoint()\n");
+//   }
+// }
 

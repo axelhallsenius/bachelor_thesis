@@ -19,14 +19,18 @@ typedef struct {
 //   grid
 // } grid_options;
 
-// void draw_point(point *p, ImVec4 color);
+void draw_point(point *p, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
 //NOTE: maybe bez the curves a lil just for show
-// void draw_between_points(point *a, point *b, ImVec4 color);
+void draw_between_points(point *a, point *b, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
-// void draw_path(point *path[], ImVec4 color);
+void draw_path(point *path[], Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
 void testing_func(SDL_Renderer *renderer);
+
+//scale: pixels between grid nodes
+//NOTE: 32 bit could be suboptimal
+void draw_grid(Uint32 scale);
 
 /*
  * Usage:
