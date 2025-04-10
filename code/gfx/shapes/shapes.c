@@ -5,14 +5,12 @@
 #include "shapes.h"
 #include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
-#define POINT_SIZE 6;
-
 void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type){
   if(type == vessel){
     filledCircleRGBA(
       renderer, 
       xpos, ypos, 
-      6, 
+      POINT_SIZE, 
       40.0f, 200.0f, 40.0f, 255.0f
     );
   }
@@ -32,17 +30,27 @@ void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type){
 
 void draw_grid(SDL_Renderer *renderer, SDL_Window *window, Uint32 scale){
   //corresponds to color #c0c0c0
-  SDL_SetRenderDrawColorFloat(renderer, 0.753f, 0.753f, 0.753f, 1.0f);
+  if (scale < 10){
+    printf("Error, grid scale too small.\n");
+  }
   int w;
   int h;
-  // SDL_GetWindowSizeInPixels(window, &w, &h);
-  //TODO: right now just renders a cross
+  SDL_GetWindowSize(window, &w, &h);
+  int mid_x = w/2;  
+  int mid_y = h/2;  
 
-	SDL_RenderLine(renderer, 0, 100, 200, 100);;
-	SDL_RenderLine(renderer, 100, 0, 100, 200);;
-  
-	// SDL_RenderLine(renderer, 0, (*h)/2, *w, (*h)/2);;
-	// SDL_RenderLine(renderer, (*w)/2, 0, (*w)/2, *h);;
+  SDL_SetRenderDrawColorFloat(renderer, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
+	// SDL_RenderLine(renderer, 0, mid_y, w, mid_y);
+	// SDL_RenderLine(renderer, mid_x, 0, mid_x, h);
+
+  for (int i = 0; i < w; i += scale){
+    SDL_RenderLine(renderer, 0, mid_y+i, w, mid_y+i);
+    SDL_RenderLine(renderer, 0, mid_y-i, w, mid_y-i);
+  }
+  for (int i = 0; i < h; i += scale){
+    SDL_RenderLine(renderer, mid_x+i, 0, mid_x+i, h);
+    SDL_RenderLine(renderer, mid_x-i, 0, mid_x-i, h);
+  }
 
 }
 

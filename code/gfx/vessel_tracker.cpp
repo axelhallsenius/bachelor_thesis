@@ -94,6 +94,8 @@ int main(int, char**)
   bool show_observer_path = false;
   bool show_hovering_legend = false;
 
+  int grid_scale = 100;
+
   // Main loop
   bool done = false;
 #ifdef __EMSCRIPTEN__
@@ -157,14 +159,17 @@ int main(int, char**)
       
       ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
-      ImGui::Text("Vessel Coordinates");
+      ImGui::Text("\n");
       ImGui::DragInt("X pos: Vessel", &xpos_v, 1);
       ImGui::DragInt("Y pos: Vessel", &ypos_v, 1);
 
-      ImGui::Text("Observer Coordinates");
+      ImGui::Text("\n");
       ImGui::DragInt("X pos: Observer", &xpos_o, 1);
       ImGui::DragInt("Y pos: Observer", &ypos_o, 1);
 
+      ImGui::Text("\n");
+      ImGui::DragInt("Grid Scale", &grid_scale, 0.8f, MIN_GRID_SIZE, MAX_GRID_SIZE);
+      ImGui::Text("\n");
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
 
@@ -213,7 +218,7 @@ int main(int, char**)
       draw_entity(renderer,xpos_o,ypos_o, observer);
     
     if(show_grid){
-      draw_grid(renderer, window, 50);
+      draw_grid(renderer, window, grid_scale);
 
     }
 

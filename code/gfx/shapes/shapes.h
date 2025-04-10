@@ -7,6 +7,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define POINT_SIZE 6
+#define GRID_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
+#define VESSEL_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
+#define OBSERVER_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
+#define MIN_GRID_SIZE 10
+#define MAX_GRID_SIZE 500
+
+
 typedef enum {
   vessel,
   observer
@@ -17,6 +26,13 @@ typedef struct {
   float y;
 } point;
 
+typedef struct {
+  float x;
+  float y;
+} wincent_point;
+
+
+
 // typedef enum {
 //   none,
 //   side_ruler,
@@ -26,7 +42,7 @@ typedef struct {
 
 void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
 
-// void draw_legend()
+// void draw_legend(SDL_Renderer* renderer, char *text, );
 
 void draw_point(point *p, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
