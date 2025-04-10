@@ -40,7 +40,8 @@ typedef struct {
 // } grid_options;
 
 
-void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
+// void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
+void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos, entity_type type);
 
 // void draw_legend(SDL_Renderer* renderer, char *text, );
 
@@ -57,7 +58,7 @@ void testing_func(SDL_Renderer *renderer);
  * * scale: pixels between grid nodes
  * * NOTE: 32 bit could be suboptimal
 */
-void draw_grid(SDL_Renderer *renderer, SDL_Window *window, Uint32 scale);
+void draw_grid(SDL_Renderer *renderer, SDL_Window *window, float zoom);
 
 /*
  * Usage:

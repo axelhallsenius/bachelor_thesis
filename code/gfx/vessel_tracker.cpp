@@ -95,6 +95,7 @@ int main(int, char**)
   bool show_hovering_legend = false;
 
   int grid_scale = 100;
+  float zoom = 1.0f;
 
   // Main loop
   bool done = false;
@@ -168,7 +169,7 @@ int main(int, char**)
       ImGui::DragInt("Y pos: Observer", &ypos_o, 1);
 
       ImGui::Text("\n");
-      ImGui::DragInt("Grid Scale", &grid_scale, 0.8f, MIN_GRID_SIZE, MAX_GRID_SIZE);
+      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
@@ -212,13 +213,13 @@ int main(int, char**)
     // SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
 
     if (show_vessel)
-      draw_entity(renderer,xpos_v,ypos_v, vessel);
+      draw_entity(renderer,window,zoom,xpos_v,ypos_v, vessel);
     
     if (show_observer)
-      draw_entity(renderer,xpos_o,ypos_o, observer);
+      draw_entity(renderer,window,zoom,xpos_o,ypos_o, observer);
     
     if(show_grid){
-      draw_grid(renderer, window, grid_scale);
+      draw_grid(renderer, window, zoom);
 
     }
 

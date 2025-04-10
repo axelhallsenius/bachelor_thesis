@@ -5,11 +5,22 @@
 #include "shapes.h"
 #include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
-void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type){
+//TODO: I suspect this function can be optimized alot
+void centered_to_window(SDL_Window *window, float zoom, float *x, float *y){
+  int w;
+  int h;
+  SDL_GetWindowSize(window, &w, &h);
+}
+
+void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos, entity_type type){
+  float x = xpos;
+  float y = ypos;
+
+  //centered_to_window(window, zoom, &x, &y);
   if(type == vessel){
     filledCircleRGBA(
       renderer, 
-      xpos, ypos, 
+      x, y, 
       POINT_SIZE, 
       40.0f, 200.0f, 40.0f, 255.0f
     );
@@ -17,8 +28,8 @@ void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type){
   else if(type == observer){
     filledCircleRGBA(
       renderer, 
-      xpos, ypos, 
-      6, 
+      x, y, 
+      POINT_SIZE, 
       200.0f, 40.0f, 40.0f, 255.0f
     );
   }
@@ -28,9 +39,10 @@ void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type){
   }
 }
 
-void draw_grid(SDL_Renderer *renderer, SDL_Window *window, Uint32 scale){
+void draw_grid(SDL_Renderer *renderer, SDL_Window *window, float zoom){
   //corresponds to color #c0c0c0
-  if (scale < 10){
+  float scale = zoom * 100.0f;
+  if (scale < 10.0f){
     printf("Error, grid scale too small.\n");
   }
   int w;
@@ -43,11 +55,11 @@ void draw_grid(SDL_Renderer *renderer, SDL_Window *window, Uint32 scale){
 	// SDL_RenderLine(renderer, 0, mid_y, w, mid_y);
 	// SDL_RenderLine(renderer, mid_x, 0, mid_x, h);
 
-  for (int i = 0; i < w; i += scale){
+  for (float i = 0; i < w; i += scale){
     SDL_RenderLine(renderer, 0, mid_y+i, w, mid_y+i);
     SDL_RenderLine(renderer, 0, mid_y-i, w, mid_y-i);
   }
-  for (int i = 0; i < h; i += scale){
+  for (float i = 0; i < h; i += scale){
     SDL_RenderLine(renderer, mid_x+i, 0, mid_x+i, h);
     SDL_RenderLine(renderer, mid_x-i, 0, mid_x-i, h);
   }
