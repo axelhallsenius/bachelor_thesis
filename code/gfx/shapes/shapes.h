@@ -15,6 +15,12 @@ extern "C" {
 #define MIN_GRID_SIZE 10
 #define MAX_GRID_SIZE 500
 
+typedef struct {
+  double deg_long;//degrees
+  double deg_lat;//degrees
+  double len_long;//meters
+  double len_lat;//meters
+} FlatMap; //NOTE: Naive solution
 
 typedef enum {
   vessel,

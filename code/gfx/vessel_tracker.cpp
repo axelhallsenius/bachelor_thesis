@@ -18,6 +18,7 @@
 #include "gui/imgui_impl_sdlrenderer3.h"
 
 #include "shapes/shapes.h"
+#include "shapes/map.h"
 // Dear ImGui: standalone example application for SDL3 + SDL_Renderer
 // (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 

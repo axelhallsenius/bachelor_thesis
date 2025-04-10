@@ -4,11 +4,11 @@ project(shapes)
 # Source files
 set(SHAPES_SRC
   shapes.c
-  #grid.c
+  map.c
 )
 set(SHAPES_H 
   shapes.h
-  #grid.h
+  map.h
 )
 
 # Create a static library target for shapes
