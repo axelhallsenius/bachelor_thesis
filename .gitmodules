@@ -4,3 +4,6 @@
 [submodule "code/gfx/vendored/SDL"]
 	path = code/gfx/vendored/SDL
 	url = git@github.com:libsdl-org/SDL.git
+[submodule "code/gfx/vendored/SDL_image"]
+	path = code/gfx/vendored/SDL_image
+	url = git@github.com:libsdl-org/SDL_image.git
