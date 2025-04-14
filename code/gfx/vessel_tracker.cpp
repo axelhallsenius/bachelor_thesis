@@ -31,6 +31,11 @@
 // Important to understand: SDL_Renderer is an _optional_ component of SDL3.
 // For a multi-platform app consider using e.g. SDL+DirectX on Windows and SDL+OpenGL on Linux/OSX.
 
+typedef enum {
+  snake,
+  t_merc,
+} projection_t;
+
 
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
@@ -150,6 +155,7 @@ int main(int, char**)
     {
       static float f = 0.0f;
       static int counter = 0;
+      static projection_t projection;
 
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
@@ -161,6 +167,19 @@ int main(int, char**)
       
       ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
+      
+      //Projection selection
+      ImGui::Text("Projection");
+      if(ImGui::RadioButton("Snake", projection == snake)) { 
+        projection = snake; 
+        //Print snake map
+      }
+      if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
+        projection = t_merc; 
+        //Print tmerc map
+      }
+      //
+
       ImGui::Text("\n");
       ImGui::DragInt("X pos: Vessel", &xpos_v, 1);
       ImGui::DragInt("Y pos: Vessel", &ypos_v, 1);
@@ -221,7 +240,6 @@ int main(int, char**)
     
     if(show_grid){
       draw_grid(renderer, window, zoom);
-
     }
 
 
