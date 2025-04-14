@@ -5,6 +5,9 @@ project(vessel_tracker)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
+set(SDL3IMAGE_BUILD_SHARED TRUE)
+set(SDL3IMAGE_BUILD_STATIC TRUE)
+
 # Include SDL3 as a subdirectory, assuming it's inside 'vendored/SDL'
 add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(vendored/SDL_image EXCLUDE_FROM_ALL)
@@ -14,6 +17,13 @@ add_subdirectory(gui)
 add_subdirectory(shapes)
 
 add_executable(${PROJECT_NAME} vessel_tracker.cpp)
+
+# Copying assets into build directory
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${CMAKE_SOURCE_DIR}/assets/maps/World-map.svg"
+    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/maps/World-map.svg"
+)
 
 # Link SDL3 and SDL3_gfx to your executable
 target_link_libraries(${PROJECT_NAME} 
@@ -26,6 +36,8 @@ PRIVATE
 )
 # target_include_directories(${PROJECT_NAME} PRIVATE shapes)
 
+get_property(SDLI_TARGETS DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
+message(STATUS "Available SDL_image targets: ${SDLI_TARGETS}")
 
 # If SDL3_gfx is built as a shared library, make sure your executable knows where to find it at runtime
 set_target_properties(${PROJECT_NAME} PROPERTIES

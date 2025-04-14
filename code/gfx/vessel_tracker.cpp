@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <SDL3_image/SDL_image.h>
 #include "gui/imgui.h"
 #include "gui/imgui_impl_sdl3.h"
 #include "gui/imgui_impl_sdlrenderer3.h"
@@ -69,6 +70,34 @@ int main(int, char**)
   }
   SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
   SDL_ShowWindow(window);
+
+  //create textures
+  static int texture_width = 0;
+  static int texture_height = 0;
+
+  SDL_Surface *surface;
+  char *svg_path;
+  
+  SDL_asprintf(&svg_path, "%smaps/World-map.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
+  surface = IMG_Load(svg_path);
+  if (!surface) {
+    SDL_Log("Couldn't load svg: %s", SDL_GetError());
+    return SDL_APP_FAILURE;
+  }
+
+  SDL_free(svg_path);  /* done with this, the file is loaded. */
+
+  texture_width = surface->w;
+  texture_height = surface->h;
+
+  SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+  if (!texture) {
+    SDL_Log("Couldn't create static texture: %s", SDL_GetError());
+    return SDL_APP_FAILURE;
+  }
+
+  SDL_DestroySurface(surface);
+
 
   // Setup Dear ImGui context
   IMGUI_CHECKVERSION();
@@ -146,7 +175,28 @@ int main(int, char**)
 
     static int xpos_o = 150;
     static int ypos_o = 150;
+    static projection_t projection;
+    static SDL_Texture *map_tex;
 
+    if(projection == snake){
+      // Clear the screen with whatever background color
+      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
+      //SDL_RenderClear(renderer);
+
+      // Define destination rectangle
+      SDL_FRect dst_rect = {
+        .x = 0.0f,
+        .y = 0.0f,
+        .w = (float)texture_width,
+        .h = (float)texture_height
+      };
+
+      // Render texture to the screen
+      SDL_RenderTexture(renderer, texture, NULL, &dst_rect);
+
+      // Present the rendered frame
+      SDL_RenderPresent(renderer);
+    }
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     // if (show_demo_window)
     //   ImGui::ShowDemoWindow(&show_demo_window);
@@ -155,7 +205,9 @@ int main(int, char**)
     {
       static float f = 0.0f;
       static int counter = 0;
-      static projection_t projection;
+
+    SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+    SDL_RenderClear(renderer);
 
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
@@ -167,12 +219,16 @@ int main(int, char**)
       
       ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
+
       
       //Projection selection
       ImGui::Text("Projection");
       if(ImGui::RadioButton("Snake", projection == snake)) { 
         projection = snake; 
+        // map_tex = IMG_Load("maps/World-map.svg");
         //Print snake map
+
+
       }
       if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
         projection = t_merc; 
@@ -219,8 +275,6 @@ int main(int, char**)
     // Rendering
     ImGui::Render();
     //SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-    SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-    SDL_RenderClear(renderer);
 
     //render shapes
     // SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
@@ -242,6 +296,7 @@ int main(int, char**)
       draw_grid(renderer, window, zoom);
     }
 
+    
 
     //testing_func();
 
