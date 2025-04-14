@@ -179,7 +179,10 @@ int main(int, char**)
     static SDL_Texture *map_tex;
 
     if(projection == snake){
-      // Clear the screen with whatever background color
+      //FIXME:
+      //Flickers
+      //
+      //// Clear the screen with whatever background color
       SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
       //SDL_RenderClear(renderer);
 

@@ -10,7 +10,10 @@ void centered_to_window(SDL_Window *window, float zoom, float *x, float *y){
   int w;
   int h;
   SDL_GetWindowSize(window, &w, &h);
+  //FIXME
 }
+
+//TODO: function that translates window coords to centered coords
 
 void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos, entity_type type){
   float x = xpos;
