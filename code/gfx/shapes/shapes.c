@@ -66,6 +66,5 @@ void draw_grid(SDL_Renderer *rend, SDL_Texture *tex, float zoom){
     SDL_RenderLine(rend, mid_x+i, 0, mid_x+i, tex_h);
     SDL_RenderLine(rend, mid_x-i, 0, mid_x-i, tex_h);
   }
-
 }
 

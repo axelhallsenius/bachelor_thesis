@@ -146,6 +146,7 @@ int main(int, char**)
   float pan_y = 0.0f;
   static int win_w;
   static int win_h;
+  static projection_t projection;
 
   // Main loop
   bool done = false;
@@ -180,6 +181,8 @@ int main(int, char**)
       SDL_Delay(10);
       continue;
     }
+    SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+    SDL_RenderClear(renderer);
 
     // Start the Dear ImGui frame
     ImGui_ImplSDLRenderer3_NewFrame();
@@ -190,7 +193,6 @@ int main(int, char**)
 
     static int xpos_o = 150;
     static int ypos_o = 150;
-    static projection_t projection;
     static SDL_Texture *map_tex;
     float scale_factor = (((float) win_h) / ((float) texture_height)) * zoom;
     SDL_GetWindowSize(window, &win_w, &win_h);
@@ -205,8 +207,8 @@ int main(int, char**)
       static float f = 0.0f;
       static int counter = 0;
 
-      SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-      SDL_RenderClear(renderer);
+      // SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+      // SDL_RenderClear(renderer);
 
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
@@ -293,7 +295,7 @@ int main(int, char**)
       SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
 
       // Present the rendered frame
-      SDL_RenderPresent(renderer);
+      // SDL_RenderPresent(renderer);
     }
 
     // Rendering

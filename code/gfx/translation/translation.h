@@ -43,6 +43,9 @@ win_coords cent_to_win(SDL_Window *window, float x, float y);
 win_coords deg_to_win_snake(SDL_Window *window, lat_lon_snake *deg);
 
 
+//vector addition with a modulo operation
+void move_xy_snake(lat_lon_snake *pos, lat_lon_snake *course);
+
 #endif
 #ifdef __cplusplus
 }

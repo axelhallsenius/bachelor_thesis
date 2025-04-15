@@ -22,4 +22,7 @@ win_coords deg_to_win_snake(SDL_Window *window, lat_lon_snake *deg){
   return cent_to_win(window, cart_x, cart_y);
 }
 
-
+void move_xy_snake(lat_lon_snake *pos, lat_lon_snake *course){
+  pos->lon = fmod(pos->lon + course->lon, 180.0f);
+  pos->lat = fmod(pos->lat + course->lat, 90.0f);
+}
