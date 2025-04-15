@@ -15,14 +15,15 @@ add_subdirectory(vendored/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(SDL3_gfx)
 add_subdirectory(gui)
 add_subdirectory(shapes)
+add_subdirectory(translation)
 
 add_executable(${PROJECT_NAME} vessel_tracker.cpp)
 
 # Copying assets into build directory
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${CMAKE_SOURCE_DIR}/assets/maps/World-map.svg"
-    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/maps/World-map.svg"
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_SOURCE_DIR}/assets/maps"
+    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/maps"
 )
 
 # Link SDL3 and SDL3_gfx to your executable
@@ -33,6 +34,7 @@ PRIVATE
   SDL3_gfx_Shared
   # ImGui
   shapes
+  translation
 )
 # target_include_directories(${PROJECT_NAME} PRIVATE shapes)
 

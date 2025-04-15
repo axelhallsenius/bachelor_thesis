@@ -42,29 +42,29 @@ void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float x
   }
 }
 
-void draw_grid(SDL_Renderer *renderer, SDL_Window *window, float zoom){
+void draw_grid(SDL_Renderer *rend, SDL_Texture *tex, float zoom){
   //corresponds to color #c0c0c0
   float scale = zoom * 100.0f;
   if (scale < 10.0f){
     printf("Error, grid scale too small.\n");
   }
-  int w;
-  int h;
-  SDL_GetWindowSize(window, &w, &h);
-  int mid_x = w/2;  
-  int mid_y = h/2;  
+  float tex_w;
+  float tex_h;
+  SDL_GetTextureSize(tex, &tex_w, &tex_h);
+  float mid_x = tex_w/2;  
+  float mid_y = tex_h/2;  
 
-  SDL_SetRenderDrawColorFloat(renderer, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
+  SDL_SetRenderDrawColorFloat(rend, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
 	// SDL_RenderLine(renderer, 0, mid_y, w, mid_y);
 	// SDL_RenderLine(renderer, mid_x, 0, mid_x, h);
 
-  for (float i = 0; i < w; i += scale){
-    SDL_RenderLine(renderer, 0, mid_y+i, w, mid_y+i);
-    SDL_RenderLine(renderer, 0, mid_y-i, w, mid_y-i);
+  for (float i = 0; i < tex_w; i += scale){
+    SDL_RenderLine(rend, 0, mid_y+i, tex_w, mid_y+i);
+    SDL_RenderLine(rend, 0, mid_y-i, tex_w, mid_y-i);
   }
-  for (float i = 0; i < h; i += scale){
-    SDL_RenderLine(renderer, mid_x+i, 0, mid_x+i, h);
-    SDL_RenderLine(renderer, mid_x-i, 0, mid_x-i, h);
+  for (float i = 0; i < tex_h; i += scale){
+    SDL_RenderLine(rend, mid_x+i, 0, mid_x+i, tex_h);
+    SDL_RenderLine(rend, mid_x-i, 0, mid_x-i, tex_h);
   }
 
 }

@@ -64,7 +64,7 @@ void testing_func(SDL_Renderer *renderer);
  * * scale: pixels between grid nodes
  * * NOTE: 32 bit could be suboptimal
 */
-void draw_grid(SDL_Renderer *renderer, SDL_Window *window, float zoom);
+void draw_grid(SDL_Renderer *rend, SDL_Texture *tex, float zoom);
 
 /*
  * Usage:

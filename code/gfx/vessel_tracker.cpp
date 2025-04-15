@@ -79,7 +79,7 @@ int main(int, char**)
   SDL_Surface *surface;
   char *svg_path;
   
-  SDL_asprintf(&svg_path, "%smaps/World-map.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
+  SDL_asprintf(&svg_path, "%smaps/Mercator_Projection.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
   surface = IMG_Load(svg_path);
   if (!surface) {
     SDL_Log("Couldn't load svg: %s", SDL_GetError());
@@ -91,11 +91,21 @@ int main(int, char**)
   texture_width = surface->w;
   texture_height = surface->h;
 
-  SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-  if (!texture) {
-    SDL_Log("Couldn't create static texture: %s", SDL_GetError());
+  SDL_Texture *map_texture = SDL_CreateTextureFromSurface(renderer, surface);
+  if (!map_texture) {
+    SDL_Log("Couldn't create static map_texture: %s", SDL_GetError());
     return SDL_APP_FAILURE;
   }
+
+  //create a grid texture for the same surface:
+  // SDL_Texture *grid_texture;
+  // SDL_SetRenderTarget(renderer, grid_texture);
+  //
+  // draw_grid(renderer, grid_texture, 1.0);
+  //
+  //
+  // //resets render target
+  // SDL_SetRenderTarget(renderer, NULL);
 
   SDL_DestroySurface(surface);
 
@@ -262,6 +272,30 @@ int main(int, char**)
       ImGui::End();
     }
 
+    
+    if(projection == snake){
+      // zoom = 1.0f;
+      //FIXME:
+      //Flickers
+      //
+      //// Clear the screen with whatever background color
+      // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
+      //SDL_RenderClear(renderer);
+
+      // Define destination rectangle
+      SDL_FRect dst_rect;
+      dst_rect.w = ((float)texture_width) * scale_factor;
+      dst_rect.h = ((float)texture_height) * scale_factor;
+      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
+      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
+
+      // Render texture to the screen
+      SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
+
+      // Present the rendered frame
+      SDL_RenderPresent(renderer);
+    }
+
     // Rendering
     ImGui::Render();
     //SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
@@ -283,31 +317,8 @@ int main(int, char**)
       draw_entity(renderer,window,zoom,xpos_o,ypos_o, observer);
     
     if(show_grid){
-      draw_grid(renderer, window, zoom);
+      draw_grid(renderer, map_texture, zoom);
     }
-    if(projection == snake){
-      // zoom = 1.0f;
-      //FIXME:
-      //Flickers
-      //
-      //// Clear the screen with whatever background color
-      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
-      //SDL_RenderClear(renderer);
-
-      // Define destination rectangle
-      SDL_FRect dst_rect;
-      dst_rect.w = ((float)texture_width) * scale_factor;
-      dst_rect.h = ((float)texture_height) * scale_factor;
-      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
-      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
-
-      // Render texture to the screen
-      SDL_RenderTexture(renderer, texture, NULL, &dst_rect);
-
-      // Present the rendered frame
-      SDL_RenderPresent(renderer);
-    }
-    
 
     //testing_func();
 
