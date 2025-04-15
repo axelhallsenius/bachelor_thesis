@@ -34,6 +34,7 @@
 
 typedef enum {
   snake,
+  merc,
   t_merc,
 } projection_t;
 
@@ -131,6 +132,8 @@ int main(int, char**)
 
   int grid_scale = 100;
   float zoom = 1.0f;
+  static int win_w;
+  static int win_h;
 
   // Main loop
   bool done = false;
@@ -177,6 +180,8 @@ int main(int, char**)
     static int ypos_o = 150;
     static projection_t projection;
     static SDL_Texture *map_tex;
+    float scale_factor = ((float) win_h) / ((float) texture_height);
+    SDL_GetWindowSize(window, &win_w, &win_h);
 
     if(projection == snake){
       //FIXME:
@@ -190,8 +195,8 @@ int main(int, char**)
       SDL_FRect dst_rect = {
         .x = 0.0f,
         .y = 0.0f,
-        .w = (float)texture_width,
-        .h = (float)texture_height
+        .w = ((float)texture_width) * scale_factor,
+        .h = ((float)texture_height) * scale_factor
       };
 
       // Render texture to the screen
@@ -214,7 +219,6 @@ int main(int, char**)
 
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
-      ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
       ImGui::Checkbox("Show Grid", &show_grid);      // Edit bools storing our window open/close state
 
       ImGui::Checkbox("Show Vessel", &show_vessel);      // Edit bools storing our window open/close state
