@@ -132,6 +132,8 @@ int main(int, char**)
 
   int grid_scale = 100;
   float zoom = 1.0f;
+  float pan_x = 0.0f;
+  float pan_y = 0.0f;
   static int win_w;
   static int win_h;
 
@@ -180,31 +182,10 @@ int main(int, char**)
     static int ypos_o = 150;
     static projection_t projection;
     static SDL_Texture *map_tex;
-    float scale_factor = ((float) win_h) / ((float) texture_height);
+    float scale_factor = (((float) win_h) / ((float) texture_height)) * zoom;
     SDL_GetWindowSize(window, &win_w, &win_h);
 
-    if(projection == snake){
-      //FIXME:
-      //Flickers
-      //
-      //// Clear the screen with whatever background color
-      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
-      //SDL_RenderClear(renderer);
-
-      // Define destination rectangle
-      SDL_FRect dst_rect = {
-        .x = 0.0f,
-        .y = 0.0f,
-        .w = ((float)texture_width) * scale_factor,
-        .h = ((float)texture_height) * scale_factor
-      };
-
-      // Render texture to the screen
-      SDL_RenderTexture(renderer, texture, NULL, &dst_rect);
-
-      // Present the rendered frame
-      SDL_RenderPresent(renderer);
-    }
+    
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     // if (show_demo_window)
     //   ImGui::ShowDemoWindow(&show_demo_window);
@@ -214,8 +195,8 @@ int main(int, char**)
       static float f = 0.0f;
       static int counter = 0;
 
-    SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-    SDL_RenderClear(renderer);
+      SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+      SDL_RenderClear(renderer);
 
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
@@ -254,6 +235,8 @@ int main(int, char**)
       ImGui::Text("\n");
       ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
+      ImGui::SliderFloat("Pan X", &pan_x, -100.0f, 100.0f, "%.2f");
+      ImGui::SliderFloat("Pan Y", &pan_y, -100.0f, 100.0f, "%.2f");
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
 
@@ -302,7 +285,28 @@ int main(int, char**)
     if(show_grid){
       draw_grid(renderer, window, zoom);
     }
+    if(projection == snake){
+      // zoom = 1.0f;
+      //FIXME:
+      //Flickers
+      //
+      //// Clear the screen with whatever background color
+      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
+      //SDL_RenderClear(renderer);
 
+      // Define destination rectangle
+      SDL_FRect dst_rect;
+      dst_rect.w = ((float)texture_width) * scale_factor;
+      dst_rect.h = ((float)texture_height) * scale_factor;
+      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
+      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
+
+      // Render texture to the screen
+      SDL_RenderTexture(renderer, texture, NULL, &dst_rect);
+
+      // Present the rendered frame
+      SDL_RenderPresent(renderer);
+    }
     
 
     //testing_func();
