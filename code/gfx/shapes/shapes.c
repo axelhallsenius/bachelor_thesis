@@ -42,29 +42,49 @@ void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float x
   }
 }
 
-void draw_grid(SDL_Renderer *rend, SDL_Texture *tex, float zoom){
+void draw_grid(SDL_Renderer *rend, SDL_Texture *tex){
+  SDL_SetRenderTarget(rend, tex);
   //corresponds to color #c0c0c0
-  float scale = zoom * 100.0f;
-  if (scale < 10.0f){
-    printf("Error, grid scale too small.\n");
-  }
   float tex_w;
   float tex_h;
   SDL_GetTextureSize(tex, &tex_w, &tex_h);
   float mid_x = tex_w/2;  
   float mid_y = tex_h/2;  
 
+  float lat_scale = tex_h/LAT_ZONES;
+  float lon_scale = tex_w/LON_ZONES;
+
   SDL_SetRenderDrawColorFloat(rend, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
 	// SDL_RenderLine(renderer, 0, mid_y, w, mid_y);
 	// SDL_RenderLine(renderer, mid_x, 0, mid_x, h);
 
-  for (float i = 0; i < tex_w; i += scale){
+  for (float i = 0; i < tex_w; i += lon_scale){
     SDL_RenderLine(rend, 0, mid_y+i, tex_w, mid_y+i);
     SDL_RenderLine(rend, 0, mid_y-i, tex_w, mid_y-i);
   }
-  for (float i = 0; i < tex_h; i += scale){
+  for (float i = 0; i < tex_h; i += lat_scale){
     SDL_RenderLine(rend, mid_x+i, 0, mid_x+i, tex_h);
     SDL_RenderLine(rend, mid_x-i, 0, mid_x-i, tex_h);
   }
+
+  //resets render target
+  SDL_SetRenderTarget(rend, NULL);
 }
+// double lon_scale = (360.0f/dst_rect.w) * 6;
+        // double lat_scale = (180.0f/dst_rect.h) * 8;
+        // SDL_SetRenderDrawColorFloat(renderer, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
+        // // SDL_RenderLine(renderer, 0, mid_y, w, mid_y);
+        // // SDL_RenderLine(renderer, mid_x, 0, mid_x, h);
+        //
+        // for (float i = 0; i < dst_rect.w; i += lon_scale){
+        //   SDL_RenderLine(renderer, 0, dst_rect.y+i, dst_rect.w, dst_rect.y+i);
+        //   SDL_RenderLine(renderer, 0, dst_rect.y-i, dst_rect.w, dst_rect.y-i);
+        // }
+        // for (float i = 0; i < dst_rect.h; i += lat_scale){
+        //   SDL_RenderLine(renderer, dst_rect.x+i, 0, dst_rect.x+i, dst_rect.h);
+        //   SDL_RenderLine(renderer, dst_rect.x-i, 0, dst_rect.x-i, dst_rect.h);
+        // }
+        // printf("lon_scale: %lf\n", lon_scale);
+        // printf("lat_scale: %lf\n", lat_scale);
+
 

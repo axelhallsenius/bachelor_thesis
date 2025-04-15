@@ -14,6 +14,8 @@ extern "C" {
 #define OBSERVER_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
 #define MIN_GRID_SIZE 10
 #define MAX_GRID_SIZE 500
+#define LAT_ZONES 24
+#define LON_ZONES 60
 
 typedef struct {
   double deg_long;//degrees
@@ -64,7 +66,7 @@ void testing_func(SDL_Renderer *renderer);
  * * scale: pixels between grid nodes
  * * NOTE: 32 bit could be suboptimal
 */
-void draw_grid(SDL_Renderer *rend, SDL_Texture *tex, float zoom);
+void draw_grid(SDL_Renderer *rend, SDL_Texture *tex);
 
 /*
  * Usage:
