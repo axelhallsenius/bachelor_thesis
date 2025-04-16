@@ -262,7 +262,7 @@ int main(int, char**)
       ImGui::Checkbox("Another Window", &show_another_window);
 
       if (ImGui::Button("Move Vessel"))
-        move_vessel_deg(vessel, 3.0, 1.0);
+        move_vessel_deg(vessel, 3.0, 2.0);
 
 
       if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)

@@ -155,8 +155,8 @@ void destroy_vessel(vessel_t *vessel){
 }
 
 void move_vessel_deg(vessel_t *vessel, double move_x, double move_y){
-  vessel->current_x = vessel->current_x + (111300 * move_x);
-  vessel->current_y = vessel->current_y + (110600 * move_y);
+  vessel->current_x = vessel->current_x + (110600 * move_x);
+  vessel->current_y = vessel->current_y + (111300 * move_y);
 }
 void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
   vessel->current_x = vessel->current_x + move_x;
