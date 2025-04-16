@@ -17,6 +17,13 @@ extern "C" {
 #define LAT_ZONES 60
 #define LON_ZONES 22
 
+#define MAX_PATH_LEN 100
+
+//Simplified length of a degree (at equator)
+
+double simpl_lat_to_m(double deg);
+double simpl_lon_to_m(double deg);
+
 typedef struct {
   double deg_long;//degrees
   double deg_lat;//degrees
@@ -24,9 +31,20 @@ typedef struct {
   double len_lat;//meters
 } FlatMap; //NOTE: Naive solution
 
+typedef struct {
+  double start_long; //degrees
+  double start_lat;
+
+  double current_x; //meters from origin
+  double current_y; //meters from origin
+
+  bool observer;
+
+} vessel_t;
+
 typedef enum {
-  vessel,
-  observer
+  vessel_ent,
+  observer_ent
 } entity_type;
 
 typedef struct {
@@ -75,7 +93,14 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
  * * grid_options: none, side_ruler, grid
 */
 // void draw_grid(float scale, grid_options goption);
+void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
+vessel_t *launch_vessel(double start_lon, double start_lat, bool observer);
+
+void destroy_vessel(vessel_t *vessel);
+
+void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
+void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
 
 #endif
 #ifdef __cplusplus

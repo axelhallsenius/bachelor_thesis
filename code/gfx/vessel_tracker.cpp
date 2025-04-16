@@ -20,6 +20,7 @@
 
 #include "shapes/shapes.h"
 #include "shapes/map.h"
+#include "translation/translation.h"
 // Dear ImGui: standalone example application for SDL3 + SDL_Renderer
 // (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 
@@ -31,12 +32,6 @@
 
 // Important to understand: SDL_Renderer is an _optional_ component of SDL3.
 // For a multi-platform app consider using e.g. SDL+DirectX on Windows and SDL+OpenGL on Linux/OSX.
-
-typedef enum {
-  snake,
-  merc,
-  t_merc,
-} projection_t;
 
 
 #ifdef __EMSCRIPTEN__
@@ -153,6 +148,7 @@ int main(int, char**)
   static projection_t projection;
   //TODO: test for possible incorrect access to dst_rect
   SDL_FRect dst_rect;
+  vessel_t *vessel = launch_vessel(0, 0, false);
 
   // Main loop
   bool done = false;
@@ -265,8 +261,9 @@ int main(int, char**)
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
 
-      ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-      ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+      if (ImGui::Button("Move Vessel"))
+        move_vessel_deg(vessel, 3.0, 1.0);
+
 
       if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
         counter++;
@@ -318,20 +315,19 @@ int main(int, char**)
     // Rendering
     ImGui::Render();
 
-    if (show_vessel)
-      draw_entity(renderer,window,zoom,xpos_v,ypos_v, vessel);
+    if (show_vessel) {
+      draw_vessel(renderer, &dst_rect, vessel);
+
+      
+    }
+      // draw_entity(renderer,window,zoom,xpos_v,ypos_v, vessel);
     
     if (show_observer)
-      draw_entity(renderer,window,zoom,xpos_o,ypos_o, observer);
+      // draw_entity(renderer,window,zoom,xpos_o,ypos_o, observer);
     
     if(show_grid){
       // draw_grid(renderer, map_texture);
     }
-
-    //testing_func();
-
-    
-
 
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
     SDL_RenderPresent(renderer);

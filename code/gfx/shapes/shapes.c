@@ -5,6 +5,13 @@
 #include "shapes.h"
 #include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
+double simpl_lat_to_m(double deg){
+  return deg * 110600;
+}
+double simpl_lon_to_m(double deg){
+  return deg * 111300;
+}
+
 //TODO: I suspect this function can be optimized alot
 void centered_to_window(SDL_Window *window, float zoom, float *x, float *y){
   int w;
@@ -20,7 +27,7 @@ void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float x
   float y = ypos;
 
   //centered_to_window(window, zoom, &x, &y);
-  if(type == vessel){
+  if(type == vessel_ent){
     filledCircleRGBA(
       renderer, 
       x, y, 
@@ -28,7 +35,7 @@ void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float x
       40.0f, 200.0f, 40.0f, 255.0f
     );
   }
-  else if(type == observer){
+  else if(type == observer_ent){
     filledCircleRGBA(
       renderer, 
       x, y, 
@@ -97,3 +104,61 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
   //ew edges
 }
 
+void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
+  float long_scale = rect->h/180.0f;
+  float lat_scale = rect->w/360.0f;
+  float equator = (rect->h / 2.0f) + rect->y;
+  float prime_mer = (rect->w / 2.0f) + rect->x;
+
+  //TODO: depends on projection
+  double pos_lat = (vessel->current_x / 110600) + vessel->start_lat;
+  double pos_long = (vessel->current_y / 111300) + vessel->start_long;
+
+  double x = prime_mer + (pos_lat * lat_scale);
+  double y = equator - (pos_long * long_scale);
+
+  //centered_to_window(window, zoom, &x, &y);
+  if(!(vessel -> observer)){
+    filledCircleRGBA(
+      rend, 
+      x, y, 
+      POINT_SIZE, 
+      40.0f, 200.0f, 40.0f, 255.0f
+    );
+  }
+  else{
+    filledCircleRGBA(
+      rend, 
+      x, y, 
+      POINT_SIZE, 
+      200.0f, 40.0f, 40.0f, 255.0f
+    );
+  }
+}
+
+
+vessel_t *launch_vessel(double start_lon, double start_lat, bool observer){
+  vessel_t *vessel = calloc(1, sizeof(vessel_t));
+
+  vessel -> start_long = start_lon;
+  vessel -> start_lat = start_lat;
+
+  vessel -> current_x = 0;
+  vessel -> current_y = 0;
+  vessel -> observer = observer;
+
+}
+
+void destroy_vessel(vessel_t *vessel){
+  //watch out for pointers to this
+  free(vessel);
+}
+
+void move_vessel_deg(vessel_t *vessel, double move_x, double move_y){
+  vessel->current_x = vessel->current_x + (111300 * move_x);
+  vessel->current_y = vessel->current_y + (110600 * move_y);
+}
+void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
+  vessel->current_x = vessel->current_x + move_x;
+  vessel->current_y = vessel->current_y + move_y;
+}

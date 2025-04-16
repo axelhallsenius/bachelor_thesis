@@ -15,7 +15,11 @@ extern "C" {
 //   double len_lat;//meters
 // } Flat_Map; //NOTE: Naive solution
 
-
+typedef enum {
+  snake,
+  merc,
+  t_merc,
+} projection_t;
 
 typedef struct {
   double max_x;
