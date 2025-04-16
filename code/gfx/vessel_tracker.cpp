@@ -146,11 +146,13 @@ int main(int, char**)
 
   int grid_scale = 100;
   float zoom = 1.0f;
-  float pan_x = 0.0f;
-  float pan_y = 0.0f;
+  int pan_x = 0;
+  int pan_y = 0;
   static int win_w;
   static int win_h;
   static projection_t projection;
+  //TODO: test for possible incorrect access to dst_rect
+  SDL_FRect dst_rect;
 
   // Main loop
   bool done = false;
@@ -177,6 +179,17 @@ int main(int, char**)
         done = true;
       if (event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED && event.window.windowID == SDL_GetWindowID(window))
         done = true;
+
+      if (event.type == SDL_EVENT_KEY_DOWN){
+        if      (event.key.key == SDLK_RIGHT)
+          pan_x = pan_x - 20;
+        else if (event.key.key == SDLK_LEFT)
+          pan_x = pan_x + 20;
+        else if (event.key.key == SDLK_UP)
+          pan_y = pan_y + 20;
+        else if (event.key.key == SDLK_DOWN)
+          pan_y = pan_y - 20;
+      }
     }
 
     // [If using SDL_MAIN_USE_CALLBACKS: all code below would likely be your SDL_AppIterate() function]
@@ -247,8 +260,8 @@ int main(int, char**)
       ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       // ImGui::SliderFloat("scale_factor", &scale_factor, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
-      ImGui::SliderFloat("Pan X", &pan_x, -100.0f, 100.0f, "%.2f");
-      ImGui::SliderFloat("Pan Y", &pan_y, -100.0f, 100.0f, "%.2f");
+      // ImGui::SliderFloat("Pan X", &pan_x, -100.0f, 100.0f, "%.2f");
+      // ImGui::SliderFloat("Pan Y", &pan_y, -100.0f, 100.0f, "%.2f");
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
 
@@ -287,21 +300,10 @@ int main(int, char**)
       // Define destination rectangle
       float scale_factor = ((float) win_h) / ((float) texture_height);
 
-      SDL_FRect dst_rect;
       dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
       dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
-      dst_rect.x = ((win_w - dst_rect.w) / 2.0f);
-      dst_rect.y = ((win_h - dst_rect.h) / 2.0f);
-      // printf("rect_X: %.3f\n", dst_rect.w);
-      // printf("rect_y: %.3f\n", dst_rect.h);
-      // mid + x 
-      // mid + y
-
-
-
-      // Render texture to the screen
-      // NOTE: add grid here?
-        // draw_grid(renderer, map_texture);
+      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
+      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
 
       SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
 
