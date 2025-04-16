@@ -79,7 +79,7 @@ int main(int, char**)
   SDL_Surface *surface;
   char *svg_path;
   
-  SDL_asprintf(&svg_path, "%smaps/Mercator_Projection.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
+  SDL_asprintf(&svg_path, "%smaps/World_map_nations.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
   surface = IMG_Load(svg_path); //NOTE: consider using IMG_LoadTexture instead of going the surface route
   if (!surface) {
     SDL_Log("Couldn't load svg: %s", SDL_GetError());
@@ -198,7 +198,6 @@ int main(int, char**)
     static int xpos_o = 150;
     static int ypos_o = 150;
     // static SDL_Texture *map_tex;
-    float scale_factor = (((float) win_h) / ((float) texture_height)) * zoom;
     SDL_GetWindowSize(window, &win_w, &win_h);
 
     
@@ -246,7 +245,7 @@ int main(int, char**)
 
       ImGui::Text("\n");
       ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
-      ImGui::SliderFloat("scale_factor", &scale_factor, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
+      // ImGui::SliderFloat("scale_factor", &scale_factor, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
       ImGui::SliderFloat("Pan X", &pan_x, -100.0f, 100.0f, "%.2f");
       ImGui::SliderFloat("Pan Y", &pan_y, -100.0f, 100.0f, "%.2f");
@@ -286,40 +285,31 @@ int main(int, char**)
       //SDL_RenderClear(renderer);
 
       // Define destination rectangle
+      float scale_factor = ((float) win_h) / ((float) texture_height);
+
       SDL_FRect dst_rect;
-      dst_rect.w = ((float)texture_width) * scale_factor;
-      dst_rect.h = ((float)texture_height) * scale_factor;
+      dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
+      dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
       dst_rect.x = ((win_w - dst_rect.w) / 2.0f);
       dst_rect.y = ((win_h - dst_rect.h) / 2.0f);
       // printf("rect_X: %.3f\n", dst_rect.w);
       // printf("rect_y: %.3f\n", dst_rect.h);
+      // mid + x 
+      // mid + y
+
+
+
       // Render texture to the screen
       // NOTE: add grid here?
-      if(show_grid){
-        SDL_SetRenderDrawColorFloat(renderer, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
-        float lat_scale = dst_rect.h/LAT_ZONES;
-        float lon_scale = dst_rect.w/LON_ZONES;
-
-        float mid_y = (dst_rect.h / 2.0f);
-        float mid_x = (dst_rect.w / 2.0f);
-
-        for (float i = lon_scale * scale_factor; i < dst_rect.w; i += lon_scale * scale_factor){
-          SDL_RenderLine(renderer, 0, mid_y+i, dst_rect.w, mid_y+i);
-          SDL_RenderLine(renderer, 0, mid_y-i, dst_rect.w, mid_y-i);
-        }
-        for (float i = lat_scale * scale_factor; i < dst_rect.h; i += lat_scale * scale_factor){
-          SDL_RenderLine(renderer, mid_x+i, 0, mid_x+i, dst_rect.h);
-          SDL_RenderLine(renderer, mid_x-i, 0, mid_x-i, dst_rect.h);
-        }
-
-
-      }
         // draw_grid(renderer, map_texture);
 
       SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
 
       // Present the rendered frame
       // SDL_RenderPresent(renderer);
+      if(show_grid){
+        draw_grid(renderer, &dst_rect);
+      }
     }
 
     // Rendering
