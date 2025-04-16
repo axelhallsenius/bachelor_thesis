@@ -310,7 +310,8 @@ int main(int, char**)
       // Present the rendered frame
       // SDL_RenderPresent(renderer);
       if(show_grid){
-        draw_grid(renderer, &dst_rect);
+        // draw_grid(renderer, &dst_rect);
+        draw_grid_utm(renderer, &dst_rect);
       }
     }
 

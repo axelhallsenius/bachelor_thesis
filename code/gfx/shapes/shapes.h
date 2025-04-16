@@ -67,6 +67,7 @@ void testing_func(SDL_Renderer *renderer);
  * * NOTE: 32 bit could be suboptimal
 */
 void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect);
+void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 
 /*
  * Usage:

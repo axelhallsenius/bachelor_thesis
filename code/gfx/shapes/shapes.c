@@ -49,8 +49,6 @@ void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect){
 
   float mid_y = (dst_rect->h / 2.0f) + dst_rect->y;
   float mid_x = (dst_rect->w / 2.0f) + dst_rect->x;
-  // float mid_y = dst_rect.x;
-  // float mid_x = dst_rect.y;
 
   for (float i = lon_scale; i < dst_rect->w; i += lon_scale){
     SDL_RenderLine(renderer, 0, mid_y+i, dst_rect->w, mid_y+i);
@@ -64,5 +62,38 @@ void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect){
   SDL_SetRenderDrawColorFloat(renderer, 255, GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
   SDL_RenderLine(renderer, 0, mid_y, dst_rect->w, mid_y);
   SDL_RenderLine(renderer, mid_x, 0, mid_x, dst_rect->h);
+}
+
+void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
+  SDL_SetRenderDrawColorFloat(renderer, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
+  float lon_scale = dst_rect->h/180.0f;
+  float lat_scale = dst_rect->w/360.0f;
+
+  float equator = (dst_rect->h / 2.0f) + dst_rect->y;
+  float prime_mer = (dst_rect->w / 2.0f) + dst_rect->x;
+
+  for (float i = 8 * lon_scale; i <= dst_rect->h; i += 8 * lon_scale){
+    SDL_RenderLine(renderer, 0, equator+i, dst_rect->w, equator+i);
+    SDL_RenderLine(renderer, 0, equator-i, dst_rect->w, equator-i);
+  }
+
+
+  for (float i = 6 * lat_scale; i <= dst_rect->w; i += 6 * lat_scale){
+    SDL_RenderLine(renderer, prime_mer+i, 0, prime_mer+i, dst_rect->h);
+    SDL_RenderLine(renderer, prime_mer-i, 0, prime_mer-i, dst_rect->h);
+  }
+
+  SDL_SetRenderDrawColorFloat(renderer, 255, GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
+  //equator and pm
+  SDL_RenderLine(renderer, 0, equator, dst_rect->w, equator);
+  SDL_RenderLine(renderer, prime_mer, 0, prime_mer, dst_rect->h);
+
+  //ns edges
+  SDL_RenderLine(renderer, 0, equator+(90 * lon_scale), dst_rect->w, equator+(90 * lon_scale));
+  SDL_RenderLine(renderer, 0, equator+(80 * lon_scale), dst_rect->w, equator+(80 * lon_scale));
+  SDL_RenderLine(renderer, 0, equator-(84 * lon_scale), dst_rect->w, equator-(84 * lon_scale));
+  SDL_RenderLine(renderer, 0, equator-(90 * lon_scale), dst_rect->w, equator-(90 * lon_scale));
+
+  //ew edges
 }
 
