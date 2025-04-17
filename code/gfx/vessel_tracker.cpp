@@ -262,9 +262,13 @@ int main(int, char**)
       ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Another Window", &show_another_window);
 
-      if (ImGui::Button("Move Vessel"))
+      if (ImGui::Button("Move Vessel Regular"))
         move_vessel_deg(vessel, 3.0, 2.0);
 
+      float randx = ((float) SDL_rand(100))/10.0f - 5.0f;
+      float randy = ((float) SDL_rand(100))/10.0f - 5.0f;
+      if (ImGui::Button("Move Vessel Rand"))
+        move_vessel_deg(vessel, randx, randy);
 
       if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
         counter++;
