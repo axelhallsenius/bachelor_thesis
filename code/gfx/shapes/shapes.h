@@ -17,7 +17,7 @@ extern "C" {
 #define LAT_ZONES 60
 #define LON_ZONES 22
 
-#define MAX_PATH_LEN 100
+#define MAX_PATH 100
 
 //Simplified length of a degree (at equator)
 
@@ -32,14 +32,25 @@ typedef struct {
 } FlatMap; //NOTE: Naive solution
 
 typedef struct {
+  double x;
+  double y;
+} path_node;
+
+typedef struct {
+  int len;
+  path_node nodes[MAX_PATH]; //NOTE: always allocates max path
+} path_t;
+
+typedef struct {
   double start_long; //degrees
   double start_lat;
 
   double current_x; //meters from origin
   double current_y; //meters from origin
 
-  bool observer;
+  float rgba[4];
 
+  path_t *path;
 } vessel_t;
 
 typedef enum {
@@ -71,14 +82,14 @@ void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float x
 
 // void draw_legend(SDL_Renderer* renderer, char *text, );
 
-void draw_point(point *p, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
+// void draw_point(point *p, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
 //NOTE: maybe bez the curves a lil just for show
-void draw_between_points(point *a, point *b, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
+// void draw_between_points(point *a, point *b, Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
-void draw_path(point *path[], Uint8 R, Uint8 G, Uint8 B, Uint8 A);
+// void draw_path(point *path[], Uint8 R, Uint8 G, Uint8 B, Uint8 A);
 
-void testing_func(SDL_Renderer *renderer);
+// void testing_func(SDL_Renderer *renderer);
 
 /*
  * * scale: pixels between grid nodes
@@ -95,12 +106,15 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 // void draw_grid(float scale, grid_options goption);
 void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
-vessel_t *launch_vessel(double start_lon, double start_lat, bool observer);
+vessel_t *launch_vessel(double start_lon, double start_lat, float rgba[4]);
 
 void destroy_vessel(vessel_t *vessel);
 
 void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
 void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
+
+// void draw_path(SDL_Renderer *rend, vessel_t *vessel);
+void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
 #endif
 #ifdef __cplusplus

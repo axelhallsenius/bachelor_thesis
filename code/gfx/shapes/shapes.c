@@ -71,6 +71,8 @@ void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect){
   SDL_RenderLine(renderer, mid_x, 0, mid_x, dst_rect->h);
 }
 
+
+
 void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
   SDL_SetRenderDrawColorFloat(renderer, GRID_RGBA[0], GRID_RGBA[1], GRID_RGBA[2], GRID_RGBA[3]);
   float lon_scale = dst_rect->h/180.0f;
@@ -118,47 +120,103 @@ void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   double y = equator - (pos_long * long_scale);
 
   //centered_to_window(window, zoom, &x, &y);
-  if(!(vessel -> observer)){
-    filledCircleRGBA(
-      rend, 
-      x, y, 
-      POINT_SIZE, 
-      40.0f, 200.0f, 40.0f, 255.0f
-    );
-  }
-  else{
-    filledCircleRGBA(
-      rend, 
-      x, y, 
-      POINT_SIZE, 
-      200.0f, 40.0f, 40.0f, 255.0f
-    );
-  }
+  filledCircleRGBA(
+    rend, 
+    x, y, 
+    POINT_SIZE, 
+    200, 60, 60, 255
+    // vessel->rgba[0], 
+    // vessel->rgba[1], 
+    // vessel->rgba[2], 
+    // vessel->rgba[3]
+  );
 }
 
+//FIXME: somewhat ugly code
+void append_to_path(path_t *path, double x, double y){
+  path_node node;
+  node.x = x;
+  node.y = y;
+  path->nodes[path->len] = node;
+  path->len++;
+  // printf("step %d: (%lf, %lf) visited\n",path->len, x,y);
+}
 
-vessel_t *launch_vessel(double start_lon, double start_lat, bool observer){
+vessel_t *launch_vessel(double start_lon, double start_lat, float rgba[4]){
   vessel_t *vessel = calloc(1, sizeof(vessel_t));
 
+  //what lat/long the vessel is launched at
   vessel -> start_long = start_lon;
   vessel -> start_lat = start_lat;
 
+  //the vessel will always start at 0,0 from its own
+  //point of view
   vessel -> current_x = 0;
   vessel -> current_y = 0;
-  vessel -> observer = observer;
 
+  //assigning colors to vessel
+  for (int i = 0;i < 4;i++) {
+    vessel -> rgba[i] = rgba[i];
+  }
+
+  //malloc its path
+  //NOTE: not dynamic
+  vessel->path = calloc(1, sizeof(path_t));
+
+  //first node visited will always be 0,0
+  append_to_path(vessel->path, 0, 0);
+  return vessel;
 }
 
+
 void destroy_vessel(vessel_t *vessel){
+  free(vessel->path);
   //watch out for pointers to this
   free(vessel);
 }
 
+//NOTE: naive
 void move_vessel_deg(vessel_t *vessel, double move_x, double move_y){
   vessel->current_x = vessel->current_x + (110600 * move_x);
   vessel->current_y = vessel->current_y + (111300 * move_y);
+
+  append_to_path(vessel->path, vessel->current_x, vessel->current_y);
 }
+
 void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
   vessel->current_x = vessel->current_x + move_x;
   vessel->current_y = vessel->current_y + move_y;
+
+  append_to_path(vessel->path, vessel->current_x, vessel->current_y);
+}
+
+//FIXME: this is really inefficient
+void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
+  double equator = (rect->h / 2.0f) + rect->y;
+  double prime_mer = (rect->w / 2.0f) + rect->x;
+  double long_scale = rect->h/20004000; 
+  double lat_scale = rect->w/40075016;
+  //len between poles: 80 016 000m
+  //
+  //y = equator - node.y * long_scale
+  //x = prime_mer + node.x * lat_scale
+
+  int len = vessel->path->len;
+  SDL_FPoint points[len];
+
+  for (int i = 0;i < len;i++) {
+    //y = equator - node.y * long_scale
+    //x = prime_mer + node.x * lat_scale
+    //NOTE: naive solution
+    path_node node = vessel->path->nodes[i];
+    SDL_FPoint p;// = {(float) node.x, (float) node.y};
+    p.x = (float) (prime_mer + node.x * lat_scale);
+    p.y = (float) (equator - node.y * long_scale);
+    points[i] = p;
+  }
+
+  //pick color
+
+  SDL_SetRenderDrawColorFloat(rend,vessel->rgba[0],vessel->rgba[1],vessel->rgba[2],vessel->rgba[3]);
+  SDL_RenderLines(rend, points, len);
 }

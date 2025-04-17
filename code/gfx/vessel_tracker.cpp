@@ -148,7 +148,8 @@ int main(int, char**)
   static projection_t projection;
   //TODO: test for possible incorrect access to dst_rect
   SDL_FRect dst_rect;
-  vessel_t *vessel = launch_vessel(0, 0, false);
+  float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
+  vessel_t *vessel = launch_vessel(0, 0, red_color);
 
   // Main loop
   bool done = false;
@@ -317,8 +318,10 @@ int main(int, char**)
 
     if (show_vessel) {
       draw_vessel(renderer, &dst_rect, vessel);
+    }
 
-      
+    if (show_vessel_path){
+      draw_path(renderer, &dst_rect, vessel);
     }
       // draw_entity(renderer,window,zoom,xpos_v,ypos_v, vessel);
     
