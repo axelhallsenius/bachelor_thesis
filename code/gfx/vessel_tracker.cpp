@@ -21,24 +21,11 @@
 #include "shapes/shapes.h"
 #include "shapes/map.h"
 #include "translation/translation.h"
-// Dear ImGui: standalone example application for SDL3 + SDL_Renderer
-// (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
-
-// Learn about Dear ImGui:
-// - FAQ                  https://dearimgui.com/faq
-// - Getting Started      https://dearimgui.com/getting-started
-// - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
-// - Introduction, links and more at the top of imgui.cpp
-
-// Important to understand: SDL_Renderer is an _optional_ component of SDL3.
-// For a multi-platform app consider using e.g. SDL+DirectX on Windows and SDL+OpenGL on Linux/OSX.
-
 
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
-// Main code
 int main(int, char**)
 {
   // Setup SDL
@@ -92,22 +79,7 @@ int main(int, char**)
     return SDL_APP_FAILURE;
   }
 
-  //create a grid texture for the same surface:
-  // SDL_Texture *grid_texture;
-  // SDL_SetRenderTarget(renderer, grid_texture);
-  //
-  // draw_grid(renderer, grid_texture, 1.0);
-  //
-  //
-  // //resets render target
-  // SDL_SetRenderTarget(renderer, NULL);
-
   SDL_DestroySurface(surface);
-
-
-  //active texture:
-
-  SDL_Texture *active_tex;
 
   // Setup Dear ImGui context
   IMGUI_CHECKVERSION();
@@ -202,65 +174,32 @@ int main(int, char**)
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
-    static int xpos_v = 100;
-    static int ypos_v = 100;
-
-    static int xpos_o = 150;
-    static int ypos_o = 150;
-    // static SDL_Texture *map_tex;
     SDL_GetWindowSize(window, &win_w, &win_h);
+    static float f = 0.0f;
+    static int counter = 0;
 
-    
-    // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-    // if (show_demo_window)
-    //   ImGui::ShowDemoWindow(&show_demo_window);
-
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
     {
-      static float f = 0.0f;
-      static int counter = 0;
-
-      // SDL_SetRenderDrawColorFloat(renderer, clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-      // SDL_RenderClear(renderer);
-
       ImGui::Begin("Options");                          // Create a window called "Hello, world!" and append into it.
 
       ImGui::Checkbox("Show Grid", &show_grid);      // Edit bools storing our window open/close state
 
       ImGui::Checkbox("Show Vessel", &show_vessel);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
-      
       ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
+      
+      ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
-
       
       //Projection selection
       ImGui::Text("Projection");
       if(ImGui::RadioButton("Snake", projection == snake)) { 
         projection = snake; 
-        // active_tex = map_texture;
       }
       if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
         projection = t_merc; 
-        //redraw grid
       }
 
-      ImGui::Text("\n");
-      ImGui::DragInt("X pos: Vessel", &xpos_v, 1);
-      ImGui::DragInt("Y pos: Vessel", &ypos_v, 1);
-
-      ImGui::Text("\n");
-      ImGui::DragInt("X pos: Observer", &xpos_o, 1);
-      ImGui::DragInt("Y pos: Observer", &ypos_o, 1);
-
-      ImGui::Text("\n");
       ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
-      // ImGui::SliderFloat("scale_factor", &scale_factor, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
-      // ImGui::SliderFloat("Pan X", &pan_x, -100.0f, 100.0f, "%.2f");
-      // ImGui::SliderFloat("Pan Y", &pan_y, -100.0f, 100.0f, "%.2f");
-      ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Another Window", &show_another_window);
 
       if (ImGui::Button("Move Vessel Regular"))
         move_vessel_deg(vessel, 3.0, 2.0);
@@ -270,38 +209,13 @@ int main(int, char**)
       if (ImGui::Button("Move Vessel Rand"))
         move_vessel_deg(vessel, randx, randy);
 
-      if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-        counter++;
-      ImGui::SameLine();
-      ImGui::Text("counter = %d", counter);
-
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
       ImGui::End();
     }
-
-    // 3. Show another simple window.
-    if (show_another_window)
-    {
-      ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-      ImGui::Text("Hello from another window!");
-      if (ImGui::Button("Close Me"))
-        show_another_window = false;
-      ImGui::End();
-    }
-
-    
+        
     if(projection == snake){
-      // zoom = 1.0f;
-      //FIXME:
-      //Flickers
-      //
-      //// Clear the screen with whatever background color
-      // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  // black background
-      //SDL_RenderClear(renderer);
-
       // Define destination rectangle
       float scale_factor = ((float) win_h) / ((float) texture_height);
-
       dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
       dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
       dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
@@ -309,10 +223,7 @@ int main(int, char**)
 
       SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
 
-      // Present the rendered frame
-      // SDL_RenderPresent(renderer);
       if(show_grid){
-        // draw_grid(renderer, &dst_rect);
         draw_grid_utm(renderer, &dst_rect);
       }
     }
@@ -327,15 +238,7 @@ int main(int, char**)
     if (show_vessel_path){
       draw_path(renderer, &dst_rect, vessel);
     }
-      // draw_entity(renderer,window,zoom,xpos_v,ypos_v, vessel);
     
-    if (show_observer)
-      // draw_entity(renderer,window,zoom,xpos_o,ypos_o, observer);
-    
-    if(show_grid){
-      // draw_grid(renderer, map_texture);
-    }
-
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
     SDL_RenderPresent(renderer);
   }
