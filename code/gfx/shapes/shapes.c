@@ -182,6 +182,7 @@ void move_vessel_deg(vessel_t *vessel, double move_x, double move_y){
 
   append_to_path(vessel->path, vessel->current_x, vessel->current_y);
 }
+//move_vessel_cart_deg
 
 void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
   vessel->current_x = vessel->current_x + move_x;
@@ -190,6 +191,68 @@ void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
   append_to_path(vessel->path, vessel->current_x, vessel->current_y);
 }
 
+//move_sphere_deg
+//move_sphere_m
+
+//move_geoid_deg
+//move_geoid_m
+
+//timea funktioner separat
+
+//HERE: great circle navigation
+//HERE: basic UV-mapping to a sphere
+//HERE: rhumb line impl? Looks straight on a mercator proj
+//but isn't straight over a geoid
+
+//NOTE:
+//Store coordinates in a common data structure
+//ex: vessel:
+//x, y from launch
+//lat/long on a sphere
+//lat/long on a geoid
+//functions translate these coords onto the map
+//Points will start to differ when they are moved 
+//difference in projection and such will be in move functions
+
+//TODO: Implement travel across poles and date line for snake
+//Less silly:
+//Make movement across a pole will make you end up on an equal distance to the meridian, but upside down
+
+//IDEA: save orientation of the vessels matrix?
+//
+//movement algo for this: 
+//
+// 1. place reference (basis) matrix in current position of vessel
+// 2. translate next waypoint's position 
+//    (an x, y value from the current basis) ---> projection coords 
+//  2a. x, y from null island for snake proj
+//  2b. lat/long for sphere
+//  2c. lat/long for WGS geoid
+// 3. store the vessel's new ref?
+// 4. draw it
+//    translate from all 3 coord systems separately into pixels
+//    give separate colors for comparison?
+//
+// this can be done similarly for all projections
+//
+// This is good if vessel reports position like:
+// I went 2m right, and 4 m forward from where I last was.
+//
+// This assumes vessels bearing at the end of a waypoint.
+// Can the bearing be assumed to be linear to vector? No.
+// Can the vessel report its rotation?
+// Saving rotation and transform as a quaternion (2d, so maybe that's just a x,y,w) is a good idea in this case 
+// More classic gamedev programming there
+
+
+// ALTERNATIVE:
+// next waypoints are always given as cardinal directions from the vessel position.
+// supplying more than max/min of the map will result in 
+// supplied val until vessel reaches pole. The vessel will then "teleport" 
+// to a negated map value x 
+// and the rest of the y value will be negated
+
+//This function could be saved as draw_path_linear or something
 //FIXME: this is really inefficient
 void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   double equator = (rect->h / 2.0f) + rect->y;
