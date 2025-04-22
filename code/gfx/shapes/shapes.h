@@ -24,12 +24,12 @@ extern "C" {
 double simpl_lat_to_m(double deg);
 double simpl_lon_to_m(double deg);
 
-typedef struct {
-  double deg_long;//degrees
-  double deg_lat;//degrees
-  double len_long;//meters
-  double len_lat;//meters
-} FlatMap; //NOTE: Naive solution
+// typedef struct {
+//   double deg_long;//degrees
+//   double deg_lat;//degrees
+//   double len_long;//meters
+//   double len_lat;//meters
+// } FlatMap; //NOTE: Naive solution
 
 typedef struct {
   double x;
@@ -39,18 +39,25 @@ typedef struct {
 typedef struct {
   int len;
   path_node nodes[MAX_PATH]; //NOTE: always allocates max path
-} path_t;
+} path_t; //TODO: dynamically allocate
 
 typedef struct {
   double start_long; //degrees
   double start_lat;
 
-  double current_x; //meters from origin
-  double current_y; //meters from origin
+  double local_x; //meters from origin
+  double local_y; //meters from origin
+  
+  double sphere_lat; //degrees
+  double sphere_long;
+
+  //wgs square
+  // double wgs_lat;
+  // double wgs_long;
 
   float rgba[4];
 
-  path_t *path;
+  path_t *path; //NOTE: doesn't need to be kept here
 } vessel_t;
 
 typedef enum {
@@ -104,9 +111,9 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
  * * grid_options: none, side_ruler, grid
 */
 // void draw_grid(float scale, grid_options goption);
-void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
+void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
-vessel_t *launch_vessel(double start_lon, double start_lat, float rgba[4]);
+vessel_t *launch_vessel(double start_long, double start_lat, float rgba[4]);
 
 void destroy_vessel(vessel_t *vessel);
 

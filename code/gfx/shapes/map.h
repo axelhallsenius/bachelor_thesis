@@ -21,6 +21,7 @@ typedef enum {
   t_merc,
 } projection_t;
 
+/*
 typedef struct {
   double max_x;
   double max_y;
@@ -60,6 +61,9 @@ typedef struct {
 typedef struct {
   WGS_Submap **map_matrix;
 } WGS_Map;
+*/
+
+
 
 #endif
 #ifdef __cplusplus

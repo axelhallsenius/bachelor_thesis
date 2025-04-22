@@ -232,7 +232,7 @@ int main(int, char**)
     ImGui::Render();
 
     if (show_vessel) {
-      draw_vessel(renderer, &dst_rect, vessel);
+      draw_vessel_snake(renderer, &dst_rect, vessel);
     }
 
     if (show_vessel_path){

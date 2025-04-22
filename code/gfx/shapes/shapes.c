@@ -106,15 +106,15 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
   //ew edges
 }
 
-void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
+void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   float long_scale = rect->h/180.0f;
   float lat_scale = rect->w/360.0f;
   float equator = (rect->h / 2.0f) + rect->y;
   float prime_mer = (rect->w / 2.0f) + rect->x;
 
   //TODO: depends on projection
-  double pos_lat = (vessel->current_x / 110600) + vessel->start_lat;
-  double pos_long = (vessel->current_y / 111300) + vessel->start_long;
+  double pos_lat = (vessel->local_x / 110600) + vessel->start_lat;
+  double pos_long = (vessel->local_y / 111300) + vessel->start_long;
 
   double x = prime_mer + (pos_lat * lat_scale);
   double y = equator - (pos_long * long_scale);
@@ -125,15 +125,11 @@ void draw_vessel(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
     x, y, 
     POINT_SIZE, 
     200, 60, 60, 255
-    // vessel->rgba[0], 
-    // vessel->rgba[1], 
-    // vessel->rgba[2], 
-    // vessel->rgba[3]
   );
 }
 
 //FIXME: somewhat ugly code
-void append_to_path(path_t *path, double x, double y){
+void append_to_path_local(path_t *path, double x, double y){
   path_node node;
   node.x = x;
   node.y = y;
@@ -142,17 +138,20 @@ void append_to_path(path_t *path, double x, double y){
   // printf("step %d: (%lf, %lf) visited\n",path->len, x,y);
 }
 
-vessel_t *launch_vessel(double start_lon, double start_lat, float rgba[4]){
+vessel_t *launch_vessel(double start_long, double start_lat, float rgba[4]){
   vessel_t *vessel = calloc(1, sizeof(vessel_t));
 
   //what lat/long the vessel is launched at
-  vessel -> start_long = start_lon;
+  vessel -> start_long = start_long;
   vessel -> start_lat = start_lat;
 
   //the vessel will always start at 0,0 from its own
   //point of view
-  vessel -> current_x = 0;
-  vessel -> current_y = 0;
+  vessel -> local_x = 0;
+  vessel -> local_y = 0;
+
+  vessel -> sphere_lat = start_lat;
+  vessel -> sphere_long = start_long;
 
   //assigning colors to vessel
   for (int i = 0;i < 4;i++) {
@@ -164,7 +163,7 @@ vessel_t *launch_vessel(double start_lon, double start_lat, float rgba[4]){
   vessel->path = calloc(1, sizeof(path_t));
 
   //first node visited will always be 0,0
-  append_to_path(vessel->path, 0, 0);
+  append_to_path_local(vessel->path, 0, 0);
   return vessel;
 }
 
@@ -177,19 +176,27 @@ void destroy_vessel(vessel_t *vessel){
 
 //NOTE: naive
 void move_vessel_deg(vessel_t *vessel, double move_x, double move_y){
-  vessel->current_x = vessel->current_x + (110600 * move_x);
-  vessel->current_y = vessel->current_y + (111300 * move_y);
+  vessel->local_x = vessel->local_x + (110600 * move_x);
+  vessel->local_y = vessel->local_y + (111300 * move_y);
 
-  append_to_path(vessel->path, vessel->current_x, vessel->current_y);
+  append_to_path_local(vessel->path, vessel->local_x, vessel->local_y);
 }
 //move_vessel_cart_deg
 
 void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
-  vessel->current_x = vessel->current_x + move_x;
-  vessel->current_y = vessel->current_y + move_y;
+  vessel->local_x = vessel->local_x + move_x;
+  vessel->local_y = vessel->local_y + move_y;
 
-  append_to_path(vessel->path, vessel->current_x, vessel->current_y);
+  append_to_path_local(vessel->path, vessel->local_x, vessel->local_y);
 }
+
+void move_sphere_m(vessel_t *vessel, double move_x, double move_y){
+  //move x many meters in this direction, y in that
+  //what is now the degree value on the sphere
+  //save the value in the vessel->sphere_lat/long
+}
+
+
 
 //move_sphere_deg
 //move_sphere_m
@@ -243,6 +250,8 @@ void move_vessel_m(vessel_t *vessel, double move_x, double move_y){
 // Can the vessel report its rotation?
 // Saving rotation and transform as a quaternion (2d, so maybe that's just a x,y,w) is a good idea in this case 
 // More classic gamedev programming there
+//
+// Write about this, but do not implement it
 
 
 // ALTERNATIVE:
