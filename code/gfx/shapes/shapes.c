@@ -107,12 +107,16 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
 }
 
 void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
+  //how many pixels is a degree
   float long_scale = rect->h/180.0f;
   float lat_scale = rect->w/360.0f;
+  //equator in the middle between N and S
   float equator = (rect->h / 2.0f) + rect->y;
+  //prime meridian in the middle between E and W
   float prime_mer = (rect->w / 2.0f) + rect->x;
 
   //TODO: depends on projection
+  //aquire degree position of local pos
   double pos_lat = (vessel->local_x / 110600) + vessel->start_lat;
   double pos_long = (vessel->local_y / 111300) + vessel->start_long;
 
@@ -125,6 +129,29 @@ void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
     x, y, 
     POINT_SIZE, 
     200, 60, 60, 255
+  );
+}
+
+// will likely print wierd
+void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double xm, double ym, tm_ellipsoid e){
+  float long_scale = rect->h/180.0f;
+  float lat_scale = rect->w/360.0f;
+  float equator = (rect->h / 2.0f) + rect->y;
+  float prime_mer = (rect->w / 2.0f) + rect->x;
+
+  
+  double pos_lat = (xm / 110600);
+  double pos_long = (ym / 111300);
+
+  double y = equator - pos_long;
+  double x = prime_mer + (pos_lat * lat_scale);
+
+  //centered_to_window(window, zoom, &x, &y);
+  filledCircleRGBA(
+    rend, 
+    x, y, 
+    POINT_SIZE, 
+    60, 60, 200, 255
   );
 }
 

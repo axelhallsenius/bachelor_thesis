@@ -1,5 +1,6 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include "map.h"
 
 #ifndef SHAPES_H
 #define SHAPES_H
@@ -113,7 +114,8 @@ void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
 // void draw_path(SDL_Renderer *rend, vessel_t *vessel);
 void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
-#endif
+// void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double x, double y);
 #ifdef __cplusplus
 }
+#endif
 #endif

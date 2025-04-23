@@ -16,6 +16,7 @@ add_subdirectory(SDL3_gfx)
 add_subdirectory(gui)
 add_subdirectory(shapes)
 add_subdirectory(translation)
+add_subdirectory(test)
 
 add_executable(${PROJECT_NAME} vessel_tracker.cpp)
 
@@ -35,6 +36,7 @@ PRIVATE
   # ImGui
   shapes
   translation
+  test
 )
 # target_include_directories(${PROJECT_NAME} PRIVATE shapes)
 

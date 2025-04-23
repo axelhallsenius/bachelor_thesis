@@ -38,66 +38,28 @@ typedef struct {
   double false_easting; // rad/s
 } tm_ellipsoid;
 
-//Map
-
-// typedef struct {
-//   double len_long;//meters
-//   double len_lat;//meters
-// } Flat_Map; //NOTE: Naive solution
-
 typedef enum {
   snake,
   merc,
   t_merc,
 } projection_t;
 
+typedef struct{
+  double deg_lat;
+  double deg_long;
+} point_geod;
+
+typedef struct{
+  double x;
+  double y;
+} point_tm_grid;
+
+point_tm_grid geod_to_tm_grid(tm_ellipsoid e, point_geod p);
 
 
-/*
-typedef struct {
-  double max_x;
-  double max_y;
-  double min_x;
-  double min_y;
-} tm_zone;
+// void test_geod_grid();
 
-typedef struct tm_node {
-  bool isLeaf;
-  int entries_amt;
-  tm_zone MBRs[MAX_ENTRIES];
-  struct tm_node *children[MAX_ENTRIES];
-  void *data[MAX_ENTRIES];
-} tm_node;
-
-typedef struct {
-  //R+tree seems the best data structure
-  //key being lat long in degrees
-  //A-Z s/n
-  //1-60 e/w
-
-} tm_map;
-
-
-//snake projection
-
-typedef struct {
-  double from_long;//degrees
-  double from_lat;//degrees
-  double to_long;//degrees
-  double to_lat;//degrees
-  //TODO: lots of constants go here.
-} WGS_Submap;
-
-//wgs constants:
-
-typedef struct {
-  WGS_Submap **map_matrix;
-} WGS_Map;
-*/
-
-
-
-#endif
 #ifdef __cplusplus
 }
+#endif
 #endif

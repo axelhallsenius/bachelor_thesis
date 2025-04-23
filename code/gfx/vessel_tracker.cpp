@@ -21,6 +21,7 @@
 #include "shapes/shapes.h"
 #include "shapes/map.h"
 #include "translation/translation.h"
+#include "test/test.h"
 
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
@@ -110,6 +111,7 @@ int main(int, char**)
   bool show_vessel_path = false;
   bool show_observer_path = false;
   bool show_hovering_legend = false;
+  bool show_test_point = false;
 
   int grid_scale = 100;
   float zoom = 1.0f;
@@ -188,6 +190,7 @@ int main(int, char**)
       
       ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
+      ImGui::Checkbox("Show Test Point", &show_test_point);      // Edit bools storing our window open/close state
       
       //Projection selection
       ImGui::Text("Projection");
@@ -237,6 +240,10 @@ int main(int, char**)
 
     if (show_vessel_path){
       draw_path(renderer, &dst_rect, vessel);
+    }
+    if (show_test_point) {
+      
+      test_geod_grid(renderer,&dst_rect);
     }
     
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
