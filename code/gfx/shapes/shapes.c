@@ -292,3 +292,9 @@ void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   SDL_SetRenderDrawColorFloat(rend,vessel->rgba[0],vessel->rgba[1],vessel->rgba[2],vessel->rgba[3]);
   SDL_RenderLines(rend, points, len);
 }
+
+
+
+void draw_path_sphere(SDL_Renderer *rend, SDL_FRect *rect,  path_t *path){
+  
+}

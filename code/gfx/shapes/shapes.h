@@ -21,16 +21,6 @@ extern "C" {
 
 //Simplified length of a degree (at equator)
 
-double simpl_lat_to_m(double deg);
-double simpl_lon_to_m(double deg);
-
-// typedef struct {
-//   double deg_long;//degrees
-//   double deg_lat;//degrees
-//   double len_long;//meters
-//   double len_lat;//meters
-// } FlatMap; //NOTE: Naive solution
-
 typedef struct {
   double x;
   double y;
