@@ -114,7 +114,8 @@ void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
 // void draw_path(SDL_Renderer *rend, vessel_t *vessel);
 void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
-// void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double x, double y);
+// void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double xm, double ym, tm_ellipsoid e);
+void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p, tm_ellipsoid e);
 #ifdef __cplusplus
 }
 #endif

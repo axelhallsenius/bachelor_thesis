@@ -1,6 +1,8 @@
 #define MAX_ENTRIES 4
 #include <stdbool.h>
 #include <math.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 
 
 #ifndef MAP_H
@@ -40,14 +42,24 @@ typedef struct {
 
 typedef enum {
   snake,
-  merc,
   t_merc,
+  wgs84
 } projection_t;
 
 typedef struct{
   double deg_lat;
   double deg_long;
 } point_geod;
+
+//NOTE: how to choose this grid?
+typedef struct{
+  //points outside the grid to prevent numbers in grid from becoming negative
+  double fe; //False easting 
+  double fn; //False Northing
+  double central_mer; //degrees east to the centerpoint of the grid
+  double scale_factor; //scale factor on the central meridian of the grid
+} tm_grid;
+
 
 typedef struct{
   double x;
@@ -56,6 +68,7 @@ typedef struct{
 
 point_tm_grid geod_to_tm_grid(tm_ellipsoid e, point_geod p);
 
+point_geod tm_grid_to_geod(tm_ellipsoid e, point_tm_grid p);
 
 // void test_geod_grid();
 

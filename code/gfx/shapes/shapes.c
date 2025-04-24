@@ -5,6 +5,9 @@
 #include "shapes.h"
 #include "SDL3_gfx/SDL3_gfxPrimitives.h"
 
+#define EARTH_CIRC_EQ 40075016.0
+#define EARTH_POLAR_DIST 20004000.0
+
 double simpl_lat_to_m(double deg){
   return deg * 110600;
 }
@@ -132,19 +135,43 @@ void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   );
 }
 
+//TODO:
+void deg_to_pixel(SDL_FRect *rect, double x, double y){
+  float equator = rect->h/2.0f + rect->y;
+  float prime_mer = rect->w/2.0f + rect->x;
+}
+void m_to_pixel(SDL_FRect *rect, double x, double y){
+  float equator = rect->h/2.0f + rect->y;
+  float prime_mer = rect->w/2.0f + rect->x;
+
+  double lat_scale = rect->w/EARTH_CIRC_EQ;
+  double long_scale = rect->h/EARTH_POLAR_DIST;
+}
+
 // will likely print wierd
-void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double xm, double ym, tm_ellipsoid e){
+void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p, tm_ellipsoid e){
   float long_scale = rect->h/180.0f;
   float lat_scale = rect->w/360.0f;
   float equator = (rect->h / 2.0f) + rect->y;
   float prime_mer = (rect->w / 2.0f) + rect->x;
 
+  //scale rect units per meter
+  //earth circumference
+  // double rm_lat = rect->w/EARTH_CIRC_EQ;
+  // double rect_easting = 84182.8790 * rm_lat;
   
-  double pos_lat = (xm / 110600);
-  double pos_long = (ym / 111300);
+  // double pos_lat = (xm / 110600);
+  // double pos_long = (ym / 111300);
+  double pos_lat = p.deg_lat * lat_scale;
+  double pos_long = p.deg_long * long_scale;
+  // double foo = e.false_easting 
+  
 
   double y = equator - pos_long;
-  double x = prime_mer + (pos_lat * lat_scale);
+  // double x = rect_easting + (e.central_meridian_longitude * lat_scale);
+  double x = prime_mer + pos_lat;
+  // double y = equator - pos_long;
+  // double x = prime_mer + (pos_lat * lat_scale);
 
   //centered_to_window(window, zoom, &x, &y);
   filledCircleRGBA(
@@ -293,8 +320,8 @@ void move_sphere_m(vessel_t *vessel, double move_x, double move_y){
 void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   double equator = (rect->h / 2.0f) + rect->y;
   double prime_mer = (rect->w / 2.0f) + rect->x;
-  double long_scale = rect->h/20004000; 
-  double lat_scale = rect->w/40075016;
+  double long_scale = rect->h/EARTH_POLAR_DIST; 
+  double lat_scale = rect->w/EARTH_CIRC_EQ;
   //len between poles: 80 016 000m
   //
   //y = equator - node.y * long_scale
