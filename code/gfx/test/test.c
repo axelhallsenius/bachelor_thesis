@@ -1,8 +1,12 @@
 #include "test.h"
+//TODO: introduce Google Test here
 
 tm_ellipsoid grs80 = {
   6378137.0000,
   1/298.257222101,
+};
+
+tm_grid grid = {
   13.58547,
   1.000002540000,
   -6226307.8640,
@@ -17,4 +21,11 @@ void test_geod_draw(SDL_Renderer *rend, SDL_FRect *rect){
   draw_example_point_tm(rend, rect, geop);
 }
 
-// void test_
+void test_meter_to_geod(SDL_Renderer *rend, SDL_FRect *rect){
+  point_tm_grid gridp;
+  gridp.x = 1135809.413803;
+  gridp.y = 555304.106555;
+  point_geod geop = tm_grid_to_geod(grs80, grid, gridp);
+  printf("lat: %lf, long: %lf\n", geop.deg_lat, geop.deg_long);
+  draw_example_point_tm(rend, rect, geop);
+}

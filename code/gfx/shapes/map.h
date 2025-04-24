@@ -34,10 +34,10 @@ typedef struct {
 typedef struct {
   double a; //semi major axis
   double f; // 1/f : flattening factor
-  double central_meridian_longitude;
-  double central_meridian_scale_factor;
-  double false_northing; // rad/s
-  double false_easting; // rad/s
+  // double central_meridian_longitude;
+  // double central_meridian_scale_factor;
+  // double false_northing; // rad/s
+  // double false_easting; // rad/s
 } tm_ellipsoid;
 
 typedef enum {
@@ -53,11 +53,11 @@ typedef struct{
 
 //NOTE: how to choose this grid?
 typedef struct{
-  //points outside the grid to prevent numbers in grid from becoming negative
-  double fe; //False easting 
-  double fn; //False Northing
   double central_mer; //degrees east to the centerpoint of the grid
   double scale_factor; //scale factor on the central meridian of the grid
+  //points outside the grid to prevent numbers in grid from becoming negative
+  double fn; //False Northing
+  double fe; //False easting 
 } tm_grid;
 
 
@@ -66,9 +66,9 @@ typedef struct{
   double y;
 } point_tm_grid;
 
-point_tm_grid geod_to_tm_grid(tm_ellipsoid e, point_geod p);
+point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p);
 
-point_geod tm_grid_to_geod(tm_ellipsoid e, point_tm_grid p);
+point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p);
 
 void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y);
 // void test_geod_grid();
