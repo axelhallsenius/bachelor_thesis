@@ -70,6 +70,7 @@ point_tm_grid geod_to_tm_grid(tm_ellipsoid e, point_geod p);
 
 point_geod tm_grid_to_geod(tm_ellipsoid e, point_tm_grid p);
 
+void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y);
 // void test_geod_grid();
 
 #ifdef __cplusplus

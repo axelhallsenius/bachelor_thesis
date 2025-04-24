@@ -243,7 +243,7 @@ int main(int, char**)
     }
     if (show_test_point) {
       
-      test_geod_grid(renderer,&dst_rect);
+      test_geod_draw(renderer,&dst_rect);
     }
     
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);

@@ -17,6 +17,16 @@ tm_ellipsoid grs_1980 = {
   84182.8790
 };
 
+void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y){
+  float long_scale = rect->h/180.0f;
+  float lat_scale = rect->w/360.0f;
+  float equator = (rect->h / 2.0f) + rect->y;
+  float prime_mer = (rect->w / 2.0f) + rect->x;
+  double pos_lat = p.deg_lat * lat_scale;
+  double pos_long = p.deg_long * long_scale;
+  *y = equator - pos_long;
+  *x = prime_mer + pos_lat;
+}
 
 //converts transverse mercator x,y to geodetic coordinates
 //follows conversion from lantmäteriet

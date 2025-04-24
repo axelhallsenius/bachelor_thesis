@@ -148,32 +148,12 @@ void m_to_pixel(SDL_FRect *rect, double x, double y){
   double long_scale = rect->h/EARTH_POLAR_DIST;
 }
 
+
 // will likely print wierd
-void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p, tm_ellipsoid e){
-  float long_scale = rect->h/180.0f;
-  float lat_scale = rect->w/360.0f;
-  float equator = (rect->h / 2.0f) + rect->y;
-  float prime_mer = (rect->w / 2.0f) + rect->x;
-
-  //scale rect units per meter
-  //earth circumference
-  // double rm_lat = rect->w/EARTH_CIRC_EQ;
-  // double rect_easting = 84182.8790 * rm_lat;
-  
-  // double pos_lat = (xm / 110600);
-  // double pos_long = (ym / 111300);
-  double pos_lat = p.deg_lat * lat_scale;
-  double pos_long = p.deg_long * long_scale;
-  // double foo = e.false_easting 
-  
-
-  double y = equator - pos_long;
-  // double x = rect_easting + (e.central_meridian_longitude * lat_scale);
-  double x = prime_mer + pos_lat;
-  // double y = equator - pos_long;
-  // double x = prime_mer + (pos_lat * lat_scale);
-
-  //centered_to_window(window, zoom, &x, &y);
+void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p){
+  double x;
+  double y;
+  geod_to_pixels(rect, p, &x, &y);
   filledCircleRGBA(
     rend, 
     x, y, 

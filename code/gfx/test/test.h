@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-void test_geod_grid(SDL_Renderer *rend, SDL_FRect *rect);
+void test_geod_draw(SDL_Renderer *rend, SDL_FRect *rect);
 
 #endif
 #ifdef __cplusplus
