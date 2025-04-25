@@ -8,6 +8,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+
 //definitions from lantmäteriet
 //false northing
 // #define FN -6626307.8640

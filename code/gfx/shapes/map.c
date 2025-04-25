@@ -1,24 +1,22 @@
 #include "map.h"
 
-
-
 void print_geo(double deg_lat, double deg_long){
   // fmt: xx:xx:xx.xxx
 }
 
 //geodetic coordinates
 //GRS 1980 from lantmäteriet 
-tm_ellipsoid grs_1980 = {
-  6378137.0000,
-  1/298.257222101
-};
-
-tm_grid test_grid = {
-  13.58547,
-  1.000002540000,
-  -6226307.8640,
-  84182.8790
-};
+// tm_ellipsoid grs_1980 = {
+//   6378137.0000,
+//   1/298.257222101
+// };
+//
+// tm_grid test_grid = {
+//   13.58547,
+//   1.000002540000,
+//   -6226307.8640,
+//   84182.8790
+// };
 
 double to_degrees(double radians){
   return radians * (180.0 / M_PI);
@@ -34,8 +32,8 @@ void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y){
   float prime_mer = (rect->w / 2.0f) + rect->x;
   double pos_lat = p.deg_lat * lat_scale;
   double pos_long = p.deg_long * long_scale;
-  *y = equator - pos_long;
-  *x = prime_mer + pos_lat;
+  *y = equator - pos_lat;
+  *x = prime_mer + pos_long;
 }
 
 //converts transverse mercator x,y to geodetic coordinates
@@ -114,7 +112,7 @@ point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p){
   double D_star = 
     -1.0/1260.0 * 4279.0*pow(e_squared, 4);
 
-  double rad_long = 
+  double rad_lat = 
     conf_lat + sin(conf_lat) * cos(conf_lat) * (
     A_star + 
     B_star*pow(sin(conf_lat), 2) + 
@@ -123,15 +121,15 @@ point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p){
 
 
   double lambda = to_radians(g.central_mer) + delta_lambda;
-  // coords.deg_lat =  g.central_mer + to_degrees(delta_lambda);
-  coords.deg_lat = to_degrees(lambda);
-  coords.deg_long = to_degrees(rad_long);
+  coords.deg_long = to_degrees(lambda);
+  coords.deg_lat = to_degrees(rad_lat);
 
   return coords;
 }
 
 
 //TODO: predefine constants
+//TODO: test
 point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p){
   double A = e.f*(2 - e.f);
 
