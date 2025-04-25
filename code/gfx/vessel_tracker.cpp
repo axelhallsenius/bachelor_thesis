@@ -242,7 +242,7 @@ int main(int, char**)
       draw_path(renderer, &dst_rect, vessel);
     }
     if (show_test_point) {
-      //test_geod_draw(renderer,&dst_rect);
+      // test_geod_draw(renderer,&dst_rect);
       test_meter_to_geod(renderer,&dst_rect);
     }
     

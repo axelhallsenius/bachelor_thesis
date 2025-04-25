@@ -9,10 +9,11 @@ tm_ellipsoid grs80 = {
   // 1.000002540000,
 tm_grid grid = {
   13.58547,
-  // 66.0,
-  // 0.9996,
-  1.000002540000,
+  // 24.0,
+  0.9996,
+  // 1.000002540000,
   -6226307.8640,
+  // 0.0,
   84182.8790
   // 0.0,
   // 0.0
@@ -21,8 +22,8 @@ tm_grid grid = {
 
 void test_geod_draw(SDL_Renderer *rend, SDL_FRect *rect){
   point_geod geop;
-  geop.deg_long = 66.0;
-  geop.deg_lat = 24.0;
+  geop.deg_long = 24.0;
+  geop.deg_lat = 66.0;
   // gridp = geod_to_tm_grid(grs80, geop);
   draw_example_point_tm(rend, rect, geop);
 }
