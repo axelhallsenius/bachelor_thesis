@@ -23,6 +23,9 @@ tm_grid test_grid = {
 double to_degrees(double radians){
   return radians * (180.0 / M_PI);
 }
+double to_radians(double degrees){
+  return degrees/180.0 * M_PI;
+}
 
 void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y){
   float long_scale = rect->h/180.0f;
@@ -42,19 +45,19 @@ point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p){
 
   double n = 
     e.f / 
-    (2 - e.f);
+    (2.0 - e.f);
 
   double a_hat = 
     (e.a / (1 + n)) * 
-    (1 + (1.0/4.0)*pow(n, 2) + 
-    (1.0/64)*pow(n, 4));
+    (1 + 0.25*pow(n, 2) + 
+    (1.0/64.0)*pow(n, 4));
 
   double xi = 
     (p.x - g.fn) / 
     (g.scale_factor * a_hat);
 
   double eta = 
-    (p.y - g.fn) / 
+    (p.y - g.fe) / 
     (g.scale_factor * a_hat);
 
   double d1 = 
@@ -76,53 +79,52 @@ point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p){
     (4397.0/161280.0)*pow(n, 4);
 
 
-  double xi_prime = (
+  double xi_prime = xi -(
     d1*sin(2*xi)*cosh(2*eta) - 
     d2*sin(4*xi)*cosh(4*eta) - 
     d3*sin(6*xi)*cosh(6*eta) - 
     d4*sin(8*xi)*cosh(8*eta));
 
-  double eta_prime = (
+  double eta_prime = eta - (
     d1*cos(2*xi)*sinh(2*eta) - 
     d2*cos(4*xi)*sinh(4*eta) - 
     d3*cos(6*xi)*sinh(6*eta) - 
     d4*cos(8*xi)*sinh(8*eta));
 
-  double conf_lat = 
-    asin(sin(xi_prime) / 
-         cosh(eta_prime));
+  double conf_lat = asin(sin(xi_prime) / cosh(eta_prime));
 
-  double delta_lambda = 
-    atan(sinh(eta_prime) / 
-         cos(xi_prime));
+  double delta_lambda = atan(sinh(eta_prime) / cos(xi_prime));
 
   double e_squared = e.f * (2.0 - e.f);
 
-  double a_star = 
+  double A_star = 
     (e_squared + pow(e_squared, 2) + 
     pow(e_squared, 3) + 
     pow(e_squared, 4));
 
-  double b_star = 
+  double B_star = 
     -1.0/6.0 * (7.0*pow(e_squared, 2) + 
     17.0*pow(e_squared, 3) + 
     30.0*pow(e_squared, 4));
 
-  double c_star = 
+  double C_star = 
     1.0/120.0 * (224.0*pow(e_squared, 3) + 
     889.0*pow(e_squared, 4));
 
-  double d_star = 
+  double D_star = 
     -1.0/1260.0 * 4279.0*pow(e_squared, 4);
 
   double rad_long = 
     conf_lat + sin(conf_lat) * cos(conf_lat) * (
-    a_star + 
-    b_star*pow(sin(conf_lat), 2) + 
-    c_star*pow(sin(conf_lat), 4) + 
-    d_star*pow(sin(conf_lat), 6));
+    A_star + 
+    B_star*pow(sin(conf_lat), 2) + 
+    C_star*pow(sin(conf_lat), 4) + 
+    D_star*pow(sin(conf_lat), 6));
 
-  coords.deg_lat = to_degrees(g.central_mer + delta_lambda);
+
+  double lambda = to_radians(g.central_mer) + delta_lambda;
+  // coords.deg_lat =  g.central_mer + to_degrees(delta_lambda);
+  coords.deg_lat = to_degrees(lambda);
   coords.deg_long = to_degrees(rad_long);
 
   return coords;
@@ -147,7 +149,8 @@ point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p){
     (1.0/1260) * 
     (1237*pow(A, 4));
 
-  double phi = p.deg_lat;
+  double phi = to_radians(p.deg_lat);
+  double lambda = to_radians(p.deg_long);
 
   double n = e.f / (2 - e.f);
 
@@ -162,7 +165,7 @@ point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p){
     C*pow(sin(phi),4) + 
     D*pow(sin(phi), 6));
 
-  double delta_lambda = p.deg_long - g.central_mer;
+  double delta_lambda = p.deg_long - to_radians(g.central_mer);
 
   double xi_prime = 
     atan(tan(conf_lat) /
