@@ -4,6 +4,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include "ellipsoid.h"
+#include <stdio.h>
 
 #ifndef MAP_H
 #define MAP_H

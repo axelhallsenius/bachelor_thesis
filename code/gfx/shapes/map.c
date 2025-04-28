@@ -287,7 +287,7 @@ point_tm_grid geod_to_utm_grid(point_geod p){
     UTM_C*pow(sin(phi),4) + 
     UTM_D*pow(sin(phi), 6));
 
-  double delta_lambda = p.deg_long - to_radians(zone.c_meridian);
+  double delta_lambda = to_radians(p.deg_long) - to_radians(zone.c_meridian);
 
   double xi_prime = 
     atan(tan(conf_lat) /
@@ -310,8 +310,11 @@ point_tm_grid geod_to_utm_grid(point_geod p){
     B4*cos(8*xi_prime)*sinh(8*eta_prime));
 
   point_tm_grid coords;
-  coords.x = UTM_CMER_SCALE * UTM_A_HAT * (xi_prime + sum1) + fn;
-  coords.y = UTM_CMER_SCALE * UTM_A_HAT * (eta_prime + sum2) + UTM_FE;
+  coords.x = UTM_CMER_SCALE * UTM_A_HAT * 
+    (xi_prime + sum1) + fn;
+  coords.y = UTM_CMER_SCALE * UTM_A_HAT * 
+    (eta_prime + sum2) + UTM_FE;
+  // printf("a_hat: %lf\n", (xi_prime));
   return coords;
 }
 /*
