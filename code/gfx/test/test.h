@@ -11,6 +11,7 @@ extern "C" {
 
 void test_geod_draw(SDL_Renderer *rend, SDL_FRect *rect);
 void test_meter_to_geod(SDL_Renderer *rend, SDL_FRect *rect);
+void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect);
 
 #endif
 #ifdef __cplusplus

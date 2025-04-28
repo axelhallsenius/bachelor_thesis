@@ -3,11 +3,11 @@
 #include <math.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-
+#include "ellipsoid.h"
 
 #ifndef MAP_H
 #define MAP_H
-
+//central_mer is always +3 deg from edge of zone
 
 //definitions from lantmäteriet
 //false northing
@@ -23,6 +23,10 @@
 extern "C" {
 #endif
 
+typedef struct {
+  int hemisphere;
+  int c_meridian;
+} utm_zone;
 
 typedef struct {
   double a; //semi major axis
@@ -61,7 +65,6 @@ typedef struct{
   double fe; //False easting 
 } tm_grid;
 
-
 typedef struct{
   double x;
   double y;
@@ -74,6 +77,9 @@ point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p);
 void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y);
 // void test_geod_grid();
 
+utm_zone utm_zone_from_geod(point_geod p);
+point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z);
+point_tm_grid geod_to_utm_grid(point_geod p);
 #ifdef __cplusplus
 }
 #endif
