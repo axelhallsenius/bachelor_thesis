@@ -327,6 +327,13 @@ void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel){
   SDL_RenderLines(rend, points, len);
 }
 
+void utm_move_vessel_m(vessel_t *vessel, path_t *path, double x, double y){
+  path->nodes[path->len].x = 0.0; //TODO
+  path->nodes[path->len].y = 0.0; //TODO
+  path->len++;
+
+  
+}
 
 
 void draw_path_sphere(SDL_Renderer *rend, SDL_FRect *rect,  path_t *path){

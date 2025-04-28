@@ -315,51 +315,5 @@ point_tm_grid geod_to_utm_grid(point_geod p){
     (xi_prime + sum1) + fn;
   coords.y = UTM_CMER_SCALE * UTM_A_HAT * 
     (eta_prime + sum2) + UTM_FE;
-  // printf("c_mer: %d\n", zone.c_meridian);
   return coords;
 }
-/*
-point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
-  point_geod coords;
-  int fn = UTM_FN_N;
-  if (z.hemisphere){
-    fn = UTM_FN_S;
-  }
-
-  double xi = 
-    (p.x - fn) / 
-    (UTM_CMER_SCALE * UTM_A_HAT);
-
-  double eta = 
-    (p.y - UTM_FE) / 
-    (UTM_CMER_SCALE * UTM_A_HAT);
-  double xi_prime = xi -(
-    D1*sin(2*xi)*cosh(2*eta) - 
-    D2*sin(4*xi)*cosh(4*eta) - 
-    D3*sin(6*xi)*cosh(6*eta) - 
-    D4*sin(8*xi)*cosh(8*eta));
-
-  double eta_prime = eta - (
-    D1*cos(2*xi)*sinh(2*eta) - 
-    D2*cos(4*xi)*sinh(4*eta) - 
-    D3*cos(6*xi)*sinh(6*eta) - 
-    D4*cos(8*xi)*sinh(8*eta));
-
-  double conf_lat = asin(sin(xi_prime) / cosh(eta_prime));
-
-  double delta_lambda = atan(sinh(eta_prime) / cos(xi_prime));
-
-  double rad_lat = 
-    conf_lat + sin(conf_lat) * cos(conf_lat) * (
-    A_STAR + 
-    B_STAR*pow(sin(conf_lat), 2) + 
-    C_STAR*pow(sin(conf_lat), 4) + 
-    D_STAR*pow(sin(conf_lat), 6));
-
-  double lambda = to_radians(z.c_meridian) + delta_lambda;
-  coords.deg_long = to_degrees(lambda);
-  coords.deg_lat = to_degrees(rad_lat);
-
-  return coords;
-}
-*/
