@@ -55,7 +55,9 @@ void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect){
 
   point_geod newgeop = utm_grid_to_geod(gridp,z);
 
-  printf("lat: %lf, long: %lf\n", newgeop.deg_lat, newgeop.deg_long);
+  // printf("oldlat: %lf, oldlong: %lf\n", newgeop.deg_lat, newgeop.deg_long);
+  printf("delta lat: %lf, delta long: %lf\n", geop.deg_lat - newgeop.deg_lat, geop.deg_long - newgeop.deg_long);
+  // printf("newlat: %lf, newlong: %lf\n", newgeop.deg_lat, newgeop.deg_long);
 
   draw_example_point_tm(rend,rect,newgeop);
 }

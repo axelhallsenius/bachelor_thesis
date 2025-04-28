@@ -266,7 +266,8 @@ utm_zone utm_zone_from_geod(point_geod p){
   }
   //which zone is the long in?
   //take that and mult by 6, and plus 3 to get to the middle
-  z.c_meridian = (p.deg_long/6) * 6 + 3; // there's prob a smarter way to do this
+  int deg = p.deg_long/6;
+  z.c_meridian = (deg * 6) + 3; // there's prob a smarter way to do this
 
   return z;
 }
@@ -314,7 +315,7 @@ point_tm_grid geod_to_utm_grid(point_geod p){
     (xi_prime + sum1) + fn;
   coords.y = UTM_CMER_SCALE * UTM_A_HAT * 
     (eta_prime + sum2) + UTM_FE;
-  // printf("a_hat: %lf\n", (xi_prime));
+  // printf("c_mer: %d\n", zone.c_meridian);
   return coords;
 }
 /*
