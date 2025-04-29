@@ -211,7 +211,7 @@ point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p){
 
 point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
   point_geod coords;
-  int fn = UTM_FN_N;
+  double fn = UTM_FN_N;
   if (z.hemisphere){
     fn = UTM_FN_S;
   }
@@ -291,39 +291,48 @@ point_tm_grid geod_to_utm_grid(point_geod p){
 
   double phi = to_radians(p.deg_lat);
   double lambda = to_radians(p.deg_long);
+  printf("phi: %.17g\n", phi);
+  printf("lambda: %.17g\n", lambda);
 
   double conf_lat = 
     phi - 
-    sin(phi) * cos(phi) * (UTM_A + (UTM_B * pow(sin(phi),2)) + 
-    (UTM_C * pow(sin(phi),4)) + 
-    (UTM_D * pow(sin(phi), 6)));
+    sin(phi) * cos(phi) * (UTM_A + (UTM_B * pow(sin(phi), 2.0)) + 
+    (UTM_C * pow(sin(phi), 4.0)) + 
+    (UTM_D * pow(sin(phi), 6.0)));
 
   double delta_lambda = to_radians(p.deg_long) - to_radians(zone.c_meridian);
+  printf("delta_lambda: %.17g\n", delta_lambda);
 
   double xi_prime = 
     atan(tan(conf_lat) /
          cos(delta_lambda));
 
+  printf("xi_prime: %.17g\n", xi_prime);
   double eta_prime = 
     atanh(cos(conf_lat) * 
           sin(delta_lambda));
+  printf("eta_prime: %.17g\n", eta_prime);
 
   double sum1 = (
-    (B1 * sin(2 * xi_prime) * cosh(2 * eta_prime)) + 
-    (B2 * sin(4 * xi_prime) * cosh(4 * eta_prime)) + 
-    (B3 * sin(6 * xi_prime) * cosh(6 * eta_prime)) + 
-    (B4 * sin(8 * xi_prime) * cosh(8 * eta_prime)));
+    (B1 * sin(2.0 * xi_prime) * cosh(2.0 * eta_prime)) + 
+    (B2 * sin(4.0 * xi_prime) * cosh(4.0 * eta_prime)) + 
+    (B3 * sin(6.0 * xi_prime) * cosh(6.0 * eta_prime)) + 
+    (B4 * sin(8.0 * xi_prime) * cosh(8.0 * eta_prime)));
+  printf("sum1: %.17g\n", sum1);
 
   double sum2 = (
-    (B1 * cos(2 * xi_prime) * sinh(2 * eta_prime)) + 
-    (B2 * cos(4 * xi_prime) * sinh(4 * eta_prime)) + 
-    (B3 * cos(6 * xi_prime) * sinh(6 * eta_prime)) + 
-    (B4 * cos(8 * xi_prime) * sinh(8 * eta_prime)));
+    (B1 * cos(2.0 * xi_prime) * sinh(2.0 * eta_prime)) + 
+    (B2 * cos(4.0 * xi_prime) * sinh(4.0 * eta_prime)) + 
+    (B3 * cos(6.0 * xi_prime) * sinh(6.0 * eta_prime)) + 
+    (B4 * cos(8.0 * xi_prime) * sinh(8.0 * eta_prime)));
+  printf("sum2: %.17g\n", sum2);
 
   point_tm_grid coords;
-  coords.x = (UTM_CMER_SCALE * UTM_A_HAT * 
-    (xi_prime + sum1)) + fn;
-  coords.y = (UTM_CMER_SCALE * UTM_A_HAT * 
-    (eta_prime + sum2)) + UTM_FE;
+  double nx = (UTM_CMER_SCALE * UTM_A_HAT * (xi_prime + sum1)) + fn;
+  printf("nx: %.17g\n", nx);
+  double ny = (UTM_CMER_SCALE * UTM_A_HAT * (eta_prime + sum2)) + UTM_FE;
+  printf("nx: %.17g\n", ny);
+  coords.x = nx;
+  coords.y = ny;
   return coords;
 }
