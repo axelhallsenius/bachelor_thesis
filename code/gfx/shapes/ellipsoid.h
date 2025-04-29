@@ -1,7 +1,7 @@
 
-#define UTM_FN_N 0
-#define UTM_FN_S 10000000
-#define UTM_FE 500000
+#define UTM_FN_N 0.0
+#define UTM_FN_S 10000000.0
+#define UTM_FE 500000.0
 #define UTM_CMER_SCALE 0.9996
 
 //wgs84 ellipsoid a

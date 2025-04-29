@@ -26,10 +26,10 @@ double to_radians(double degrees){
 }
 
 void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y){
-  float long_scale = rect->h/180.0f;
-  float lat_scale = rect->w/360.0f;
-  float equator = (rect->h / 2.0f) + rect->y;
-  float prime_mer = (rect->w / 2.0f) + rect->x;
+  double long_scale = rect->h/180.0;
+  double lat_scale = rect->w/360.0;
+  double equator = (rect->h / 2.0) + rect->y;
+  double prime_mer = (rect->w / 2.0) + rect->x;
   double pos_lat = p.deg_lat * lat_scale;
   double pos_long = p.deg_long * long_scale;
   *y = equator - pos_lat;
@@ -223,17 +223,18 @@ point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
   double eta = 
     (p.y - UTM_FE) / 
     (UTM_CMER_SCALE * UTM_A_HAT);
+
   double xi_prime = xi -(
-    D1*sin(2*xi)*cosh(2*eta) - 
-    D2*sin(4*xi)*cosh(4*eta) - 
-    D3*sin(6*xi)*cosh(6*eta) - 
-    D4*sin(8*xi)*cosh(8*eta));
+    (D1 * sin(2 * xi) * cosh(2 * eta)) - 
+    (D2 * sin(4 * xi) * cosh(4 * eta)) - 
+    (D3 * sin(6 * xi) * cosh(6 * eta)) - 
+    (D4 * sin(8 * xi) * cosh(8 * eta)));
 
   double eta_prime = eta - (
-    D1*cos(2*xi)*sinh(2*eta) - 
-    D2*cos(4*xi)*sinh(4*eta) - 
-    D3*cos(6*xi)*sinh(6*eta) - 
-    D4*cos(8*xi)*sinh(8*eta));
+    (D1 * cos(2 * xi) * sinh(2 * eta)) - 
+    (D2 * cos(4 * xi) * sinh(4 * eta)) - 
+    (D3 * cos(6 * xi) * sinh(6 * eta)) - 
+    (D4 * cos(8 * xi) * sinh(8 * eta)));
 
   double conf_lat = asin(sin(xi_prime) / cosh(eta_prime));
 
@@ -242,9 +243,9 @@ point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
   double rad_lat = 
     conf_lat + sin(conf_lat) * cos(conf_lat) * (
     A_STAR + 
-    B_STAR*pow(sin(conf_lat), 2) + 
-    C_STAR*pow(sin(conf_lat), 4) + 
-    D_STAR*pow(sin(conf_lat), 6));
+    (B_STAR * pow(sin(conf_lat), 2)) + 
+    (C_STAR * pow(sin(conf_lat), 4)) + 
+    (D_STAR * pow(sin(conf_lat), 6)));
 
   double lambda = to_radians(z.c_meridian) + delta_lambda;
   coords.deg_long = to_degrees(lambda);
@@ -254,6 +255,7 @@ point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
 }
 
 //TODO: test
+//conversions use 357 instead of -3
 utm_zone utm_zone_from_geod(point_geod p){
   utm_zone z;
   if (p.deg_lat < 0){
@@ -264,17 +266,25 @@ utm_zone utm_zone_from_geod(point_geod p){
     //northern hem
     z.hemisphere = 0;
   }
+  int deg;
+  if (p.deg_long < 0) {
+    deg = 360 + p.deg_long;
+  }
+  else {
+    deg = p.deg_long;
+  }
+  deg = deg / 6;
   //which zone is the long in?
   //take that and mult by 6, and plus 3 to get to the middle
-  int deg = p.deg_long/6;
   z.c_meridian = (deg * 6) + 3; // there's prob a smarter way to do this
 
+  printf("c_meridian: %d\n", z.c_meridian);
   return z;
 }
 
 point_tm_grid geod_to_utm_grid(point_geod p){
   utm_zone zone = utm_zone_from_geod(p);
-  int fn = UTM_FN_N;
+  double fn = UTM_FN_N;
   if (zone.hemisphere){
     fn = UTM_FN_S;
   }
@@ -284,9 +294,9 @@ point_tm_grid geod_to_utm_grid(point_geod p){
 
   double conf_lat = 
     phi - 
-    sin(phi) * cos(phi) * (UTM_A + UTM_B*pow(sin(phi),2) + 
-    UTM_C*pow(sin(phi),4) + 
-    UTM_D*pow(sin(phi), 6));
+    sin(phi) * cos(phi) * (UTM_A + (UTM_B * pow(sin(phi),2)) + 
+    (UTM_C * pow(sin(phi),4)) + 
+    (UTM_D * pow(sin(phi), 6)));
 
   double delta_lambda = to_radians(p.deg_long) - to_radians(zone.c_meridian);
 
@@ -299,21 +309,21 @@ point_tm_grid geod_to_utm_grid(point_geod p){
           sin(delta_lambda));
 
   double sum1 = (
-    B1*sin(2*xi_prime)*cosh(2*eta_prime) + 
-    B2*sin(4*xi_prime)*cosh(4*eta_prime) + 
-    B3*sin(6*xi_prime)*cosh(6*eta_prime) + 
-    B4*sin(8*xi_prime)*cosh(8*eta_prime));
+    (B1 * sin(2 * xi_prime) * cosh(2 * eta_prime)) + 
+    (B2 * sin(4 * xi_prime) * cosh(4 * eta_prime)) + 
+    (B3 * sin(6 * xi_prime) * cosh(6 * eta_prime)) + 
+    (B4 * sin(8 * xi_prime) * cosh(8 * eta_prime)));
 
   double sum2 = (
-    B1*cos(2*xi_prime)*sinh(2*eta_prime) + 
-    B2*cos(4*xi_prime)*sinh(4*eta_prime) + 
-    B3*cos(6*xi_prime)*sinh(6*eta_prime) + 
-    B4*cos(8*xi_prime)*sinh(8*eta_prime));
+    (B1 * cos(2 * xi_prime) * sinh(2 * eta_prime)) + 
+    (B2 * cos(4 * xi_prime) * sinh(4 * eta_prime)) + 
+    (B3 * cos(6 * xi_prime) * sinh(6 * eta_prime)) + 
+    (B4 * cos(8 * xi_prime) * sinh(8 * eta_prime)));
 
   point_tm_grid coords;
-  coords.x = UTM_CMER_SCALE * UTM_A_HAT * 
-    (xi_prime + sum1) + fn;
-  coords.y = UTM_CMER_SCALE * UTM_A_HAT * 
-    (eta_prime + sum2) + UTM_FE;
+  coords.x = (UTM_CMER_SCALE * UTM_A_HAT * 
+    (xi_prime + sum1)) + fn;
+  coords.y = (UTM_CMER_SCALE * UTM_A_HAT * 
+    (eta_prime + sum2)) + UTM_FE;
   return coords;
 }
