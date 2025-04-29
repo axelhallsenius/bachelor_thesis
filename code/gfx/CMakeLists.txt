@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(vessel_tracker)
 
+#enable ctest
+# include(CTest)
+
 # Set the output directory for built objects (for runtime and libraries)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
@@ -19,6 +22,8 @@ add_subdirectory(translation)
 add_subdirectory(test)
 
 add_executable(${PROJECT_NAME} vessel_tracker.cpp)
+
+# add_test(geotest geotest)
 
 # Copying assets into build directory
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

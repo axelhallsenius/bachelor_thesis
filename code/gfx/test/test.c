@@ -67,7 +67,7 @@ void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect){
 
   gridp = geod_to_utm_grid(geop);
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-  printf("Discgo.17g:\t\t delta x: %.17g, delta y: %.17g\n", 6576222.0 - gridp.x, 475536.0 - gridp.y);
+  printf("Discgo.17g:\t\t delta x: %.17g, delta y: %.17g\n", 475536.0 - gridp.x,6576222.0 - gridp.y);
 
   //fobollsplan vid ett raffinaderi i Abidjan, E.17genbenskusten
   geop.deg_lat = 5.25631000;
@@ -75,28 +75,28 @@ void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect){
 
   gridp = geod_to_utm_grid(geop);
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-  printf("Abidjan Football Field:\t delta x: %.17g, delta y: %.17g\n", 581083.0 - gridp.x, 390332.0 - gridp.y);
+  printf("Abidjan Football Field:\t delta x: %.17g, delta y: %.17g\n", 390332.0 - gridp.x,581083.0 - gridp.y);
 
   geop.deg_lat = 78.66501000;
   geop.deg_long = 16.31944000;
 
   gridp = geod_to_utm_grid(geop);
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-  printf("Schoolyard in Svalbard:\t delta x: %.17g, delta y: %.17g\n", 8731798.0 - gridp.x, 528973.0 - gridp.y);
+  printf("Schoolyard in Svalbard:\t delta x: %.17g, delta y: %.17g\n", 528973.0 - gridp.x,8731798.0 - gridp.y);
 
   geop.deg_lat = 49.29078000;
   geop.deg_long = -123.11829000;
 
   gridp = geod_to_utm_grid(geop);
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-  printf("Vancouver Harbour:\t delta x: %.17g, delta y: %.17g\n", 5459788.0 - gridp.x, 491398.0 - gridp.y);
+  printf("Vancouver Harbour:\t delta x: %.17g, delta y: %.17g\n", 491398.0 - gridp.x,5459788.0 - gridp.y);
  
   geop.deg_lat = -37.84175000;
   geop.deg_long = 144.92936000;
 
   gridp = geod_to_utm_grid(geop);
-  printf("x: %.17g, y: %.17g\n", 5809723.0, 317803.0);
-  printf("Port Melbourne Light:\t delta x: %.17g, delta y: %.17g\n", 5809723.0 - gridp.x, 317803.0 - gridp.y);
+  // printf("x: %.17g, y: %.17g\n", 317803.0, 5809723.0);
+  printf("Port Melbourne Light:\t delta x: %.17g, delta y: %.17g\n", 317803.0 - gridp.x,5809723.0 - gridp.y);
 
   draw_example_point_tm(rend,rect,newgeop);
 }
