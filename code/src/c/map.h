@@ -1,4 +1,6 @@
 #define MAX_ENTRIES 4
+#define EARTH_CIRC_EQ 40075016.0
+#define EARTH_POLAR_DIST 20004000.0
 #include <stdbool.h>
 #include <math.h>
 #include <SDL3/SDL.h>

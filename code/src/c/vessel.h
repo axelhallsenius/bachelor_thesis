@@ -1,6 +1,3 @@
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_main.h>
-#include "../SDL3_gfx/SDL3_gfxPrimitives.h"
 #include "map.h"
 
 #ifndef SHAPES_H
@@ -10,7 +7,6 @@
 extern "C" {
 #endif
 
-#define POINT_SIZE 6
 #define GRID_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
 #define VESSEL_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
 #define OBSERVER_RGBA (float[]){0.753f, 0.753f, 0.753f, 0.8f}
