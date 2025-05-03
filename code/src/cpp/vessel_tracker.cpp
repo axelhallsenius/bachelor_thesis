@@ -13,15 +13,15 @@
 #include <stdio.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <imgui.h>
+#include <imgui_impl_sdl3.h>
+#include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
-#include "gui/imgui.h"
-#include "gui/imgui_impl_sdl3.h"
-#include "gui/imgui_impl_sdlrenderer3.h"
 
-#include "shapes/shapes.h"
-#include "shapes/map.h"
-#include "translation/translation.h"
-#include "test/test.h"
+#include "vessel.h"
+// #include "shapes/map.h"
+// #include "translation/translation.h"
+// #include "test/test.h"
 
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
@@ -62,7 +62,7 @@ int main(int, char**)
   SDL_Surface *surface;
   char *svg_path;
   
-  SDL_asprintf(&svg_path, "%smaps/World_map_nations.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
+  SDL_asprintf(&svg_path, "%sassets/maps/World_map_nations.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
   surface = IMG_Load(svg_path); //NOTE: consider using IMG_LoadTexture instead of going the surface route
   if (!surface) {
     SDL_Log("Couldn't load svg: %s", SDL_GetError());
@@ -97,7 +97,7 @@ int main(int, char**)
   ImGui_ImplSDLRenderer3_Init(renderer);
 
   // Load Fonts
-  io.Fonts->AddFontFromFileTTF("gui/fonts/DroidSans.ttf", 24.0f);
+  io.Fonts->AddFontFromFileTTF("assets/fonts/DroidSans.ttf", 24.0f);
 
    // Our state
   bool show_demo_window = false;
@@ -127,7 +127,9 @@ int main(int, char**)
   float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
   point_geod null_island = {0.0, 0.0};
 
-  vessel_t *vessel = launch_vessel(null_island, red_color);
+  canvas_t canvas = {renderer, &dst_rect};
+
+  vessel_t *vessel = launch_vessel(&canvas, null_island, red_color);
 
   // Main loop
   bool done = false;
@@ -251,8 +253,8 @@ int main(int, char**)
     // }
     if (show_test_point) {
       // test_geod_draw(renderer,&dst_rect);
-      test_meter_to_geod(renderer, &dst_rect);
-      test_geod_to_meter(renderer, &dst_rect);
+      // test_meter_to_geod(renderer, &dst_rect);
+      // test_geod_to_meter(renderer, &dst_rect);
     }
     
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);

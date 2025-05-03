@@ -69,7 +69,7 @@ void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect){
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
   printf("Discgo.17g:\t\t delta x: %.17g, delta y: %.17g\n", 475536.0 - gridp.x,6576222.0 - gridp.y);
 
-  //fobollsplan vid ett raffinaderi i Abidjan, E.17genbenskusten
+  //fobollsplan vid ett raffinaderi i Abidjan, Elfenbenskusten
   geop.deg_lat = 5.25631000;
   geop.deg_long = -3.98964000;
 
@@ -98,5 +98,5 @@ void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect){
   // printf("x: %.17g, y: %.17g\n", 317803.0, 5809723.0);
   printf("Port Melbourne Light:\t delta x: %.17g, delta y: %.17g\n", 317803.0 - gridp.x,5809723.0 - gridp.y);
 
-  draw_example_point_tm(rend,rect,newgeop);
+  draw_example_point_tm(rend,rect,geop);
 }
