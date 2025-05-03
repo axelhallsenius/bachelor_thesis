@@ -12,8 +12,8 @@ set(IMGUI_SRC
 )
 
 set(IMGUI_HEADERS
-  imconfig.h
   imgui.h
+  imconfig.h
   imgui_impl_sdl3.h
   imgui_impl_sdlrenderer3.h
   imgui_internal.h

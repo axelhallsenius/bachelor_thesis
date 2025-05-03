@@ -117,7 +117,7 @@ vessel_t *launch_vessel(point_geod startp, float rgba[4]);
 void destroy_vessel(vessel_t *vessel);
 
 // void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
-void snake_move_vessel_m(vessel_t *vessel, point_local p);
+point_local snake_move_vessel_m(vessel_t *vessel, point_local p);
 // void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
 void snake_move_vessel_deg(vessel_t *vessel, point_geod p);
 

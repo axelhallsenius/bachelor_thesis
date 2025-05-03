@@ -1,15 +1,17 @@
-all: # Build with tests (default)
-	mkdir -p build
-	cd build
-	cmake .. -DCMAKE_BUILD_TYPE=Release
-	cmake --build . --config Debug
+.PHONY: all vessel_tracker
 
-run: # Build without tests
-	cmake -B build -DBUILD_TESTS=OFF
-	cmake --build build
+all:
+	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+	cmake --build build --target vessel_tracker
+
+vessel_tracker:
+	cmake --build build --target vessel_tracker
 
 clean:
+	rm -rf build/*clean:
 	(find ./build/ -mindepth 1 -maxdepth 1 | grep -v deps) | xargs rm -r 
 
 deep-clean:
 	rm -rf ./build/*
+
+.PHONY: all run clean deep-clean

@@ -9,6 +9,11 @@ option(BUILD_TESTS "Build tests" ON)  # Control test compilation
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
+# (if you ever build multi‑config: Debug / Release subdirs)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG  "${CMAKE_SOURCE_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}")
+
 set(SDL3IMAGE_BUILD_SHARED TRUE)
 set(SDL3IMAGE_BUILD_STATIC TRUE)
 
@@ -47,10 +52,11 @@ add_executable(${PROJECT_NAME} src/cpp/vessel_tracker.cpp)
 # Copying assets into build directory
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory
-    "${CMAKE_CURRENT_SOURCE_DIR}/assets/maps"
-    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/maps"
+    "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
 target_include_directories(${PROJECT_NAME} PRIVATE src/c)
+# target_include_directories(${PROJECT_NAME} PRIVATE deps/ImGui)
 
 # Link SDL3 and SDL3_gfx to your executable
 target_link_libraries(${PROJECT_NAME} 
