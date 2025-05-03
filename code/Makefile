@@ -1,8 +1,10 @@
 .PHONY: all vessel_tracker
 
 all:
-	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
-	cmake --build build --target vessel_tracker
+	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && \
+	cmake --build build --target vessel_tracker && \
+	./vessel_tracker
+
 
 vessel_tracker:
 	cmake --build build --target vessel_tracker
