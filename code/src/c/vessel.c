@@ -24,7 +24,7 @@ void append_to_path_local(path_t *path, double x, double y){
   path->len++;
 }
 
-vessel_t *launch_vessel(point_geod startp, float rgba[4]){
+vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]){
   vessel_t *vessel = calloc(1, sizeof(vessel_t));
 
   //what lat/long the vessel is launched at
@@ -38,6 +38,9 @@ vessel_t *launch_vessel(point_geod startp, float rgba[4]){
 
   vessel -> pos_geod.deg_lat = startp.deg_lat;
   vessel -> pos_geod.deg_long = startp.deg_long;
+
+  vessel->canvas.renderer = canvas->renderer;
+  vessel->canvas.dst_rect = canvas->dst_rect;
 
   // geod_to_utm_grid()
 

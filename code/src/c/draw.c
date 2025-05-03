@@ -108,8 +108,8 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
 
 //FIXME: segs
 void draw_vessel_snake(vessel_t *vessel){
-  SDL_FRect *rect = vessel->canvas.dst_rect;
-  SDL_Renderer *rend = vessel->canvas.renderer;
+  SDL_FRect *rect = (vessel->canvas).dst_rect;
+  SDL_Renderer *rend = (vessel->canvas).renderer;
   //how many pixels is a degree
   float long_scale = rect->h/180.0f;
   float lat_scale = rect->w/360.0f;

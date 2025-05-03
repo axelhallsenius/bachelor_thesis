@@ -127,7 +127,9 @@ int main(int, char**)
   float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
   point_geod null_island = {0.0, 0.0};
 
-  vessel_t *vessel = launch_vessel(null_island, red_color);
+  canvas_t canvas = {renderer, &dst_rect};
+
+  vessel_t *vessel = launch_vessel(&canvas, null_island, red_color);
 
   // Main loop
   bool done = false;

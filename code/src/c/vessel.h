@@ -112,7 +112,7 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 
 void draw_vessel_snake(vessel_t *vessel);
 
-vessel_t *launch_vessel(point_geod startp, float rgba[4]);
+vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]);
 
 void destroy_vessel(vessel_t *vessel);
 
