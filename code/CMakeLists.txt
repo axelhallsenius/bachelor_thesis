@@ -7,15 +7,22 @@ option(BUILD_TESTS "Build tests" ON)  # Control test compilation
 
 # Set the output directory for built objects (for runtime and libraries)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
-# (if you ever build multi‑config: Debug / Release subdirs)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG  "${CMAKE_SOURCE_DIR}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}")
 
 set(SDL3IMAGE_BUILD_SHARED TRUE)
 set(SDL3IMAGE_BUILD_STATIC TRUE)
+
+
+
+# ensure debug symbols and no optimization in Debug
+set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG}   -g -O0")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
+
+# (optionally) enable AddressSanitizer in Debug:
+set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG}   -fsanitize=address -fno-omit-frame-pointer")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
 
 if(BUILD_TESTS)
   include(FetchContent)
@@ -54,6 +61,9 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_CURRENT_SOURCE_DIR}/assets"
     "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+  COMMAND ${CMAKE_COMMAND} -E copy
+    "$<TARGET_FILE:${PROJECT_NAME}>"
+    "${CMAKE_SOURCE_DIR}/vessel_tracker"
 )
 target_include_directories(${PROJECT_NAME} PRIVATE src/c)
 # target_include_directories(${PROJECT_NAME} PRIVATE deps/ImGui)
@@ -83,4 +93,63 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 # If you want to build the executable and all dependencies into the same build directory, enable this:
 # set(CMAKE_BUILD_TYPE Debug)
+include(ExternalProject)
 
+# Base directory for building and installing external projects
+set(EXT_PREFIX ${CMAKE_BINARY_DIR}/external)
+
+# Helper to install into EXT_PREFIX/install
+set(EXT_INSTALL_DIR ${EXT_PREFIX}/install)
+
+# Common CMake args for all externals
+set(EXT_CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX=${EXT_INSTALL_DIR}
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+)
+
+### 1) SDL3
+ExternalProject_Add(
+    SDL3_ext
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/deps/SDL
+    BINARY_DIR ${EXT_PREFIX}/SDL/build
+    UPDATE_COMMAND ""            # no updates
+    CONFIGURE_COMMAND cmake <SOURCE_DIR> ${EXT_CMAKE_ARGS} -DSDL_SHARED=ON -DSDL_STATIC=OFF
+    BUILD_COMMAND cmake --build .
+    INSTALL_COMMAND cmake --build . --target install
+)
+
+### 2) SDL3_gfx (depends on SDL3)
+ExternalProject_Add(
+    SDL3_gfx_ext
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/deps/SDL3_gfx
+    BINARY_DIR ${EXT_PREFIX}/SDL3_gfx/build
+    DEPENDS SDL3_ext
+    UPDATE_COMMAND ""
+    CONFIGURE_COMMAND cmake <SOURCE_DIR> ${EXT_CMAKE_ARGS} -DCMAKE_PREFIX_PATH=${EXT_INSTALL_DIR}
+    BUILD_COMMAND cmake --build .
+    INSTALL_COMMAND cmake --build . --target install
+)
+
+### 3) SDL3_image (depends on SDL3)
+ExternalProject_Add(
+    SDL3_image_ext
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/deps/SDL_image
+    BINARY_DIR ${EXT_PREFIX}/SDL_image/build
+    DEPENDS SDL3_ext
+    UPDATE_COMMAND ""
+    CONFIGURE_COMMAND cmake <SOURCE_DIR> ${EXT_CMAKE_ARGS} -DSDL3IMAGE_SHARED=ON -DSDL3IMAGE_STATIC=OFF -DCMAKE_PREFIX_PATH=${EXT_INSTALL_DIR}
+    BUILD_COMMAND cmake --build .
+    INSTALL_COMMAND cmake --build . --target install
+)
+
+### 4) ImGui (depends on SDL3)
+ExternalProject_Add(
+    ImGui_ext
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/deps/ImGui
+    BINARY_DIR ${EXT_PREFIX}/ImGui/build
+    DEPENDS SDL3_ext
+    UPDATE_COMMAND ""            # disable git updates
+    CONFIGURE_COMMAND cmake <SOURCE_DIR> ${EXT_CMAKE_ARGS} -DCMAKE_PREFIX_PATH=${EXT_INSTALL_DIR}
+    BUILD_COMMAND cmake --build .
+    INSTALL_COMMAND cmake --build . --target install
+)
