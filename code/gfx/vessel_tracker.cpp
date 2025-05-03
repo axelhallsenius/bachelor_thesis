@@ -122,8 +122,12 @@ int main(int, char**)
   static projection_t projection;
   //TODO: test for possible incorrect access to dst_rect
   SDL_FRect dst_rect;
+  
+  // Define destination rectangle
   float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
-  vessel_t *vessel = launch_vessel(0, 0, red_color);
+  point_geod null_island = {0.0, 0.0};
+
+  vessel_t *vessel = launch_vessel(null_island, red_color);
 
   // Main loop
   bool done = false;
@@ -196,36 +200,39 @@ int main(int, char**)
       ImGui::Text("Projection");
       if(ImGui::RadioButton("Snake", projection == snake)) { 
         projection = snake; 
-      }
-      if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
-        projection = t_merc; 
-      }
+     }
+      // if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
+      //   projection = t_merc; 
+      // }
 
       ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
 
-      if (ImGui::Button("Move Vessel Regular"))
-        move_vessel_deg(vessel, 3.0, 2.0);
+      if (ImGui::Button("Move Vessel Regular")){
+        point_geod pg = {3.0, 2.0};
+        snake_move_vessel_deg(vessel, pg);
+      }
+        float scale_factor = ((float) win_h) / ((float) texture_height);
+        dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
+        dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
+        dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
+        dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
+        SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
+ 
 
-      float randx = ((float) SDL_rand(100))/10.0f - 5.0f;
-      float randy = ((float) SDL_rand(100))/10.0f - 5.0f;
-      if (ImGui::Button("Move Vessel Rand"))
-        move_vessel_deg(vessel, randx, randy);
+      if (ImGui::Button("Move Vessel Rand")){
+        point_geod pg = {
+          ((double) SDL_rand(100))/10.0f - 5.0f,
+          ((double) SDL_rand(100))/10.0f - 5.0f
+        };
+        snake_move_vessel_deg(vessel, pg);
+      }
 
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
       ImGui::End();
     }
         
     if(projection == snake){
-      // Define destination rectangle
-      float scale_factor = ((float) win_h) / ((float) texture_height);
-      dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
-      dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
-      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
-      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
-
-      SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
-
       if(show_grid){
         draw_grid_utm(renderer, &dst_rect);
       }
@@ -235,15 +242,16 @@ int main(int, char**)
     ImGui::Render();
 
     if (show_vessel) {
-      draw_vessel_snake(renderer, &dst_rect, vessel);
+      draw_vessel_snake(vessel);
+      // draw_vessel_snake(renderer, &dst_rect, vessel);
     }
 
-    if (show_vessel_path){
-      draw_path(renderer, &dst_rect, vessel);
-    }
+    // if (show_vessel_path){
+    //   draw_path(renderer, &dst_rect, vessel);
+    // }
     if (show_test_point) {
       // test_geod_draw(renderer,&dst_rect);
-      test_meter_to_geod(renderer,&dst_rect);
+      test_meter_to_geod(renderer, &dst_rect);
       test_geod_to_meter(renderer, &dst_rect);
     }
     

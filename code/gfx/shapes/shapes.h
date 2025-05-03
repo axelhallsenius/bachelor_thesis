@@ -1,5 +1,6 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include "../SDL3_gfx/SDL3_gfxPrimitives.h"
 #include "map.h"
 
 #ifndef SHAPES_H
@@ -23,6 +24,18 @@ extern "C" {
 //Simplified length of a degree (at equator)
 
 typedef struct {
+  float r;
+  float g;
+  float b;
+  float a;
+}color_t;
+
+typedef struct {
+  SDL_Renderer *renderer;
+  SDL_FRect    *dst_rect;
+}canvas_t;
+
+typedef struct {
   double x;
   double y;
 } path_node;
@@ -33,38 +46,35 @@ typedef struct {
 } path_t; //TODO: dynamically allocate
 
 typedef struct {
-  double start_long; //degrees
-  double start_lat;
+  //where the vessel was launched. lat/long
+  point_geod start_geod;
 
-  double local_x; //meters from origin
-  double local_y; //meters from origin
+  // where the vessel is currently at. lat/long
+  point_geod pos_geod;
+
+  point_local pos_local; //meters from origin
+  //needed?
   
-  double sphere_lat; //degrees
-  double sphere_long;
+  //color representing this vessel. RGBA
+  color_t color;
 
-  //wgs square
-  // double wgs_lat;
-  // double wgs_long;
-
-  float rgba[4];
-
-  path_t *path; //NOTE: doesn't need to be kept here
+  canvas_t canvas;
 } vessel_t;
 
-typedef enum {
-  vessel_ent,
-  observer_ent
-} entity_type;
+// typedef enum {
+//   vessel_ent,
+//   observer_ent
+// } entity_type;
 
-typedef struct {
-  float x;
-  float y;
-} point;
+// typedef struct {
+//   float x;
+//   float y;
+// } point;
 
-typedef struct {
-  float x;
-  float y;
-} wincent_point;
+// typedef struct {
+//   float x;
+//   float y;
+// } wincent_point;
 
 
 
@@ -76,7 +86,7 @@ typedef struct {
 
 
 // void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
-void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos, entity_type type);
+void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos);
 
 // void draw_legend(SDL_Renderer* renderer, char *text, );
 
@@ -102,14 +112,18 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
  * * grid_options: none, side_ruler, grid
 */
 // void draw_grid(float scale, grid_options goption);
-void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
+// void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
-vessel_t *launch_vessel(double start_long, double start_lat, float rgba[4]);
+void draw_vessel_snake(vessel_t *vessel);
+
+vessel_t *launch_vessel(point_geod startp, float rgba[4]);
 
 void destroy_vessel(vessel_t *vessel);
 
-void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
-void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
+// void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
+void snake_move_vessel_m(vessel_t *vessel, point_local p);
+// void move_vessel_m(vessel_t *vessel, double move_x, double move_y);
+void snake_move_vessel_deg(vessel_t *vessel, point_geod p);
 
 // void draw_path(SDL_Renderer *rend, vessel_t *vessel);
 void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);

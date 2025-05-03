@@ -57,6 +57,11 @@ typedef struct{
   double deg_long;
 } point_geod;
 
+typedef struct {
+  double x;
+  double y;
+} point_local;
+
 //NOTE: how to choose this grid?
 typedef struct{
   double central_mer; //degrees east to the centerpoint of the grid
