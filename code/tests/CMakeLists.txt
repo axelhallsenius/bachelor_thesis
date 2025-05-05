@@ -2,7 +2,7 @@
 
 # collecting all .cpp in tests/cpp
 file(GLOB CPP_TEST_SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/cpp/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 )
 
 # building test executable from them

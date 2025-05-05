@@ -6,6 +6,11 @@ all:
 	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
 	./build/Debug/vessel_tracker
 
+test:
+	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON &&\
+	cmake --build build --target unit_tests
+	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
+	./build/Debug/unit_tests
 
 vessel_tracker:
 	cmake --build build --target vessel_tracker
