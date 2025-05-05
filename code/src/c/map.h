@@ -47,13 +47,13 @@ typedef struct {
   // double false_northing; // rad/s
   // double false_easting; // rad/s
 } tm_ellipsoid;
-
-typedef enum {
-  snake,
-  t_merc,
-  wgs84
-} projection_t;
-
+//
+// typedef enum {
+//   snake,
+//   t_merc,
+//   wgs84
+// } projection_t;
+//
 typedef struct{
   double deg_lat;
   double deg_long;
@@ -82,8 +82,9 @@ point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p);
 
 point_geod tm_grid_to_geod(tm_ellipsoid e, tm_grid g, point_tm_grid p);
 
-void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y);
 // void test_geod_grid();
+
+void snake_local_to_pixels(SDL_FRect *rect, point_local p);
 
 utm_zone utm_zone_from_geod(point_geod p);
 point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z);

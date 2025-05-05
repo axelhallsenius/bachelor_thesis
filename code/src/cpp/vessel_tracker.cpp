@@ -1,14 +1,3 @@
-/*
-  Copyright (C) 1997-2025 Sam Lantinga <slouken@libsdl.org>
-
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
-
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely.
-*/
 //#define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
 #include <stdio.h>
 #include <SDL3/SDL.h>
@@ -23,6 +12,12 @@
 // #include "translation/translation.h"
 // #include "test/test.h"
 
+typedef enum {
+  snake_vessel,
+  utm_vessel,
+  compare
+}view_t;
+
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
@@ -31,7 +26,7 @@ int main(int, char**)
 {
   // Setup SDL
   // [If using SDL_MAIN_USE_CALLBACKS: all code below until the main loop starts would likely be your SDL_AppInit() function]
-  if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD))
+  if (!SDL_Init(SDL_INIT_VIDEO))
   {
     printf("Error: SDL_Init(): %s\n", SDL_GetError());
     return -1;
@@ -119,7 +114,8 @@ int main(int, char**)
   int pan_y = 0;
   static int win_w;
   static int win_h;
-  static projection_t projection;
+  // static projection_t projection;
+  static view_t view;
   //TODO: test for possible incorrect access to dst_rect
   SDL_FRect dst_rect;
   
@@ -199,15 +195,21 @@ int main(int, char**)
       ImGui::Checkbox("Show Test Point", &show_test_point);      // Edit bools storing our window open/close state
       
       //Projection selection
-      ImGui::Text("Projection");
-      if(ImGui::RadioButton("Snake", projection == snake)) { 
-        projection = snake; 
-     }
+      ImGui::Text("View");
+      if(ImGui::RadioButton("Naïve Measurement", view == snake_vessel)) { 
+        view = snake_vessel; 
+      }
+      if(ImGui::RadioButton("Universal Transverse Mercator", view == utm_vessel)) { 
+        view = utm_vessel; 
+      }
+      if(ImGui::RadioButton("Compare Paths", view == compare)) { 
+        view = compare; 
+      }
       // if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
       //   projection = t_merc; 
       // }
 
-      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
+      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 100.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
 
       if (ImGui::Button("Move Vessel Regular")){
@@ -231,22 +233,33 @@ int main(int, char**)
       }
 
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+      if (ImGui::Button("Quit")){
+        break;
+      }
       ImGui::End();
     }
         
-    if(projection == snake){
+    if(view == utm_vessel){
       if(show_grid){
-        draw_grid_utm(renderer, &dst_rect);
+        // draw_grid_utm(renderer, &dst_rect);
+      }
+      if (show_vessel) {
+        // draw_vessel_snake(vessel);
+        // draw_vessel_snake(renderer, &dst_rect, vessel);
+      }
+    }
+    if (view == snake_vessel) {
+      if (show_vessel) {
+        // draw_vessel_snake(vessel);
+      }
+      if (show_vessel) {
+        // draw_vessel_utm(vessel);
       }
     }
 
     // Rendering
     ImGui::Render();
 
-    if (show_vessel) {
-      draw_vessel_snake(vessel);
-      // draw_vessel_snake(renderer, &dst_rect, vessel);
-    }
 
     // if (show_vessel_path){
     //   draw_path(renderer, &dst_rect, vessel);
@@ -266,6 +279,7 @@ int main(int, char**)
 
   // Cleanup
   // [If using SDL_MAIN_USE_CALLBACKS: all code below would likely be your SDL_AppQuit() function]
+  destroy_vessel(vessel);
   ImGui_ImplSDLRenderer3_Shutdown();
   ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();

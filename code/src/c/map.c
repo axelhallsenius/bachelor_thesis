@@ -11,16 +11,7 @@ double to_radians(double degrees){
   return degrees/180.0 * M_PI;
 }
 
-void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y){
-  double long_scale = rect->h/180.0;
-  double lat_scale = rect->w/360.0;
-  double equator = (rect->h / 2.0) + rect->y;
-  double prime_mer = (rect->w / 2.0) + rect->x;
-  double pos_lat = p.deg_lat * lat_scale;
-  double pos_long = p.deg_long * long_scale;
-  *y = equator - pos_lat;
-  *x = prime_mer + pos_long;
-}
+
 
 //converts transverse mercator x,y to geodetic coordinates
 //follows conversion from lantmäteriet

@@ -17,8 +17,6 @@ extern "C" {
 
 #define MAX_PATH 100
 
-//Simplified length of a degree (at equator)
-
 typedef struct {
   float r;
   float g;
@@ -42,47 +40,40 @@ typedef struct {
 } path_t; //TODO: dynamically allocate
 
 typedef struct {
+  int len;
+  point_local *deltas;
+}move_order_t;
+
+typedef struct {
   //where the vessel was launched. lat/long
+  //needed?
   point_geod start_geod;
 
   // where the vessel is currently at. lat/long
-  point_geod pos_geod;
-
-  point_local pos_local; //meters from origin
   //needed?
+  point_geod pos_geod;
+  //needed?
+  // point_geod pos_local_utm;
+
+  utm_zone zone;
+  // point_local pos_local; //meters from origin
   
   //color representing this vessel. RGBA
-  color_t color;
+  // color_t color;
 
-  canvas_t canvas;
+  int local_steps;
+  point_local *local_path;
+  int geod_steps;
+  point_geod *geod_path;
+
+  SDL_FPoint *local_path_pixels;
+  SDL_FPoint *geod_path_pixels;
+
 } vessel_t;
-
-// typedef enum {
-//   vessel_ent,
-//   observer_ent
-// } entity_type;
-
-// typedef struct {
-//   float x;
-//   float y;
-// } point;
-
-// typedef struct {
-//   float x;
-//   float y;
-// } wincent_point;
-
-
-
-// typedef enum {
-//   none,
-//   side_ruler,
-//   grid
-// } grid_options;
 
 
 // void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
-void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos);
+// void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos);
 
 // void draw_legend(SDL_Renderer* renderer, char *text, );
 
@@ -95,12 +86,8 @@ void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float x
 
 // void testing_func(SDL_Renderer *renderer);
 
-/*
- * * scale: pixels between grid nodes
- * * NOTE: 32 bit could be suboptimal
-*/
-void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect);
-void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
+// void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect);
+// void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 
 /*
  * Usage:
@@ -112,7 +99,8 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 
 void draw_vessel_snake(vessel_t *vessel);
 
-vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]);
+// vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]);
+vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, int path_len);
 
 void destroy_vessel(vessel_t *vessel);
 
@@ -122,7 +110,7 @@ point_local snake_move_vessel_m(vessel_t *vessel, point_local p);
 void snake_move_vessel_deg(vessel_t *vessel, point_geod p);
 
 // void draw_path(SDL_Renderer *rend, vessel_t *vessel);
-void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
+// void draw_path(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
 // void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double xm, double ym, tm_ellipsoid e);
 void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p);
