@@ -241,46 +241,18 @@ point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
 }
 
 //TODO: test
-//conversions use 357 instead of -3
 utm_zone utm_zone_from_geod(point_geod p){
-  /*
   utm_zone z;
-  if (p.deg_lat < 0){
-    //southern hem
-    z.hemisphere = 1;
-  }
-  else {
-    //northern hem
-    z.hemisphere = 0;
-  }
-  int deg;
-  if (p.deg_long < 0) {
-    deg = 360 + p.deg_long;
-  }
-  else {
-    deg = p.deg_long;
-  }
-  deg = deg / 6;
-  //which zone is the long in?
-  //take that and mult by 6, and plus 3 to get to the middle
-  z.c_meridian = (deg * 6) + 3; // there's prob a smarter way to do this
-
-  printf("c_meridian: %d\n", z.c_meridian);
-  return z;
-  */
-  utm_zone z;
-  // hemisphere
   z.hemisphere = (p.deg_lat < 0);
 
-  // compute zone number 1…60
+  // zone number (1 .. 60)
   int zone_number = (int)floor((p.deg_long + 180.0)/6.0) + 1;
   if (zone_number < 1) zone_number = 1;
   if (zone_number > 60) zone_number = 60;
 
-  // central meridian = −183° + 6°·zone_number
+  // central meridian = −183deg + 6deg zone_number
   z.c_meridian = -183 + zone_number * 6;
 
-  printf("zone_number: %d, c_meridian: %d\n", zone_number, z.c_meridian);
   return z;
 }
 
@@ -293,8 +265,6 @@ point_tm_grid geod_to_utm_grid(point_geod p){
 
   double phi = to_radians(p.deg_lat);
   double lambda = to_radians(p.deg_long);
-  printf("phi: %.17g\n", phi);
-  printf("lambda: %.17g\n", lambda);
 
   const double e2 = E2;  
   const double e4 = e2*e2, e6 = e4*e2, e8 = e4*e4;  
@@ -304,11 +274,6 @@ point_tm_grid geod_to_utm_grid(point_geod p){
   const double C =  (13.0/480*e6 + 461.0/13440*e8);  
   const double D =  (1237.0/161280*e8);
 
-  // double conf_lat = 
-  //   phi - 
-  //   sin(phi) * cos(phi) * (A + (B * pow(sin(phi), 2.0)) + 
-  //   (C * pow(sin(phi), 4.0)) + 
-  //   (D * pow(sin(phi), 6.0)));
   double conf_lat =  
     phi  
     - A*sin(2*phi)  
@@ -317,39 +282,30 @@ point_tm_grid geod_to_utm_grid(point_geod p){
     + D*sin(8*phi);  
 
   double delta_lambda = lambda - to_radians(zone.c_meridian);
-  printf("delta_lambda: %.17g\n", delta_lambda);
 
   double xi_prime = 
     atan(tan(conf_lat) /
          cos(delta_lambda));
 
-  printf("xi_prime: %.17g\n", xi_prime);
   double eta_prime = 
     atanh(cos(conf_lat) * 
           sin(delta_lambda));
-  printf("eta_prime: %.17g\n", eta_prime);
 
   double sum1 = (
     (B1 * sin(2.0 * xi_prime) * cosh(2.0 * eta_prime)) + 
     (B2 * sin(4.0 * xi_prime) * cosh(4.0 * eta_prime)) + 
     (B3 * sin(6.0 * xi_prime) * cosh(6.0 * eta_prime)) + 
     (B4 * sin(8.0 * xi_prime) * cosh(8.0 * eta_prime)));
-  printf("sum1: %.17g\n", sum1);
 
   double sum2 = (
     (B1 * cos(2.0 * xi_prime) * sinh(2.0 * eta_prime)) + 
     (B2 * cos(4.0 * xi_prime) * sinh(4.0 * eta_prime)) + 
     (B3 * cos(6.0 * xi_prime) * sinh(6.0 * eta_prime)) + 
     (B4 * cos(8.0 * xi_prime) * sinh(8.0 * eta_prime)));
-  printf("sum2: %.17g\n", sum2);
 
   point_tm_grid coords;
-  // double nx = (UTM_CMER_SCALE * UTM_A_HAT * (xi_prime + sum1)) + fn;
   double easting = (UTM_CMER_SCALE * UTM_A_HAT * (eta_prime + sum2)) + UTM_FE;
-  printf("easting: %.17g\n", easting);
-  // double ny = (UTM_CMER_SCALE * UTM_A_HAT * (eta_prime + sum2)) + fn;
   double northing = (UTM_CMER_SCALE * UTM_A_HAT * (xi_prime + sum1)) + fn;
-  printf("northing: %.17g\n", northing);
   coords.x = easting;
   coords.y = northing;
   return coords;
