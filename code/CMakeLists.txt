@@ -5,6 +5,7 @@ project(vessel_tracker LANGUAGES C CXX)
 
 option(BUILD_TESTS "Build tests" ON)  # Control test compilation
 
+
 # Set the output directory for built objects (for runtime and libraries)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
@@ -23,6 +24,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
 # (optionally) enable AddressSanitizer in Debug:
 set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG}   -fsanitize=address -fno-omit-frame-pointer")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -fsanitize=address")
 
 if(BUILD_TESTS)
   include(FetchContent)
@@ -60,7 +62,7 @@ add_executable(${PROJECT_NAME} src/cpp/vessel_tracker.cpp)
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_CURRENT_SOURCE_DIR}/assets"
-    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/assets"
   COMMAND ${CMAKE_COMMAND} -E copy
     "$<TARGET_FILE:${PROJECT_NAME}>"
     "${CMAKE_SOURCE_DIR}/vessel_tracker"
