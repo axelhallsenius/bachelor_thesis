@@ -12,10 +12,10 @@ double simpl_lon_to_m(double deg){
   return deg * 111300;
 }
 
-move_order_t create_random_move_order(int len, int scale){
-  move_order_t order;
-  order.deltas = malloc(len * sizeof(point_local));
-  order.len = 0;
+move_order_t *create_random_move_order(int len, int scale){
+  move_order_t *order = malloc(sizeof(move_order_t));
+  order->deltas = malloc(len * sizeof(point_local));
+  order->len = 0;
 
   //rand
   point_local p;
@@ -28,15 +28,14 @@ move_order_t create_random_move_order(int len, int scale){
     p.x = dx;
     p.y = dy;
 
-    order.deltas[i] = p;
+    order->deltas[i] = p;
   }
-
   return order;
 }
 
-void destroy_move_order(move_order_t order){
-  free(order.deltas);
-  // free(order);
+void destroy_move_order(move_order_t *order){
+  free(order->deltas);
+  free(order);
 }
 
 //

@@ -63,8 +63,6 @@ typedef struct {
 } vessel_t;
 
 
-move_order_t create_random_move_order(int len, int scale);
-void destroy_move_order(move_order_t order);
 // void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
 // void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos);
 
@@ -90,7 +88,7 @@ void destroy_move_order(move_order_t order);
 // void draw_grid(float scale, grid_options goption);
 // void draw_vessel_snake(SDL_Renderer *rend, SDL_FRect *rect, vessel_t *vessel);
 
-void draw_vessel_snake(vessel_t *vessel);
+// void draw_vessel_snake(vessel_t *vessel);
 
 // move_order_t *create_random_move_order(int len, int scale);
 
@@ -114,6 +112,11 @@ void snake_move_vessel_deg(vessel_t *vessel, point_geod p);
 
 // void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, double xm, double ym, tm_ellipsoid e);
 void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p);
+
+// move_order_t create_random_move_order(int len, int scale);
+move_order_t *create_random_move_order(int len, int scale);
+
+void destroy_move_order(move_order_t *order);
 #ifdef __cplusplus
 }
 #endif

@@ -7,8 +7,8 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
-#define ORDER_LEN 10
-#define ORDER_SCALE 1
+#define ORDER_LEN 1000
+#define ORDER_SCALE 100
 
 #include "vessel.h"
 #include "draw.h"
@@ -129,9 +129,9 @@ int main(int, char**)
 
   canvas_t canvas = {renderer, &dst_rect};
 
-  move_order_t move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+  move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
 
-  vessel_t *vessel = launch_vessel(null_island, move_order.len);
+  vessel_t *vessel = launch_vessel(null_island, move_order->len);
 
   // Main loop
   bool done = false;
@@ -252,16 +252,35 @@ int main(int, char**)
       if (show_vessel) {
         // draw_vessel_snake(vessel);
         // draw_vessel_snake(renderer, &dst_rect, vessel);
-        track_vessel_utm(&canvas, vessel, &move_order);
+        SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
+        track_vessel_utm(&canvas, vessel, move_order);
+        draw_vessel_utm(&canvas, vessel);
       }
     }
-    if (view == snake_vessel) {
+    else if (view == snake_vessel) {
       if (show_grid) {
-        // draw_vessel_snake(vessel);
       }
       if (show_vessel) {
-        track_vessel_snake(&canvas, vessel, &move_order);
+        printf("%d", move_order->deltas[0].x,move_order->deltas[4].x);
+        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
+        track_vessel_snake(&canvas, vessel, move_order);
+        draw_vessel_snake(&canvas, vessel);
       }
+    }
+    else if (view == compare) {
+      if (show_vessel) {
+        printf("%d", move_order->deltas[0].x,move_order->deltas[4].x);
+        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
+        track_vessel_snake(&canvas, vessel, move_order);
+        draw_vessel_snake(&canvas, vessel);
+
+
+
+        SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
+        track_vessel_utm(&canvas, vessel, move_order);
+        draw_vessel_utm(&canvas, vessel);
+      }
+
     }
 
     // Rendering

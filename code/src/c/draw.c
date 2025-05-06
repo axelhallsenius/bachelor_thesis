@@ -169,7 +169,33 @@ void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect){
 //     vessel->color.a
 //   );
 // }
-//
+
+void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel){
+  SDL_FPoint p = local_to_pixels_snake(canvas->dst_rect, vessel->pos_snake);
+
+  filledCircleRGBA(
+    canvas->renderer, 
+    p.x, p.y, 
+    POINT_SIZE, 
+    0.0f,
+    255.0f,
+    0.0f,
+    255.0f
+  );
+}
+
+void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel){
+  SDL_FPoint p = geod_to_pixels(canvas->dst_rect, vessel->pos_geod);
+  filledCircleRGBA(
+    canvas->renderer, 
+    p.x, p.y, 
+    POINT_SIZE, 
+    255.0f,
+    0.0f,
+    0.0f,
+    255.0f
+  );
+}
 // void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y){
 //   double long_scale = rect->h/180.0;
 //   double lat_scale  = rect->w/360.0;
