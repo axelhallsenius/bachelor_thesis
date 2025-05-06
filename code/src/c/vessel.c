@@ -11,6 +11,28 @@ double simpl_lat_to_m(double deg){
 double simpl_lon_to_m(double deg){
   return deg * 111300;
 }
+
+move_order_t *create_random_move_order(int len, int scale){
+  move_order_t *order = malloc(sizeof(move_order_t));
+  order->deltas = malloc(len * sizeof(point_local));
+  order->len = 0;
+
+  //rand
+  point_local p;
+  double dx;
+  double dy;
+
+  for (int i = 0; i < len; i++){
+    dx = ((double) (SDL_rand(200.0) - 100.0) * scale);
+    dy = ((double) (SDL_rand(200.0) - 100.0) * scale);
+    p.x = dx;
+    p.y = dy;
+
+    order->deltas[i] = p;
+  }
+
+  return order;
+}
 //
 // //FIXME: somewhat ugly code
 // void append_to_path_local(path_t *path, local_path){
@@ -21,16 +43,19 @@ double simpl_lon_to_m(double deg){
 //   path->len++;
 // }
 
-vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, int path_len){
-  vessel_t *vessel = calloc(1, sizeof(vessel_t));
+vessel_t *launch_vessel(point_geod startp, int path_len){
+  vessel_t *vessel = malloc(sizeof(vessel_t));
 
   //what lat/long the vessel is launched at
   vessel->start_geod = startp;
-  //TODO: dynamically?
+  //TODO: must do dynamically. otherwise heap bffer will overflow
   //can realloc if given more at runtime
-  vessel->local_path = calloc(path_len, sizeof(point_local));
-  vessel->geod_path  = calloc(path_len, sizeof(point_geod));
-  vessel->geod_path[0] = startp;
+  // vessel->local_path
+  point_local *local_ptr = (point_local *)malloc(path_len * sizeof(point_local));
+  point_geod *geod_ptr = (point_geod *)malloc(path_len * sizeof(point_geod));
+  vessel->local_path = local_ptr;
+  vessel->geod_path = geod_ptr;
+  (vessel->geod_path)[0] = startp;
 
   vessel->pos_geod = startp;
 
@@ -61,8 +86,8 @@ vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, int path_len){
 void destroy_vessel(vessel_t *vessel){
   free(vessel->local_path);
   free(vessel->geod_path);
-  free(vessel->local_path_pixels);
-  free(vessel->geod_path_pixels);
+  // free(vessel->local_path_pixels);
+  // free(vessel->geod_path_pixels);
   //watch out for pointers to this
   free(vessel);
 }
@@ -76,15 +101,10 @@ void move_vessel_snake(vessel_t *vessel, point_local delta){
 
   vessel->local_path[idx] = p;
   vessel->local_steps++;
-  //TODO: populate pixel point array
+
 }
 
-//make move orders into positions, and draw inbetween them
-void track_vessel_snake(canvas_t * canvas, vessel_t *vessel, move_order_t *order){
-  for (int i = 0; i < order->len; i++){
-    move_vessel_snake(vessel, (order->deltas)[i]);
-  }
-}
+
 
 void move_vessel_utm(vessel_t *vessel, point_local delta){
   point_tm_grid p = geod_to_utm_grid(vessel->pos_geod);

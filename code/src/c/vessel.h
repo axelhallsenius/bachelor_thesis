@@ -42,7 +42,7 @@ typedef struct {
 typedef struct {
   int len;
   point_local *deltas;
-}move_order_t;
+} move_order_t;
 
 typedef struct {
   //where the vessel was launched. lat/long
@@ -66,12 +66,13 @@ typedef struct {
   int geod_steps;
   point_geod *geod_path;
 
-  SDL_FPoint *local_path_pixels;
-  SDL_FPoint *geod_path_pixels;
+  // SDL_FPoint *local_path_pixels;
+  // SDL_FPoint *geod_path_pixels;
 
 } vessel_t;
 
 
+move_order_t *create_random_move_order(int len, int scale);
 // void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
 // void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos);
 
@@ -99,11 +100,15 @@ typedef struct {
 
 void draw_vessel_snake(vessel_t *vessel);
 
+move_order_t *create_random_move_order(int len, int scale);
+
 // vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]);
-vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, int path_len);
+vessel_t *launch_vessel(point_geod startp, int path_len);
 
 void destroy_vessel(vessel_t *vessel);
 
+void move_vessel_snake(vessel_t *vessel, point_local delta);
+void move_vessel_utm(vessel_t *vessel, point_local delta);
 // void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
 point_local snake_move_vessel_m(vessel_t *vessel, point_local p);
 // void move_vessel_m(vessel_t *vessel, double move_x, double move_y);

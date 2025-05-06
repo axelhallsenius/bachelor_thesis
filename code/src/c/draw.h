@@ -25,6 +25,7 @@ void draw_path_snake(const canvas_t *canvas, const color_t *color, const SDL_FPo
 //draws a dot of the vessel position in the snake projection
 void draw_vessel_snake(vessel_t *vessel);
 
+SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
 //draws a grid
 void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 

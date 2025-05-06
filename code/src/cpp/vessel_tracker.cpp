@@ -7,7 +7,11 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
+#define ORDER_LEN 100
+#define ORDER_SCALE 1
+
 #include "vessel.h"
+#include "draw.h"
 // #include "shapes/map.h"
 // #include "translation/translation.h"
 // #include "test/test.h"
@@ -125,7 +129,9 @@ int main(int, char**)
 
   canvas_t canvas = {renderer, &dst_rect};
 
-  vessel_t *vessel = launch_vessel(&canvas, null_island, red_color);
+  move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+
+  vessel_t *vessel = launch_vessel(null_island, move_order->len);
 
   // Main loop
   bool done = false;
@@ -190,9 +196,9 @@ int main(int, char**)
       ImGui::Checkbox("Show Vessel", &show_vessel);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
       
-      ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Show Test Point", &show_test_point);      // Edit bools storing our window open/close state
+      // ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
+      // ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
+      // ImGui::Checkbox("Show Test Point", &show_test_point);      // Edit bools storing our window open/close state
       
       //Projection selection
       ImGui::Text("View");
@@ -213,8 +219,8 @@ int main(int, char**)
       ImGui::Text("\n");
 
       if (ImGui::Button("Move Vessel Regular")){
-        point_geod pg = {3.0, 2.0};
-        snake_move_vessel_deg(vessel, pg);
+        // point_geod pg = {3.0, 2.0};
+        // snake_move_vessel_deg(vessel, pg);
       }
         float scale_factor = ((float) win_h) / ((float) texture_height);
         dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
@@ -225,11 +231,11 @@ int main(int, char**)
  
 
       if (ImGui::Button("Move Vessel Rand")){
-        point_geod pg = {
-          ((double) SDL_rand(100))/10.0f - 5.0f,
-          ((double) SDL_rand(100))/10.0f - 5.0f
-        };
-        snake_move_vessel_deg(vessel, pg);
+        // point_geod pg = {
+        //   ((double) SDL_rand(100))/10.0f - 5.0f,
+        //   ((double) SDL_rand(100))/10.0f - 5.0f
+        // };
+        // snake_move_vessel_deg(vessel, pg);
       }
 
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
@@ -249,11 +255,11 @@ int main(int, char**)
       }
     }
     if (view == snake_vessel) {
-      if (show_vessel) {
+      if (show_grid) {
         // draw_vessel_snake(vessel);
       }
       if (show_vessel) {
-        // draw_vessel_utm(vessel);
+
       }
     }
 
