@@ -25,8 +25,12 @@ void draw_path_snake(const canvas_t *canvas, const color_t *color, const SDL_FPo
 
 //draws a dot of the vessel position in the snake projection
 // void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
+// void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
+// void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
 void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
 void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
+void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
+void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
 
 SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
 //draws a grid
@@ -46,9 +50,6 @@ SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p);
 //convert degrees on globe to a pixel position in the window
 SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
 
-void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order);
-
-void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order);
 /*
  * / Functions
 */

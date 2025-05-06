@@ -1,5 +1,6 @@
 //#define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
 #include <stdio.h>
+#include <stdlib.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <imgui.h>
@@ -7,8 +8,8 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
-#define ORDER_LEN 1000
-#define ORDER_SCALE 100
+#define ORDER_LEN 100
+#define ORDER_SCALE 1
 
 #include "vessel.h"
 #include "draw.h"
@@ -133,6 +134,9 @@ int main(int, char**)
 
   vessel_t *vessel = launch_vessel(null_island, move_order->len);
 
+  SDL_FPoint *snake_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+  SDL_FPoint *utm_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+
   // Main loop
   bool done = false;
 #ifdef __EMSCRIPTEN__
@@ -218,10 +222,10 @@ int main(int, char**)
       ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 100.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
 
-      if (ImGui::Button("Move Vessel Regular")){
-        // point_geod pg = {3.0, 2.0};
-        // snake_move_vessel_deg(vessel, pg);
-      }
+      // if (ImGui::Button("Move Vessel Regular")){
+      //   // point_geod pg = {3.0, 2.0};
+      //   // snake_move_vessel_deg(vessel, pg);
+      // }
         float scale_factor = ((float) win_h) / ((float) texture_height);
         dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
         dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
@@ -231,11 +235,12 @@ int main(int, char**)
  
 
       if (ImGui::Button("Move Vessel Rand")){
-        // point_geod pg = {
-        //   ((double) SDL_rand(100))/10.0f - 5.0f,
-        //   ((double) SDL_rand(100))/10.0f - 5.0f
-        // };
-        // snake_move_vessel_deg(vessel, pg);
+        
+        move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+        track_vessel_utm(&canvas, vessel, move_order, utm_path);
+        track_vessel_snake(&canvas, vessel, move_order, snake_path);
+
+
       }
 
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
@@ -244,43 +249,26 @@ int main(int, char**)
       }
       ImGui::End();
     }
+    if(show_grid){
+      draw_grid_utm(renderer, &dst_rect);
+    }
         
-    if(view == utm_vessel){
-      if(show_grid){
-        // draw_grid_utm(renderer, &dst_rect);
-      }
+    if(view == utm_vessel || view == compare){
       if (show_vessel) {
         // draw_vessel_snake(vessel);
         // draw_vessel_snake(renderer, &dst_rect, vessel);
-        SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
-        track_vessel_utm(&canvas, vessel, move_order);
+        SDL_SetRenderDrawColorFloat(renderer, 1.0f, 0.0f, 0.0f, 1.0f);
         draw_vessel_utm(&canvas, vessel);
       }
     }
-    else if (view == snake_vessel) {
+    if (view == snake_vessel || view == compare) {
       if (show_grid) {
       }
       if (show_vessel) {
         printf("%d", move_order->deltas[0].x,move_order->deltas[4].x);
-        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
-        track_vessel_snake(&canvas, vessel, move_order);
+        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
         draw_vessel_snake(&canvas, vessel);
       }
-    }
-    else if (view == compare) {
-      if (show_vessel) {
-        printf("%d", move_order->deltas[0].x,move_order->deltas[4].x);
-        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 255.0f, 0.0f, 255.0f);
-        track_vessel_snake(&canvas, vessel, move_order);
-        draw_vessel_snake(&canvas, vessel);
-
-
-
-        SDL_SetRenderDrawColorFloat(renderer, 255.0f, 0.0f, 0.0f, 255.0f);
-        track_vessel_utm(&canvas, vessel, move_order);
-        draw_vessel_utm(&canvas, vessel);
-      }
-
     }
 
     // Rendering
@@ -307,6 +295,8 @@ int main(int, char**)
   // [If using SDL_MAIN_USE_CALLBACKS: all code below would likely be your SDL_AppQuit() function]
   destroy_vessel(vessel);
   destroy_move_order(move_order);
+  free(snake_path);
+  free(utm_path);
   ImGui_ImplSDLRenderer3_Shutdown();
   ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();

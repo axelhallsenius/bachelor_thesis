@@ -15,7 +15,7 @@ double simpl_lon_to_m(double deg){
 move_order_t *create_random_move_order(int len, int scale){
   move_order_t *order = malloc(sizeof(move_order_t));
   order->deltas = malloc(len * sizeof(point_local));
-  order->len = 0;
+  order->len = len;
 
   //rand
   point_local p;
@@ -23,12 +23,13 @@ move_order_t *create_random_move_order(int len, int scale){
   double dy;
 
   for (int i = 0; i < len; i++){
-    dx = ((double) (SDL_rand(200.0) - 100.0) * scale);
-    dy = ((double) (SDL_rand(200.0) - 100.0) * scale);
+    dx = (double) ((SDL_rand(200) - 100) * scale);
+    dy = (double) ((SDL_rand(200) - 100) * scale);
     p.x = dx;
     p.y = dy;
 
     order->deltas[i] = p;
+    printf("%lf, %lf\n", order->deltas[i].x, order->deltas[i].x);
   }
   return order;
 }
