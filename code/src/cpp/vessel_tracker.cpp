@@ -8,8 +8,8 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
-#define ORDER_LEN 100
-#define ORDER_SCALE 1
+#define ORDER_LEN 10
+#define ORDER_SCALE 10
 
 #include "vessel.h"
 #include "draw.h"
@@ -236,6 +236,7 @@ int main(int, char**)
 
       if (ImGui::Button("Move Vessel Rand")){
         
+        destroy_move_order(move_order);
         move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
         track_vessel_utm(&canvas, vessel, move_order, utm_path);
         track_vessel_snake(&canvas, vessel, move_order, snake_path);
@@ -259,6 +260,7 @@ int main(int, char**)
         // draw_vessel_snake(renderer, &dst_rect, vessel);
         SDL_SetRenderDrawColorFloat(renderer, 1.0f, 0.0f, 0.0f, 1.0f);
         draw_vessel_utm(&canvas, vessel);
+        SDL_RenderLines(renderer, utm_path, move_order->len);
       }
     }
     if (view == snake_vessel || view == compare) {
@@ -268,6 +270,8 @@ int main(int, char**)
         printf("%d", move_order->deltas[0].x,move_order->deltas[4].x);
         SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
         draw_vessel_snake(&canvas, vessel);
+        // SDL_SetRenderDrawColorFloat(canvas->renderer, 0.0f, 1.0f, 0.0f, 1.0f);
+        SDL_RenderLines(renderer, snake_path, move_order->len);
       }
     }
 

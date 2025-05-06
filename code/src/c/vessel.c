@@ -95,12 +95,14 @@ void move_vessel_utm(vessel_t *vessel, point_local delta){
   p.x = p.x + delta.x;
   p.y = p.y + delta.y;
   
+
   //TODO: should detect if vessel transfers zone
   //current solution is likely not working
   point_geod newpos = utm_grid_to_geod(p, vessel->zone);
   vessel->steps_utm++;
   vessel->zone = utm_zone_from_geod(newpos);
   
+  vessel->pos_geod = newpos;
   // TODO: define headless mode for measuring without seeing
   // #ifdef HEADLESS=OFF
   // cant do that here, we dont have the rect
