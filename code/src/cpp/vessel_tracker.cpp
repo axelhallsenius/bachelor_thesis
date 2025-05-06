@@ -8,8 +8,9 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
+#include <time.h>
 #define ORDER_LEN 100
-#define ORDER_SCALE 10
+#define ORDER_SCALE 1
 
 #include "vessel.h"
 #include "draw.h"
@@ -112,6 +113,8 @@ int main(int, char**)
   bool show_observer_path = false;
   bool show_hovering_legend = false;
   bool show_test_point = false;
+
+  srand(time(NULL));
 
   int grid_scale = 100;
   float zoom = 1.0f;
@@ -241,6 +244,9 @@ int main(int, char**)
         track_vessel_utm(&canvas, vessel, move_order, utm_path);
         track_vessel_snake(&canvas, vessel, move_order, snake_path);
 
+        // for (int i = 0; i < move_order->len; i++){
+        //   // printf("new deltas:%lf,%lf\n", (move_order->deltas)[i].x, (move_order->deltas)[i].y);
+        // }
 
       }
 
@@ -270,6 +276,7 @@ int main(int, char**)
         SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
         draw_vessel_snake(&canvas, vessel);
         // SDL_SetRenderDrawColorFloat(canvas->renderer, 0.0f, 1.0f, 0.0f, 1.0f);
+        //TODO: must be recalculated from snake path when we zoom
         SDL_RenderLines(renderer, snake_path, move_order->len);
       }
     }
