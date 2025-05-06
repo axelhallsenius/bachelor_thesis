@@ -215,30 +215,37 @@ SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p){
 
 
 //make move orders into positions, and draw inbetween them
-void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path){
-  for (int i = 0; i < order->len; i++){
-    move_vessel_snake(vessel, (order->deltas)[i]);
-    int idx = vessel->local_steps;
+void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order){
+  SDL_FPoint pixel_path[order->len];
 
-    pixel_path[idx] = local_to_pixels_snake(
+  pixel_path[0] = local_to_pixels_snake(canvas->dst_rect, vessel->pos_snake);
+  // SDL_FPoint pos;
+  //TODO:test for length
+  for (int i = 1; i < order->len; i++){
+    move_vessel_snake(vessel, (order->deltas)[i]);
+    // int idx = vessel->steps_snake;
+
+    pixel_path[i] = local_to_pixels_snake(
       canvas->dst_rect,
-      vessel->local_path[idx]
-    );
+      vessel->pos_snake);
   }
+  SDL_RenderLines(canvas->renderer, pixel_path, order->len);
 }
 
-void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path){
+void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order){
+  SDL_FPoint pixel_path[order->len];
+  pixel_path[0] = geod_to_pixels(canvas->dst_rect, vessel->pos_geod);
   for(int i = 0; i < order->len; i++){
     move_vessel_utm(vessel, (order->deltas)[i]);
     //TODO: zone transfer
 
-    int idx = vessel->geod_steps;
-
-    pixel_path[idx] = geod_to_pixels(
+    pixel_path[i] = geod_to_pixels(
       canvas->dst_rect,
-      vessel->geod_path[idx]
+      vessel->pos_geod
     );
   }
+
+  SDL_RenderLines(canvas->renderer, pixel_path, order->len);
 }
 
 //NOTE:could do this inside the track function

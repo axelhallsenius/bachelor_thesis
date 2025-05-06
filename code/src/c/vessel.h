@@ -50,24 +50,15 @@ typedef struct {
   point_geod start_geod;
 
   // where the vessel is currently at. lat/long
-  //needed?
   point_geod pos_geod;
-  //needed?
-  // point_geod pos_local_utm;
-
+  point_local pos_local_utm;
   utm_zone zone;
-  // point_local pos_local; //meters from origin
-  
-  //color representing this vessel. RGBA
-  // color_t color;
 
-  int local_steps;
-  point_local *local_path;
-  int geod_steps;
-  point_geod *geod_path;
+  point_local start_snake;
+  point_local pos_snake;
 
-  // SDL_FPoint *local_path_pixels;
-  // SDL_FPoint *geod_path_pixels;
+  int steps_snake;
+  int steps_utm;
 
 } vessel_t;
 
@@ -100,15 +91,18 @@ move_order_t *create_random_move_order(int len, int scale);
 
 void draw_vessel_snake(vessel_t *vessel);
 
-move_order_t *create_random_move_order(int len, int scale);
+// move_order_t *create_random_move_order(int len, int scale);
 
 // vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]);
 vessel_t *launch_vessel(point_geod startp, int path_len);
 
 void destroy_vessel(vessel_t *vessel);
 
+// void move_vessel_snake(vessel_t *vessel, point_local delta);
+// void move_vessel_snake(vessel_t *vessel, point_local delta, point_geod geod_path[]);
 void move_vessel_snake(vessel_t *vessel, point_local delta);
 void move_vessel_utm(vessel_t *vessel, point_local delta);
+// void move_vessel_utm(vessel_t *vessel, point_local delta);
 // void move_vessel_deg(vessel_t *vessel, double move_x, double move_y);
 point_local snake_move_vessel_m(vessel_t *vessel, point_local p);
 // void move_vessel_m(vessel_t *vessel, double move_x, double move_y);

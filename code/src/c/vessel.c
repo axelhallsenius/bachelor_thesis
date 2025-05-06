@@ -48,60 +48,38 @@ vessel_t *launch_vessel(point_geod startp, int path_len){
 
   //what lat/long the vessel is launched at
   vessel->start_geod = startp;
-  //TODO: must do dynamically. otherwise heap bffer will overflow
-  //can realloc if given more at runtime
-  // vessel->local_path
-  point_local *local_ptr = (point_local *)malloc(path_len * sizeof(point_local));
-  point_geod *geod_ptr = (point_geod *)malloc(path_len * sizeof(point_geod));
-  vessel->local_path = local_ptr;
-  vessel->geod_path = geod_ptr;
-  (vessel->geod_path)[0] = startp;
-
   vessel->pos_geod = startp;
+  vessel->zone = utm_zone_from_geod(startp);
 
-  // vessel -> pos_geod.deg_lat = startp.deg_lat;
-  // vessel -> pos_geod.deg_long = startp.deg_long;
-  vessel->local_steps = 1;
-  vessel->geod_steps = 1;
+  //NOTE: will place the vessel at the correct starting point
+  point_tm_grid local_point = geod_to_utm_grid(startp);
+  point_local p = {local_point.x, local_point.y};
 
+  vessel->start_snake = p;
+  vessel->pos_snake = p;
 
-  // geod_to_utm_grid()
+  vessel->steps_snake = 1;
+  vessel->steps_utm = 1;
 
-  //assigning colors to vessel
-  // vessel -> color = color;
-  // vessel -> color.r = rgba[0];
-  // vessel -> color.g = rgba[1];
-  // vessel -> color.b = rgba[2];
-  // vessel -> color.a = rgba[3];
-
-  //malloc its path
-  //NOTE: not dynamic
-  // vessel->path = calloc(1, sizeof(path_t));
-
-  //first node visited will always be 0,0
-  // append_to_path_local(vessel->path, 0, 0);
   return vessel;
 }
 
 void destroy_vessel(vessel_t *vessel){
-  free(vessel->local_path);
-  free(vessel->geod_path);
+  // free(vessel->local_path);
+  // free(vessel->geod_path);
   // free(vessel->local_path_pixels);
   // free(vessel->geod_path_pixels);
-  //watch out for pointers to this
   free(vessel);
 }
 
-//FIXME: will segfault now
 void move_vessel_snake(vessel_t *vessel, point_local delta){
-  int idx = vessel->local_steps;
+  int idx = vessel->steps_snake;
   point_local p;
-  p.x = vessel->local_path[idx-1].x + delta.x;
-  p.y = vessel->local_path[idx-1].y + delta.y;
+  p.x = vessel->pos_snake.x + delta.x;
+  p.y = vessel->pos_snake.y + delta.y;
 
-  vessel->local_path[idx] = p;
-  vessel->local_steps++;
-
+  vessel->pos_snake = p;
+  vessel->steps_snake++;
 }
 
 
@@ -114,8 +92,7 @@ void move_vessel_utm(vessel_t *vessel, point_local delta){
   //TODO: should detect if vessel transfers zone
   //current solution is likely not working
   point_geod newpos = utm_grid_to_geod(p, vessel->zone);
-  vessel->geod_path[vessel->geod_steps] = newpos;
-  vessel->geod_steps++;
+  vessel->steps_utm++;
   vessel->zone = utm_zone_from_geod(newpos);
   
   // TODO: define headless mode for measuring without seeing
