@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <time.h>
 #include "vessel.h"
 
 
@@ -17,19 +18,26 @@ move_order_t *create_random_move_order(int len, int scale){
   order->deltas = malloc(len * sizeof(point_local));
   order->len = len;
 
+  srand(time(NULL));
+
   //rand
-  point_local p;
   double dx;
   double dy;
 
   for (int i = 0; i < len; i++){
-    dx = (double) ((SDL_rand(200) - 100) * scale);
-    dy = (double) ((SDL_rand(200) - 100) * scale);
-    p.x = dx;
-    p.y = dy;
+    dx = ((SDL_rand(200) - 100) * scale);
+    dy = ((SDL_rand(200) - 100) * scale);
+    // dx = (rand() % 200) - 100;
+    dx = dx * scale;
+
+    // dy = (rand() % 200) - 100;
+    dy = dy * scale;
+    // p.x = dx;
+    // p.y = dy;
+    point_local p = {dx, dy};
 
     order->deltas[i] = p;
-    printf("%lf, %lf\n", order->deltas[i].x, order->deltas[i].x);
+    printf("delta: %lf,%lf\n", order->deltas[0].x,order->deltas[4].x);
   }
   return order;
 }

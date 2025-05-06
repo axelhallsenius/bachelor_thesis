@@ -8,7 +8,7 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
-#define ORDER_LEN 10
+#define ORDER_LEN 100
 #define ORDER_SCALE 10
 
 #include "vessel.h"
@@ -267,7 +267,6 @@ int main(int, char**)
       if (show_grid) {
       }
       if (show_vessel) {
-        printf("%d", move_order->deltas[0].x,move_order->deltas[4].x);
         SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
         draw_vessel_snake(&canvas, vessel);
         // SDL_SetRenderDrawColorFloat(canvas->renderer, 0.0f, 1.0f, 0.0f, 1.0f);
