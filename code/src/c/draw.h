@@ -8,6 +8,7 @@ extern "C" {
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include "../../deps/SDL3_gfx/SDL3_gfxPrimitives.h"
+#include <stdlib.h>
 
 #include "vessel.h"
 
@@ -43,6 +44,9 @@ SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p);
 //convert degrees on globe to a pixel position in the window
 SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
 
+void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order);
+
+void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order);
 /*
  * / Functions
 */

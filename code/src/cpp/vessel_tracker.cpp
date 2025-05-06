@@ -7,7 +7,7 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
-#define ORDER_LEN 100
+#define ORDER_LEN 10
 #define ORDER_SCALE 1
 
 #include "vessel.h"
@@ -129,9 +129,9 @@ int main(int, char**)
 
   canvas_t canvas = {renderer, &dst_rect};
 
-  move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+  move_order_t move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
 
-  vessel_t *vessel = launch_vessel(null_island, move_order->len);
+  vessel_t *vessel = launch_vessel(null_island, move_order.len);
 
   // Main loop
   bool done = false;
@@ -252,6 +252,7 @@ int main(int, char**)
       if (show_vessel) {
         // draw_vessel_snake(vessel);
         // draw_vessel_snake(renderer, &dst_rect, vessel);
+        track_vessel_utm(&canvas, vessel, &move_order);
       }
     }
     if (view == snake_vessel) {
@@ -259,7 +260,7 @@ int main(int, char**)
         // draw_vessel_snake(vessel);
       }
       if (show_vessel) {
-
+        track_vessel_snake(&canvas, vessel, &move_order);
       }
     }
 
@@ -286,6 +287,7 @@ int main(int, char**)
   // Cleanup
   // [If using SDL_MAIN_USE_CALLBACKS: all code below would likely be your SDL_AppQuit() function]
   destroy_vessel(vessel);
+  destroy_move_order(move_order);
   ImGui_ImplSDLRenderer3_Shutdown();
   ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();

@@ -216,36 +216,43 @@ SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p){
 
 //make move orders into positions, and draw inbetween them
 void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order){
-  SDL_FPoint pixel_path[order->len];
+  SDL_FPoint *pixel_path = malloc(order->len * sizeof(SDL_FPoint));
 
-  pixel_path[0] = local_to_pixels_snake(canvas->dst_rect, vessel->pos_snake);
+  // pixel_path[0] = local_to_pixels_snake(canvas->dst_rect, vessel->pos_snake);
   // SDL_FPoint pos;
   //TODO:test for length
-  for (int i = 1; i < order->len; i++){
-    move_vessel_snake(vessel, (order->deltas)[i]);
+  for (int i = 0; i < order->len; i++){
     // int idx = vessel->steps_snake;
 
     pixel_path[i] = local_to_pixels_snake(
       canvas->dst_rect,
       vessel->pos_snake);
+
+    move_vessel_snake(vessel, (order->deltas)[i]);
   }
   SDL_RenderLines(canvas->renderer, pixel_path, order->len);
+  //NOTE: possible to draw lines one by one, since the drawing is single threaded
+  //in case of multithread: make sure map renders first
+  free(pixel_path);
 }
 
 void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order){
-  SDL_FPoint pixel_path[order->len];
-  pixel_path[0] = geod_to_pixels(canvas->dst_rect, vessel->pos_geod);
+  // SDL_FPoint pixel_path[order->len];
+  SDL_FPoint *pixel_path = malloc(order->len * sizeof(SDL_FPoint));
+  // pixel_path[0] = geod_to_pixels(canvas->dst_rect, vessel->pos_geod);
   for(int i = 0; i < order->len; i++){
-    move_vessel_utm(vessel, (order->deltas)[i]);
     //TODO: zone transfer
 
     pixel_path[i] = geod_to_pixels(
       canvas->dst_rect,
       vessel->pos_geod
     );
+
+    move_vessel_utm(vessel, (order->deltas)[i]);
   }
 
   SDL_RenderLines(canvas->renderer, pixel_path, order->len);
+  free(pixel_path);
 }
 
 //NOTE:could do this inside the track function

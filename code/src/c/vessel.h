@@ -63,7 +63,8 @@ typedef struct {
 } vessel_t;
 
 
-move_order_t *create_random_move_order(int len, int scale);
+move_order_t create_random_move_order(int len, int scale);
+void destroy_move_order(move_order_t order);
 // void draw_entity(SDL_Renderer *renderer, int xpos, int ypos, entity_type type);
 // void draw_entity(SDL_Renderer *renderer, SDL_Window *window, float zoom, float xpos, float ypos);
 
