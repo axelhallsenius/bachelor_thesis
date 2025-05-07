@@ -12,95 +12,188 @@ double simpl_lon_to_m(double deg){
   return deg * 111300;
 }
 
+move_order_t *create_random_move_order(int len, int scale){
+  move_order_t *order = malloc(sizeof(move_order_t));
+  order->deltas = malloc(len * sizeof(point_local));
+  order->len = len;
 
 
+  //rand
+  double dx;
+  double dy;
 
-//FIXME: somewhat ugly code
-void append_to_path_local(path_t *path, double x, double y){
-  path_node node;
-  node.x = x;
-  node.y = y;
-  path->nodes[path->len] = node;
-  path->len++;
+  for (int i = 0; i < len; i++){
+    dx = ((SDL_rand(200) - 100));
+    dy = ((SDL_rand(200) - 100));
+    dx = dx * scale;
+    dy = dy * scale;
+
+    point_local p = {dx, dy};
+
+    order->deltas[i] = p;
+    // printf("delta: %lf,%lf\n", order->deltas[0].x,order->deltas[4].x);
+  }
+  return order;
 }
 
-vessel_t *launch_vessel(canvas_t *canvas, point_geod startp, float rgba[4]){
-  vessel_t *vessel = calloc(1, sizeof(vessel_t));
+void destroy_move_order(move_order_t *order){
+  free(order->deltas);
+  free(order);
+}
+
+//
+// //FIXME: somewhat ugly code
+// void append_to_path_local(path_t *path, local_path){
+//   path_node node;
+//   node.x = x;
+//   node.y = y;
+//   path->nodes[path->len] = node;
+//   path->len++;
+// }
+
+vessel_t *launch_vessel(point_geod startp, int path_len){
+  vessel_t *vessel = malloc(sizeof(vessel_t));
 
   //what lat/long the vessel is launched at
-  vessel -> start_geod.deg_long = startp.deg_long;
-  vessel -> start_geod.deg_lat = startp.deg_lat;
+  vessel->start_geod = startp;
+  vessel->pos_geod = startp;
+  vessel->zone = utm_zone_from_geod(startp);
 
-  //the vessel will always start at 0,0 from its own
-  //point of view
-  vessel -> pos_local.x = 0;
-  vessel -> pos_local.y = 0;
+  // point_tm_grid local_point = geod_to_utm_grid(startp);
+  //TODO: make snake spawn anywhere
+  point_local p = {0.0, 0.0};
 
-  vessel -> pos_geod.deg_lat = startp.deg_lat;
-  vessel -> pos_geod.deg_long = startp.deg_long;
+  
 
-  vessel->canvas.renderer = canvas->renderer;
-  vessel->canvas.dst_rect = canvas->dst_rect;
+  vessel->start_snake = p;
+  vessel->pos_snake = p;
 
-  // geod_to_utm_grid()
+  vessel->steps_snake = 1;
+  vessel->steps_utm = 1;
 
-  //assigning colors to vessel
-  vessel -> color.r = rgba[0];
-  vessel -> color.g = rgba[1];
-  vessel -> color.b = rgba[2];
-  vessel -> color.a = rgba[3];
-
-  //malloc its path
-  //NOTE: not dynamic
-  // vessel->path = calloc(1, sizeof(path_t));
-
-  //first node visited will always be 0,0
-  // append_to_path_local(vessel->path, 0, 0);
   return vessel;
 }
 
-
 void destroy_vessel(vessel_t *vessel){
-  // free(vessel->path);
-  //watch out for pointers to this
+  // free(vessel->local_path);
+  // free(vessel->geod_path);
+  // free(vessel->local_path_pixels);
+  // free(vessel->geod_path_pixels);
   free(vessel);
 }
 
+void move_vessel_snake(vessel_t *vessel, point_local delta){
+  int idx = vessel->steps_snake;
+  point_local p;
+  p.x = vessel->pos_snake.x + delta.x;
+  p.y = vessel->pos_snake.y + delta.y;
 
-
-
-
-
-point_local snake_move_vessel_m(vessel_t *vessel, point_local p){
-  point_local old;
-  old.x = vessel -> pos_local.x;
-  old.y = vessel -> pos_local.y;
-
-  vessel->pos_local.x = vessel->pos_local.x + p.x;
-  vessel->pos_local.y = vessel->pos_local.y + p.y;
-
-  return old;
-  // snake_draw_path(vessel, old);
-  // draw from last pos to current pos
-  // append_to_path_local(vessel->path, vessel->local_x, vessel->local_y);
-}
-
-void snake_move_vessel_deg(vessel_t *vessel, point_geod p){
-
-  point_local lp;
-  lp.x = 110600 * p.deg_long;
-  lp.y = 111300 * p.deg_lat;
-
-  snake_move_vessel_m(vessel,lp);
-}
-
-void utm_move_vessel_m(vessel_t *vessel, point_local dst){
-  // path->nodes[path->len].x = 0.0; //TODO
-  // path->nodes[path->len].y = 0.0; //TODO
-  // path->len++;
+  vessel->pos_snake = p;
+  vessel->steps_snake++;
 }
 
 
-void draw_path_sphere(SDL_Renderer *rend, SDL_FRect *rect,  path_t *path){
+
+void move_vessel_utm(vessel_t *vessel, point_local delta){
+  point_tm_grid p = geod_to_utm_grid(vessel->pos_geod);
+  p.x = p.x + delta.x;
+  p.y = p.y + delta.y;
+
+  //TODO: should detect if vessel transfers zone
+  //current solution is likely not working
+  point_geod newpos = utm_grid_to_geod(p, vessel->zone);
+  vessel->steps_utm++;
+  vessel->zone = utm_zone_from_geod(newpos);
   
+  vessel->pos_geod = newpos;
+  // TODO: define headless mode for measuring without seeing
+  // #ifdef HEADLESS=OFF
+  // cant do that here, we dont have the rect
+  // vessel->geod_path_pixels = geod_to_pixels(newpos);
+  // #endif
+}
+
+//translate orders to degree movement
+//call when updating order
+point_geod *make_path_utm(point_geod start, move_order_t *order){
+  point_geod *path = malloc(order->len * sizeof(point_geod));
+
+  point_geod tmp_geod;
+  utm_zone zone;
+  point_tm_grid prev;
+  point_tm_grid curr = geod_to_utm_grid(start);
+  path[0] = start;
+  for (int i = 1;i < order->len;i++) {
+    //TODO: check if this works
+    zone = utm_zone_from_geod(path[i-1]);
+    prev = curr;
+    curr.x = prev.x + ((order->deltas)[i].x);
+    curr.y = prev.y + ((order->deltas)[i].y);
+    // printf("geo: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
+    // printf("geo: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
+
+    //checking hemisphere
+    // if (zone.hemisphere == HEM_N){
+    //   if (curr.y < 0){
+    //     zone.hemisphere = HEM_S;
+    //   }
+    //   else if (curr.y > UTM_FN_S){
+    //   //TODO: Polar transfer
+    //   }
+    // }
+    // }
+    // if (zone.hemisphere == HEM_S){
+    //   if (curr.y > UTM_FN_S){
+    //     zone.hemisphere = HEM_N;
+    //   }
+    //   else if (curr.y < 0){
+    //   //TODO: Polar transfer
+    //   }
+    // }
+
+
+    tmp_geod = utm_grid_to_geod(curr, zone);
+    zone = utm_zone_from_geod(tmp_geod);
+    curr = geod_to_utm_grid(tmp_geod);
+
+    path[i] = utm_grid_to_geod(curr, zone);
+    // printf("geod converted lat%lf,long%lf\n", path[i].deg_lat,path[i].deg_long);
+  }
+
+  return path;
+}
+
+void update_vessel_pos(vessel_t *vessel, point_geod g, point_local l){
+  vessel->pos_geod = g;
+  vessel->pos_snake = l;
+}
+
+//call when updating order
+point_local *make_path_snake(point_local start, move_order_t *order){
+  point_local *path = malloc(order->len * sizeof(point_local));
+
+  // point_tm_grid tmp = geod_to_utm_grid(start);
+  // point_local prev;
+  // point_local curr = {tmp.x, tmp.y};
+  point_local prev;
+  point_local curr = start;
+  // path[0] = start;
+  path[0] = curr;
+  for (int i = 1;i < order->len;i++) {
+    prev = curr;
+    // printf("delta: %lf,%lf\n",(order->deltas)[i].x, (order->deltas)[i].y);
+    // printf("old pos: %lf",prev.x);
+    // printf(",%lf\n",prev.y);
+    
+    curr.x = prev.x + ((order->deltas)[i].x);
+    // printf("new pos: %lf",curr.x);
+    curr.y = prev.y + ((order->deltas)[i].y);
+    // printf(",%lf\n",curr.y);
+
+    // printf("snake: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
+    // printf("snake: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
+    path[i] = curr;
+  }
+
+  return path;
 }

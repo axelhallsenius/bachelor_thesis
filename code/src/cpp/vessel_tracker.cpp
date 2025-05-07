@@ -1,16 +1,6 @@
-/*
-  Copyright (C) 1997-2025 Sam Lantinga <slouken@libsdl.org>
-
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
-
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely.
-*/
 //#define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
 #include <stdio.h>
+#include <stdlib.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <imgui.h>
@@ -18,10 +8,23 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
 
+#include <time.h>
+#define ORDER_LEN 100
+#define ORDER_SCALE 100
+#define MAX_PATHS 20
+
+#include "map.h"
 #include "vessel.h"
+#include "draw.h"
 // #include "shapes/map.h"
 // #include "translation/translation.h"
 // #include "test/test.h"
+
+typedef enum {
+  snake_vessel,
+  utm_vessel,
+  compare
+}view_t;
 
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
@@ -31,7 +34,7 @@ int main(int, char**)
 {
   // Setup SDL
   // [If using SDL_MAIN_USE_CALLBACKS: all code below until the main loop starts would likely be your SDL_AppInit() function]
-  if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD))
+  if (!SDL_Init(SDL_INIT_VIDEO))
   {
     printf("Error: SDL_Init(): %s\n", SDL_GetError());
     return -1;
@@ -113,15 +116,20 @@ int main(int, char**)
   bool show_hovering_legend = false;
   bool show_test_point = false;
 
+  srand(time(NULL));
+
   int grid_scale = 100;
   float zoom = 1.0f;
   int pan_x = 0;
   int pan_y = 0;
   static int win_w;
   static int win_h;
-  static projection_t projection;
+  // static projection_t projection;
+  static view_t view;
   //TODO: test for possible incorrect access to dst_rect
   SDL_FRect dst_rect;
+
+  int num_paths = 0; //make sure less than MAX_PATHS
   
   // Define destination rectangle
   float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
@@ -129,7 +137,19 @@ int main(int, char**)
 
   canvas_t canvas = {renderer, &dst_rect};
 
-  vessel_t *vessel = launch_vessel(&canvas, null_island, red_color);
+  move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+
+  vessel_t *vessel = launch_vessel(null_island, move_order->len);
+
+  point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
+  point_local *local_path = make_path_snake(vessel->pos_snake, move_order);
+
+  // SDL_FPoint *snake_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+  // SDL_FPoint *utm_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+
+  point_geod g = geod_path[move_order->len - 1];
+  point_local l = local_path[move_order->len - 1];
+  update_vessel_pos(vessel, g, l);
 
   // Main loop
   bool done = false;
@@ -142,11 +162,6 @@ int main(int, char**)
   while (!done)
 #endif
   {
-    // Poll and handle events (inputs, window resize, etc.)
-    // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-    // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-    // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-    // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
     // [If using SDL_MAIN_USE_CALLBACKS: call ImGui_ImplSDL3_ProcessEvent() from your SDL_AppEvent() function]
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -194,26 +209,32 @@ int main(int, char**)
       ImGui::Checkbox("Show Vessel", &show_vessel);      // Edit bools storing our window open/close state
       ImGui::Checkbox("Show Vessel Path", &show_vessel_path);      // Edit bools storing our window open/close state
       
-      ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
-      ImGui::Checkbox("Show Test Point", &show_test_point);      // Edit bools storing our window open/close state
+      // ImGui::Checkbox("Show Observer", &show_observer);      // Edit bools storing our window open/close state
+      // ImGui::Checkbox("Show Observer Path", &show_observer_path);      // Edit bools storing our window open/close state
+      // ImGui::Checkbox("Show Test Point", &show_test_point);      // Edit bools storing our window open/close state
       
       //Projection selection
-      ImGui::Text("Projection");
-      if(ImGui::RadioButton("Snake", projection == snake)) { 
-        projection = snake; 
-     }
+      ImGui::Text("View");
+      if(ImGui::RadioButton("Naïve Measurement", view == snake_vessel)) { 
+        view = snake_vessel; 
+      }
+      if(ImGui::RadioButton("Universal Transverse Mercator", view == utm_vessel)) { 
+        view = utm_vessel; 
+      }
+      if(ImGui::RadioButton("Compare Paths", view == compare)) { 
+        view = compare; 
+      }
       // if(ImGui::RadioButton("Transverse Mercator", projection == t_merc)) { 
       //   projection = t_merc; 
       // }
 
-      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 10.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
+      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 100.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
 
-      if (ImGui::Button("Move Vessel Regular")){
-        point_geod pg = {3.0, 2.0};
-        snake_move_vessel_deg(vessel, pg);
-      }
+      // if (ImGui::Button("Move Vessel Regular")){
+      //   // point_geod pg = {3.0, 2.0};
+      //   // snake_move_vessel_deg(vessel, pg);
+      // }
         float scale_factor = ((float) win_h) / ((float) texture_height);
         dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
         dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
@@ -223,39 +244,62 @@ int main(int, char**)
  
 
       if (ImGui::Button("Move Vessel Rand")){
-        point_geod pg = {
-          ((double) SDL_rand(100))/10.0f - 5.0f,
-          ((double) SDL_rand(100))/10.0f - 5.0f
-        };
-        snake_move_vessel_deg(vessel, pg);
+        
+        srand(time(NULL));
+        destroy_move_order(move_order);
+        move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+        free(geod_path);
+        free(local_path);
+        geod_path = make_path_utm(vessel->pos_geod, move_order);
+
+        local_path = make_path_snake(vessel->pos_snake, move_order);
+        point_geod g = geod_path[move_order->len - 1];
+        point_local l = local_path[move_order->len - 1];
+        update_vessel_pos(vessel, g, l);
+
+        // for (int i = 0; i < move_order->len; i++){
+        //   // printf("new deltas:%lf,%lf\n", (move_order->deltas)[i].x, (move_order->deltas)[i].y);
+        // }
+
       }
 
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+      if (ImGui::Button("Quit")){
+        break;
+      }
       ImGui::End();
     }
+    if(show_grid){
+      draw_grid_utm(renderer, &dst_rect);
+    }
         
-    if(projection == snake){
-      if(show_grid){
-        draw_grid_utm(renderer, &dst_rect);
+    if(view == utm_vessel || view == compare){
+      if (show_vessel) {
+        // draw_vessel_snake(vessel);
+        // draw_vessel_snake(renderer, &dst_rect, vessel);
+        SDL_SetRenderDrawColorFloat(renderer, 1.0f, 0.0f, 0.0f, 1.0f);
+        render_geod_path(&canvas, geod_path, move_order->len);
+        // track_vessel_utm(&canvas, vessel, move_order, utm_path);
+        draw_vessel_utm(&canvas, vessel);
+        // SDL_RenderLines(renderer, utm_path, move_order->len);
+      }
+    }
+    if (view == snake_vessel || view == compare) {
+      if (show_grid) {
+      }
+      if (show_vessel) {
+        // track_vessel_snake(&canvas, vessel, move_order, snake_path);
+        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
+        render_snake_path(&canvas, local_path, move_order->len);
+        draw_vessel_snake(&canvas, vessel);
+        // SDL_SetRenderDrawColorFloat(canvas->renderer, 0.0f, 1.0f, 0.0f, 1.0f);
+        //TODO: must be recalculated from snake path when we zoom
+        // SDL_RenderLines(renderer, snake_path, move_order->len);
       }
     }
 
     // Rendering
     ImGui::Render();
-
-    if (show_vessel) {
-      draw_vessel_snake(vessel);
-      // draw_vessel_snake(renderer, &dst_rect, vessel);
-    }
-
-    // if (show_vessel_path){
-    //   draw_path(renderer, &dst_rect, vessel);
-    // }
-    if (show_test_point) {
-      // test_geod_draw(renderer,&dst_rect);
-      // test_meter_to_geod(renderer, &dst_rect);
-      // test_geod_to_meter(renderer, &dst_rect);
-    }
     
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
     SDL_RenderPresent(renderer);
@@ -266,6 +310,10 @@ int main(int, char**)
 
   // Cleanup
   // [If using SDL_MAIN_USE_CALLBACKS: all code below would likely be your SDL_AppQuit() function]
+  destroy_vessel(vessel);
+  destroy_move_order(move_order);
+  free(geod_path);
+  free(local_path);
   ImGui_ImplSDLRenderer3_Shutdown();
   ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();
