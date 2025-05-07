@@ -111,34 +111,52 @@ void move_vessel_utm(vessel_t *vessel, point_local delta){
   // #endif
 }
 
-//
-// point_local snake_move_vessel_m(vessel_t *vessel, point_local p){
-//   point_local old;
-//   old.x = vessel -> pos_local.x;
-//   old.y = vessel -> pos_local.y;
-//
-//   vessel->pos_local.x = vessel->pos_local.x + p.x;
-//   vessel->pos_local.y = vessel->pos_local.y + p.y;
-//
-//   return old;
-//   // snake_draw_path(vessel, old);
-//   // draw from last pos to current pos
-//   // NOTE - This doesn't work.
-//   // append_to_path_local(vessel->local_path, vessel->pos_local);
-//   vessel->local_path[]
-// }
+//translate orders to degree movement
+//call when updating order
+point_geod *make_path_utm(point_geod start, move_order_t *order){
+  point_geod *path = malloc(order->len * sizeof(point_geod));
 
-// void snake_move_vessel_deg(vessel_t *vessel, point_geod p){
-//
-//   point_local lp;
-//   lp.x = 110600 * p.deg_long;
-//   lp.y = 111300 * p.deg_lat;
-//
-//   snake_move_vessel_m(vessel,lp);
-// }
+  utm_zone zone;
+  point_tm_grid prev;
+  point_tm_grid curr = geod_to_utm_grid(start);
+  for (int i = 1;i < order->len;i++) {
+    //TODO: check if this works
+    zone = utm_zone_from_geod(path[i-1]);
+    prev = curr;
+    curr.x = prev.x + ((order->deltas)[i].x);
+    curr.y = prev.y + ((order->deltas)[i].y);
 
-void utm_move_vessel_m(vessel_t *vessel, point_local dst){
-  // path->nodes[path->len].x = 0.0; //TODO
-  // path->nodes[path->len].y = 0.0; //TODO
-  // path->len++;
+    path[i] = utm_grid_to_geod(curr, zone);
+  }
+
+  return path;
+}
+
+void update_vessel_pos(vessel_t *vessel, point_geod g, point_local l){
+  vessel->pos_geod = g;
+  vessel->pos_snake = l;
+}
+
+//call when updating order
+point_local *make_path_snake(point_geod start, move_order_t *order){
+  point_local *path = malloc(order->len * sizeof(point_geod));
+
+  point_tm_grid tmp = geod_to_utm_grid(start);
+  point_local prev;
+  point_local curr = {tmp.x, tmp.y};
+  for (int i = 1;i < order->len;i++) {
+    prev = curr;
+    // printf("delta: %lf,%lf\n",(order->deltas)[i].x, (order->deltas)[i].y);
+    // printf("old pos: %lf",prev.x);
+    // printf(",%lf\n",prev.y);
+    
+    curr.x = prev.x + ((order->deltas)[i].x);
+    // printf("new pos: %lf",curr.x);
+    curr.y = prev.y + ((order->deltas)[i].y);
+    // printf(",%lf\n",curr.y);
+
+    path[i] = curr;
+  }
+
+  return path;
 }

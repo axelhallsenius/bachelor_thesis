@@ -10,8 +10,10 @@
 
 #include <time.h>
 #define ORDER_LEN 100
-#define ORDER_SCALE 1
+#define ORDER_SCALE 30
+#define MAX_PATHS 20
 
+#include "map.h"
 #include "vessel.h"
 #include "draw.h"
 // #include "shapes/map.h"
@@ -126,6 +128,8 @@ int main(int, char**)
   static view_t view;
   //TODO: test for possible incorrect access to dst_rect
   SDL_FRect dst_rect;
+
+  int num_paths = 0; //make sure less than MAX_PATHS
   
   // Define destination rectangle
   float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
@@ -137,8 +141,15 @@ int main(int, char**)
 
   vessel_t *vessel = launch_vessel(null_island, move_order->len);
 
+  point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
+  point_local *local_path = make_path_snake(vessel->pos_geod, move_order);
+
   SDL_FPoint *snake_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
   SDL_FPoint *utm_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+
+  point_geod g = geod_path[move_order->len - 1];
+  point_local l = local_path[move_order->len - 1];
+  update_vessel_pos(vessel, g, l);
 
   // Main loop
   bool done = false;
@@ -151,11 +162,6 @@ int main(int, char**)
   while (!done)
 #endif
   {
-    // Poll and handle events (inputs, window resize, etc.)
-    // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-    // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-    // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-    // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
     // [If using SDL_MAIN_USE_CALLBACKS: call ImGui_ImplSDL3_ProcessEvent() from your SDL_AppEvent() function]
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -239,10 +245,17 @@ int main(int, char**)
 
       if (ImGui::Button("Move Vessel Rand")){
         
+        srand(time(NULL));
         destroy_move_order(move_order);
         move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
-        track_vessel_utm(&canvas, vessel, move_order, utm_path);
-        track_vessel_snake(&canvas, vessel, move_order, snake_path);
+        free(geod_path);
+        free(local_path);
+        geod_path = make_path_utm(vessel->pos_geod, move_order);
+
+        local_path = make_path_snake(vessel->pos_geod, move_order);
+        point_geod g = geod_path[move_order->len - 1];
+        point_local l = local_path[move_order->len - 1];
+        update_vessel_pos(vessel, g, l);
 
         // for (int i = 0; i < move_order->len; i++){
         //   // printf("new deltas:%lf,%lf\n", (move_order->deltas)[i].x, (move_order->deltas)[i].y);
@@ -265,19 +278,23 @@ int main(int, char**)
         // draw_vessel_snake(vessel);
         // draw_vessel_snake(renderer, &dst_rect, vessel);
         SDL_SetRenderDrawColorFloat(renderer, 1.0f, 0.0f, 0.0f, 1.0f);
+        render_geod_path(&canvas, geod_path, move_order->len);
+        // track_vessel_utm(&canvas, vessel, move_order, utm_path);
         draw_vessel_utm(&canvas, vessel);
-        SDL_RenderLines(renderer, utm_path, move_order->len);
+        // SDL_RenderLines(renderer, utm_path, move_order->len);
       }
     }
     if (view == snake_vessel || view == compare) {
       if (show_grid) {
       }
       if (show_vessel) {
+        // track_vessel_snake(&canvas, vessel, move_order, snake_path);
         SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
+        render_snake_path(&canvas, local_path, move_order->len);
         draw_vessel_snake(&canvas, vessel);
         // SDL_SetRenderDrawColorFloat(canvas->renderer, 0.0f, 1.0f, 0.0f, 1.0f);
         //TODO: must be recalculated from snake path when we zoom
-        SDL_RenderLines(renderer, snake_path, move_order->len);
+        // SDL_RenderLines(renderer, snake_path, move_order->len);
       }
     }
 

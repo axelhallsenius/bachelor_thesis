@@ -97,6 +97,8 @@ vessel_t *launch_vessel(point_geod startp, int path_len);
 
 void destroy_vessel(vessel_t *vessel);
 
+point_local *make_path_snake(point_geod start, move_order_t *order);
+point_geod *make_path_utm(point_geod start, move_order_t *order);
 // void move_vessel_snake(vessel_t *vessel, point_local delta);
 // void move_vessel_snake(vessel_t *vessel, point_local delta, point_geod geod_path[]);
 void move_vessel_snake(vessel_t *vessel, point_local delta);
@@ -115,6 +117,7 @@ void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p);
 
 // move_order_t create_random_move_order(int len, int scale);
 move_order_t *create_random_move_order(int len, int scale);
+void update_vessel_pos(vessel_t *vessel, point_geod g, point_local l);
 
 void destroy_move_order(move_order_t *order);
 #ifdef __cplusplus

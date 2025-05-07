@@ -29,9 +29,11 @@ void draw_path_snake(const canvas_t *canvas, const color_t *color, const SDL_FPo
 // void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
 void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
 void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
-void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
-void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
+// void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
+// void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
 
+void render_geod_path(canvas_t *canvas, point_geod *path, int len);
+void render_snake_path(canvas_t *canvas, point_local *path, int len);
 SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
 //draws a grid
 void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect);

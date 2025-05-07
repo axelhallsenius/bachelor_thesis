@@ -209,8 +209,9 @@ void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel){
 // }
 
 SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p){
-  double long_scale = rect->h/180.0;
-  double lat_scale  = rect->w/360.0;
+  double long_scale = rect->w/360.0;
+  double lat_scale = rect->h/180.0;
+  // double lat_scale  = rect->w/360.0;
   double equator    = (rect->h / 2.0) + rect->y;
   double prime_mer  = (rect->w / 2.0) + rect->x;
   double pos_lat    = p.deg_lat * lat_scale;
@@ -224,8 +225,8 @@ SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p){
 }
 
 SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p){
-  double long_scale = rect->h/EARTH_POLAR_DIST;
-  double lat_scale  = rect->w/EARTH_CIRC_EQ;
+  double long_scale = rect->w/EARTH_CIRC_EQ;
+  double lat_scale  = rect->h/EARTH_POLAR_DIST;
   double equator    = (rect->h / 2.0) + rect->y;
   double prime_mer  = (rect->w / 2.0) + rect->x;
   double pos_lat    = p.y * lat_scale;
@@ -241,6 +242,7 @@ SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p){
 
 
 //make move orders into positions, and draw inbetween them
+//translate order to snake path
 void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path){
   // pixel_path = realloc(pixel_path, order->len * sizeof(SDL_FPoint));
 
@@ -260,6 +262,7 @@ void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order,
   //in case of multithread: make sure map renders first
 }
 
+//translate this to geod path
 void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path){
   // SDL_FPoint pixel_path[order->len];
   // pixel_path = realloc(pixel_path, order->len * sizeof(SDL_FPoint));
@@ -268,23 +271,47 @@ void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, S
     //TODO: zone transfer
     move_vessel_utm(vessel, (order->deltas)[i]);
 
-    pixel_path[i] = geod_to_pixels(
-      canvas->dst_rect,
-      vessel->pos_geod
-    );
-
   }
-
-  SDL_SetRenderDrawColorFloat(canvas->renderer, 1.0f, 0.0f, 0.0f, 1.0f);
-  SDL_RenderLines(canvas->renderer, pixel_path, order->len);
 }
 
-//NOTE:could do this inside the track function
-void draw_vessel_path(canvas_t *canvas, color_t color, SDL_FPoint *pixel_path, int len){
-  //TODO: color thing
 
-  SDL_RenderLines(canvas->renderer, pixel_path, len);
+//run every frame loop
+void render_geod_path(canvas_t *canvas, point_geod *path, int len){
+  if (len > 1){
+    SDL_FPoint curr = geod_to_pixels(canvas->dst_rect, path[0]);
+    SDL_FPoint prev;
+    for(int i = 1; i < len; i++){
+      prev = curr;
+      curr = geod_to_pixels(canvas->dst_rect,path[i]);
+      // printf("prev: %lf,%lf curr: %lf,%lf\n", prev.x, prev.y, curr.x,curr.y);
+
+      SDL_RenderLine(canvas->renderer, prev.x, prev.y, curr.x, curr.y);
+    }
+  }
 }
+
+void render_snake_path(canvas_t *canvas, point_local *path, int len){
+  if (len > 1){
+    SDL_FPoint curr = local_to_pixels_snake(canvas->dst_rect, path[0]);
+    SDL_FPoint prev;
+    for(int i = 1; i < len; i++){
+      prev = curr;
+      curr = local_to_pixels_snake(canvas->dst_rect,path[i]);
+      // printf("prev: %lf,%lf curr: %lf,%lf\n", prev.x, prev.y, curr.x,curr.y);
+
+      SDL_RenderLine(canvas->renderer, prev.x, prev.y, curr.x, curr.y);
+    }
+  }
+}
+
+
+//
+// //NOTE:could do this inside the track function
+// void draw_vessel_path(canvas_t *canvas, color_t color, SDL_FPoint *pixel_path, int len){
+//   //TODO: color thing
+//
+//   SDL_RenderLines(canvas->renderer, pixel_path, len);
+// }
 
 
 
@@ -304,14 +331,14 @@ void draw_vessel_path(canvas_t *canvas, color_t color, SDL_FPoint *pixel_path, i
 
 
 // will likely print wierd
-void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p){
-  double x;
-  double y;
-  // geod_to_pixels(rect, p, &x, &y);
-  filledCircleRGBA(
-    rend, 
-    x, y, 
-    POINT_SIZE, 
-    60, 60, 200, 255
-  );
-}
+// void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p){
+//   double x;
+//   double y;
+//   // geod_to_pixels(rect, p, &x, &y);
+//   filledCircleRGBA(
+//     rend, 
+//     x, y, 
+//     POINT_SIZE, 
+//     60, 60, 200, 255
+//   );
+// }
