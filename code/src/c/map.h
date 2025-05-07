@@ -21,6 +21,8 @@
 // #define SCALE_C_MER 1.000002540000
 //
 // #define SCALE_C_MER 1.000002540000
+#define HEM_S 1
+#define HEM_N 0
 
 #ifdef __cplusplus
 extern "C" {

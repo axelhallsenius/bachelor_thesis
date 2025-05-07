@@ -283,8 +283,9 @@ void render_geod_path(canvas_t *canvas, point_geod *path, int len){
     for(int i = 1; i < len; i++){
       prev = curr;
       curr = geod_to_pixels(canvas->dst_rect,path[i]);
-      printf("prev: %lf,%lf curr: %lf,%lf\n", prev.x, prev.y, curr.x,curr.y);
+      // printf("prev: %lf,%lf curr: %lf,%lf\n", prev.x, prev.y, curr.x,curr.y);
 
+    // printf("geod to render lat%lf,long%lf\n", path[i].deg_lat,path[i].deg_long);
       SDL_RenderLine(canvas->renderer, prev.x, prev.y, curr.x, curr.y);
     }
   }

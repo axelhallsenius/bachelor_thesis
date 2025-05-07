@@ -9,8 +9,8 @@
 #include <SDL3_image/SDL_image.h>
 
 #include <time.h>
-#define ORDER_LEN 100
-#define ORDER_SCALE 30
+#define ORDER_LEN 10
+#define ORDER_SCALE 10 
 #define MAX_PATHS 20
 
 #include "map.h"
@@ -144,8 +144,8 @@ int main(int, char**)
   point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
   point_local *local_path = make_path_snake(vessel->pos_geod, move_order);
 
-  SDL_FPoint *snake_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
-  SDL_FPoint *utm_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+  // SDL_FPoint *snake_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
+  // SDL_FPoint *utm_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
 
   point_geod g = geod_path[move_order->len - 1];
   point_local l = local_path[move_order->len - 1];
@@ -312,8 +312,8 @@ int main(int, char**)
   // [If using SDL_MAIN_USE_CALLBACKS: all code below would likely be your SDL_AppQuit() function]
   destroy_vessel(vessel);
   destroy_move_order(move_order);
-  free(snake_path);
-  free(utm_path);
+  free(geod_path);
+  free(local_path);
   ImGui_ImplSDLRenderer3_Shutdown();
   ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();

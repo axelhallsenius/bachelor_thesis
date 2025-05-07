@@ -189,16 +189,23 @@ point_tm_grid geod_to_tm_grid(tm_ellipsoid e, tm_grid g, point_geod p){
 point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
   point_geod coords;
   double fn = UTM_FN_N;
-  if (z.hemisphere){
+  if (z.hemisphere == HEM_S){
     fn = UTM_FN_S;
   }
+  //
+  // double xi = 
+  //   (p.x - fn) / 
+  //   (UTM_CMER_SCALE * UTM_A_HAT);
+  //
+  // double eta = 
+  //   (p.y - UTM_FE) / 
+  //   (UTM_CMER_SCALE * UTM_A_HAT);
 
-  double xi = 
-    (p.x - fn) / 
+
+  double xi = (p.y - fn) / 
     (UTM_CMER_SCALE * UTM_A_HAT);
 
-  double eta = 
-    (p.y - UTM_FE) / 
+  double eta = (p.x - UTM_FE) / 
     (UTM_CMER_SCALE * UTM_A_HAT);
 
   double xi_prime = xi -(

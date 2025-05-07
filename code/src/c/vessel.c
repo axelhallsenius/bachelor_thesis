@@ -23,8 +23,8 @@ move_order_t *create_random_move_order(int len, int scale){
   double dy;
 
   for (int i = 0; i < len; i++){
-    dx = ((SDL_rand(200) - 100) * scale);
-    dy = ((SDL_rand(200) - 100) * scale);
+    dx = ((SDL_rand(200) - 100));
+    dy = ((SDL_rand(200) - 100));
     dx = dx * scale;
     dy = dy * scale;
 
@@ -116,17 +116,33 @@ void move_vessel_utm(vessel_t *vessel, point_local delta){
 point_geod *make_path_utm(point_geod start, move_order_t *order){
   point_geod *path = malloc(order->len * sizeof(point_geod));
 
+  point_geod null_start = {0.0,0.0};
   utm_zone zone;
   point_tm_grid prev;
-  point_tm_grid curr = geod_to_utm_grid(start);
+  point_tm_grid curr = geod_to_utm_grid(null_start);
   for (int i = 1;i < order->len;i++) {
     //TODO: check if this works
     zone = utm_zone_from_geod(path[i-1]);
     prev = curr;
     curr.x = prev.x + ((order->deltas)[i].x);
+    printf("geo: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
+    printf("geo: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
     curr.y = prev.y + ((order->deltas)[i].y);
+    if (curr.y < 0){
+      zone.hemisphere = HEM_S;
+    }
+    else if (curr.y > UTM_FN_S){
+      zone.hemisphere = HEM_N;
+    }
+    if (curr.x < 0){
+      zone.c_meridian -=6;
+    }
+    else if (curr.x > UTM_FE){
+      zone.c_meridian +=6;
+    }
 
     path[i] = utm_grid_to_geod(curr, zone);
+    // printf("geod converted lat%lf,long%lf\n", path[i].deg_lat,path[i].deg_long);
   }
 
   return path;
@@ -141,9 +157,11 @@ void update_vessel_pos(vessel_t *vessel, point_geod g, point_local l){
 point_local *make_path_snake(point_geod start, move_order_t *order){
   point_local *path = malloc(order->len * sizeof(point_geod));
 
-  point_tm_grid tmp = geod_to_utm_grid(start);
+  // point_tm_grid tmp = geod_to_utm_grid(start);
+  // point_local prev;
+  // point_local curr = {tmp.x, tmp.y};
   point_local prev;
-  point_local curr = {tmp.x, tmp.y};
+  point_local curr = {0.0,0.0};
   for (int i = 1;i < order->len;i++) {
     prev = curr;
     // printf("delta: %lf,%lf\n",(order->deltas)[i].x, (order->deltas)[i].y);
@@ -155,6 +173,8 @@ point_local *make_path_snake(point_geod start, move_order_t *order){
     curr.y = prev.y + ((order->deltas)[i].y);
     // printf(",%lf\n",curr.y);
 
+    printf("snake: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
+    printf("snake: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
     path[i] = curr;
   }
 
