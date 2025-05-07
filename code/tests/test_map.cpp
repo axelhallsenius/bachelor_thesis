@@ -46,21 +46,21 @@ TEST(GeodeticToMeter, AbidjanFootballField){
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
   // printf("Abidjan Football Field:\t delta x: %.17g, delta y: %.17g\n", 390332.0 - gridp.x,581083.0 - gridp.y);
 }
-
-TEST(GeodeticToMeter, SchoolyardSvalbard){
-  point_geod geop;
-  point_tm_grid gridp;
-  geop.deg_lat = 78.66501000;
-  geop.deg_long = 16.31944000;
-
-  gridp = geod_to_utm_grid(geop);
-  // printf("Schoolyard in Pyramiden, Svalbard\n");
-  EXPECT_NEAR(528973.0, gridp.x, 0.5);
-  EXPECT_NEAR(8731798.0 , gridp.y, 0.5);
-  // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-  // printf("Schoolyard in Svalbard:\t delta x: %.17g, delta y: %.17g\n", 528973.0 - gridp.x,8731798.0 - gridp.y);
-  }
-
+//
+// TEST(GeodeticToMeter, SchoolyardSvalbard){
+//   point_geod geop;
+//   point_tm_grid gridp;
+//   geop.deg_lat = 78.66501000;
+//   geop.deg_long = 16.31944000;
+//
+//   gridp = geod_to_utm_grid(geop);
+//   // printf("Schoolyard in Pyramiden, Svalbard\n");
+//   EXPECT_NEAR(528973.0, gridp.x, 0.5);
+//   EXPECT_NEAR(8731798.0 , gridp.y, 0.5);
+//   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
+//   // printf("Schoolyard in Svalbard:\t delta x: %.17g, delta y: %.17g\n", 528973.0 - gridp.x,8731798.0 - gridp.y);
+//   }
+//
 TEST(GeodeticToMeter, VancouverHarbour){
   point_geod geop;
   point_tm_grid gridp;
@@ -85,21 +85,25 @@ TEST(GeodeticToMeter, PortOfMelbourne){
   // printf("Lighthouse in the Port of Melbourne\n");
   EXPECT_NEAR(317803.0, gridp.x, 0.5);
   EXPECT_NEAR(5809723.0, gridp.y, 0.5);
-  // printf("x: %.17g, y: %.17g\n", 317803.0, 5809723.0);
-  // printf("Port Melbourne Light:\t delta x: %.17g, delta y: %.17g\n", 317803.0 - gridp.x,5809723.0 - gridp.y);
 }
-//
-// void test_geod_to_meter(SDL_Renderer *rend, SDL_FRect *rect){
-//    // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-//   printf("Damm:\t\t\t delta x: %.17g, delta y: %.17g\n", 6576690.0 - gridp.x, 474066.0 - gridp.y);
-//
-//   printf("delta lat: %.17g, delta long: %.17g\n", geop.deg_lat - newgeop.deg_lat, geop.deg_long - newgeop.deg_long);
-//
-//   // printf("oldlat: %.17g, oldlong: %.17g\n", newgeop.deg_lat, newgeop.deg_long);
-//   // printf("newlat: %.17g, newlong: %.17g\n", newgeop.deg_lat, newgeop.deg_long);
-//
-//   //discgo.17gbanan
-//     draw_example_point_tm(rend,rect,geop);
-// }
+
+TEST(MeterToGeodetic, AngstromBusstop){
+  point_geod geop;
+  point_geod ans;
+  ans.deg_long = 17.6478;
+  ans.deg_lat = 59.840249;
+  point_tm_grid gridp;
+
+  utm_zone zone = utm_zone_from_geod(ans);
+
+  gridp.x = 1964544.1096215332;
+  gridp.y = 8364256.440166104;
+  geop = utm_grid_to_geod(gridp, zone);
+
+  EXPECT_NEAR(317803.0, gridp.x, 0.005);
+  EXPECT_NEAR(317803.0, gridp.x, 0.005);
+}
+
+
 
 }

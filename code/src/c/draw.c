@@ -210,8 +210,7 @@ void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel){
 
 SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p){
   double long_scale = rect->w/360.0;
-  double lat_scale = rect->h/180.0;
-  // double lat_scale  = rect->w/360.0;
+  double lat_scale  = rect->h/180.0;
   double equator    = (rect->h / 2.0) + rect->y;
   double prime_mer  = (rect->w / 2.0) + rect->x;
   double pos_lat    = p.deg_lat * lat_scale;
@@ -278,12 +277,13 @@ void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, S
 //run every frame loop
 void render_geod_path(canvas_t *canvas, point_geod *path, int len){
   if (len > 1){
+    //why so many degreed?
     SDL_FPoint curr = geod_to_pixels(canvas->dst_rect, path[0]);
     SDL_FPoint prev;
     for(int i = 1; i < len; i++){
       prev = curr;
       curr = geod_to_pixels(canvas->dst_rect,path[i]);
-      // printf("prev: %lf,%lf curr: %lf,%lf\n", prev.x, prev.y, curr.x,curr.y);
+      printf("prev: %lf,%lf curr: %lf,%lf\n", prev.x, prev.y, curr.x,curr.y);
 
       SDL_RenderLine(canvas->renderer, prev.x, prev.y, curr.x, curr.y);
     }

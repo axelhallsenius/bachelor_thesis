@@ -300,16 +300,6 @@ int main(int, char**)
 
     // Rendering
     ImGui::Render();
-
-
-    // if (show_vessel_path){
-    //   draw_path(renderer, &dst_rect, vessel);
-    // }
-    if (show_test_point) {
-      // test_geod_draw(renderer,&dst_rect);
-      // test_meter_to_geod(renderer, &dst_rect);
-      // test_geod_to_meter(renderer, &dst_rect);
-    }
     
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
     SDL_RenderPresent(renderer);
