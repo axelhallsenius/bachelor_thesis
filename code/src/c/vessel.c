@@ -59,9 +59,11 @@ vessel_t *launch_vessel(point_geod startp, int path_len){
   vessel->pos_geod = startp;
   vessel->zone = utm_zone_from_geod(startp);
 
-  //NOTE: will place the vessel at the correct starting point
-  point_tm_grid local_point = geod_to_utm_grid(startp);
-  point_local p = {local_point.x, local_point.y};
+  // point_tm_grid local_point = geod_to_utm_grid(startp);
+  //TODO: make snake spawn anywhere
+  point_local p = {0.0, 0.0};
+
+  
 
   vessel->start_snake = p;
   vessel->pos_snake = p;
@@ -116,30 +118,43 @@ void move_vessel_utm(vessel_t *vessel, point_local delta){
 point_geod *make_path_utm(point_geod start, move_order_t *order){
   point_geod *path = malloc(order->len * sizeof(point_geod));
 
-  point_geod null_start = {0.0,0.0};
+  point_geod tmp_geod;
   utm_zone zone;
   point_tm_grid prev;
-  point_tm_grid curr = geod_to_utm_grid(null_start);
+  point_tm_grid curr = geod_to_utm_grid(start);
+  path[0] = start;
   for (int i = 1;i < order->len;i++) {
     //TODO: check if this works
     zone = utm_zone_from_geod(path[i-1]);
     prev = curr;
     curr.x = prev.x + ((order->deltas)[i].x);
-    printf("geo: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
-    printf("geo: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
     curr.y = prev.y + ((order->deltas)[i].y);
-    if (curr.y < 0){
-      zone.hemisphere = HEM_S;
-    }
-    else if (curr.y > UTM_FN_S){
-      zone.hemisphere = HEM_N;
-    }
-    if (curr.x < 0){
-      zone.c_meridian -=6;
-    }
-    else if (curr.x > UTM_FE){
-      zone.c_meridian +=6;
-    }
+    // printf("geo: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
+    // printf("geo: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
+
+    //checking hemisphere
+    // if (zone.hemisphere == HEM_N){
+    //   if (curr.y < 0){
+    //     zone.hemisphere = HEM_S;
+    //   }
+    //   else if (curr.y > UTM_FN_S){
+    //   //TODO: Polar transfer
+    //   }
+    // }
+    // }
+    // if (zone.hemisphere == HEM_S){
+    //   if (curr.y > UTM_FN_S){
+    //     zone.hemisphere = HEM_N;
+    //   }
+    //   else if (curr.y < 0){
+    //   //TODO: Polar transfer
+    //   }
+    // }
+
+
+    tmp_geod = utm_grid_to_geod(curr, zone);
+    zone = utm_zone_from_geod(tmp_geod);
+    curr = geod_to_utm_grid(tmp_geod);
 
     path[i] = utm_grid_to_geod(curr, zone);
     // printf("geod converted lat%lf,long%lf\n", path[i].deg_lat,path[i].deg_long);
@@ -154,14 +169,16 @@ void update_vessel_pos(vessel_t *vessel, point_geod g, point_local l){
 }
 
 //call when updating order
-point_local *make_path_snake(point_geod start, move_order_t *order){
-  point_local *path = malloc(order->len * sizeof(point_geod));
+point_local *make_path_snake(point_local start, move_order_t *order){
+  point_local *path = malloc(order->len * sizeof(point_local));
 
   // point_tm_grid tmp = geod_to_utm_grid(start);
   // point_local prev;
   // point_local curr = {tmp.x, tmp.y};
   point_local prev;
-  point_local curr = {0.0,0.0};
+  point_local curr = start;
+  // path[0] = start;
+  path[0] = curr;
   for (int i = 1;i < order->len;i++) {
     prev = curr;
     // printf("delta: %lf,%lf\n",(order->deltas)[i].x, (order->deltas)[i].y);
@@ -173,8 +190,8 @@ point_local *make_path_snake(point_geod start, move_order_t *order){
     curr.y = prev.y + ((order->deltas)[i].y);
     // printf(",%lf\n",curr.y);
 
-    printf("snake: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
-    printf("snake: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
+    // printf("snake: prev.x (%lf) + orderdeltas(%lf) = %lf\n", prev.x, (order->deltas)[i].x, curr.x);
+    // printf("snake: prev.y (%lf) + orderdeltas(%lf) = %lf\n", prev.y, (order->deltas)[i].y, curr.y);
     path[i] = curr;
   }
 

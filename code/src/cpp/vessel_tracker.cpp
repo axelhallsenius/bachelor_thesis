@@ -9,8 +9,8 @@
 #include <SDL3_image/SDL_image.h>
 
 #include <time.h>
-#define ORDER_LEN 10
-#define ORDER_SCALE 10 
+#define ORDER_LEN 100
+#define ORDER_SCALE 100
 #define MAX_PATHS 20
 
 #include "map.h"
@@ -142,7 +142,7 @@ int main(int, char**)
   vessel_t *vessel = launch_vessel(null_island, move_order->len);
 
   point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
-  point_local *local_path = make_path_snake(vessel->pos_geod, move_order);
+  point_local *local_path = make_path_snake(vessel->pos_snake, move_order);
 
   // SDL_FPoint *snake_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
   // SDL_FPoint *utm_path = (SDL_FPoint *) malloc(move_order->len * sizeof(SDL_FPoint));
@@ -252,7 +252,7 @@ int main(int, char**)
         free(local_path);
         geod_path = make_path_utm(vessel->pos_geod, move_order);
 
-        local_path = make_path_snake(vessel->pos_geod, move_order);
+        local_path = make_path_snake(vessel->pos_snake, move_order);
         point_geod g = geod_path[move_order->len - 1];
         point_local l = local_path[move_order->len - 1];
         update_vessel_pos(vessel, g, l);

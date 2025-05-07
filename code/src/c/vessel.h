@@ -97,7 +97,7 @@ vessel_t *launch_vessel(point_geod startp, int path_len);
 
 void destroy_vessel(vessel_t *vessel);
 
-point_local *make_path_snake(point_geod start, move_order_t *order);
+point_local *make_path_snake(point_local start, move_order_t *order);
 point_geod *make_path_utm(point_geod start, move_order_t *order);
 // void move_vessel_snake(vessel_t *vessel, point_local delta);
 // void move_vessel_snake(vessel_t *vessel, point_local delta, point_geod geod_path[]);
