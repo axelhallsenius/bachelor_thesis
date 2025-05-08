@@ -14,47 +14,29 @@ extern "C" {
 
 #define POINT_SIZE 6
 
-/*
- * Functions:
-*/
-
-
 //draw path between positions in the snake projection
-// void draw_path_snake(canvas_t canvas, color_t color, path_t path);
 void draw_path_snake(const canvas_t *canvas, const color_t *color, const SDL_FPoint *points);
 
-//draws a dot of the vessel position in the snake projection
-// void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
-// void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
-// void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
+//places a dot on the vessel's current coordinates
 void draw_vessel_snake(canvas_t *canvas, vessel_t *vessel);
-void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
-// void track_vessel_utm(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
-// void track_vessel_snake(canvas_t *canvas, vessel_t *vessel, move_order_t *order, SDL_FPoint *pixel_path);
 
+//places a dot on the vessel's current coordinates
+void draw_vessel_utm(canvas_t *canvas, vessel_t *vessel);
+
+//draws a path in UTM projection
 void render_geod_path(canvas_t *canvas, point_geod *path, int len);
+
+//draws a path in snake projection
 void render_snake_path(canvas_t *canvas, point_local *path, int len);
-SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
-//draws a grid
-void draw_grid(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 
 //draws a grid that is close to UTM
 void draw_grid_utm(SDL_Renderer *renderer, SDL_FRect *dst_rect);
 
-//used by test functions to draw example points
-void draw_example_point_tm(SDL_Renderer *rend, SDL_FRect *rect, point_geod p);
-
 //convert degrees on globe to a pixel position in the window
-// void geod_to_pixels(SDL_FRect *rect, point_geod p, double *x, double *y);
 SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p);
-
 
 //convert degrees on globe to a pixel position in the window
 SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p);
-
-/*
- * / Functions
-*/
 
 #ifdef __cplusplus
 }

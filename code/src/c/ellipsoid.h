@@ -1,3 +1,4 @@
+//Constants and other macros for use in projection conversion
 
 #define UTM_FN_N 0.0
 #define UTM_FN_S 10000000.0
