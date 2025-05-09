@@ -7,7 +7,7 @@ extern "C" {
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-#include "../../deps/SDL3_gfx/SDL3_gfxPrimitives.h"
+#include "SDL3_gfx/SDL3_gfxPrimitives.h"
 #include <stdlib.h>
 
 #include "vessel.h"

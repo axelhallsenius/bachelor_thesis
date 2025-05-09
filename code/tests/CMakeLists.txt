@@ -9,8 +9,11 @@ file(GLOB CPP_TEST_SOURCES
 add_executable(unit_tests ${CPP_TEST_SOURCES})
 
 target_link_libraries(unit_tests PRIVATE
-  c_code          # C library
-  gtest_main      # Google Test
+  c_code        
+  gtest_main     
+  SDL3::SDL3      
+  SDL3_image::SDL3_image  
+  SDL3_gfx_Shared 
 )
 
 

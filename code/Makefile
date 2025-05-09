@@ -10,7 +10,12 @@ test:
 	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON &&\
 	cmake --build build --target unit_tests
 	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
-	./build/Debug/unit_tests
+	./build/Debug/unit_tests && \
+	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
+	./build/Debug/unit_tests \
+  --gtest_filter=ProjDiffTest.* \
+  --gtest_repeat=100 \
+  --gtest_break_on_failure
 
 vessel_tracker:
 	cmake --build build --target vessel_tracker

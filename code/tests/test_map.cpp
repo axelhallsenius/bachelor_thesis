@@ -31,21 +31,7 @@ TEST(GeodeticToMeter, AbidjanFootballField){
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
   // printf("Abidjan Football Field:\t delta x: %.17g, delta y: %.17g\n", 390332.0 - gridp.x,581083.0 - gridp.y);
 }
-//
-// TEST(GeodeticToMeter, SchoolyardSvalbard){
-//   point_geod geop;
-//   point_tm_grid gridp;
-//   geop.deg_lat = 78.66501000;
-//   geop.deg_long = 16.31944000;
-//
-//   gridp = geod_to_utm_grid(geop);
-//   // printf("Schoolyard in Pyramiden, Svalbard\n");
-//   EXPECT_NEAR(528973.0, gridp.x, 0.5);
-//   EXPECT_NEAR(8731798.0 , gridp.y, 0.5);
-//   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
-//   // printf("Schoolyard in Svalbard:\t delta x: %.17g, delta y: %.17g\n", 528973.0 - gridp.x,8731798.0 - gridp.y);
-//   }
-//
+
 TEST(GeodeticToMeter, VancouverHarbour){
   point_geod geop;
   point_tm_grid gridp;
@@ -254,4 +240,4 @@ TEST(MeterToGeodetic, MuseumSantiagoChile){
   EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.005);
 }
 
-}
+}//namespace
