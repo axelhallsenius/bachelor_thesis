@@ -4,21 +4,6 @@
 #include "gtest/gtest.h"
 namespace {
 
-// TEST(Vessel, GeodeticToMeter){
-  // point_geod geop;
-  // utm_zone z = utm_zone_from_geod(geop);
-
-  // point_tm_grid gridp = geod_to_utm_grid(geop);
- 
-  // point_geod newgeop = utm_grid_to_geod(gridp,z);
-
-  //ankdammen utanför
-  // geop.deg_lat = 59.32823000;
-  // geop.deg_long = 14.54425000;
-
-  // EXPECT_NEAR(491398.0, gridp.x, 0.5);
-  // EXPECT_NEAR(5459788.0 , gridp.y, 0.5);
-
 TEST(GeodeticToMeter, KarlskogaDiscgolf){
   point_geod geop;
   point_tm_grid gridp;
@@ -103,6 +88,119 @@ TEST(GeodeticToMeter, Dammbron){ //sub cm accuracy
   gridp = geod_to_utm_grid(geop);
   EXPECT_NEAR(ans.x, gridp.x, 0.01);
   EXPECT_NEAR(ans.y, gridp.y, 0.01);
+}
+
+TEST(MeterToGeodetic, Tasmania){ //sub cm accuracy
+  point_geod geop;
+  point_geod ans;
+  point_tm_grid gridp;
+  ans.deg_lat = -42.1634034242;
+  ans.deg_long = 146.6015625000;
+  gridp.x = 467086.882;
+  gridp.y = 5332004.203;
+
+  utm_zone zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+  zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+
+  EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.00001);
+  EXPECT_NEAR(ans.deg_long, geop.deg_long, 0.00001);
+}
+
+TEST(ZoneTransfer, Tasmania){ //sub cm accuracy
+  point_geod geop;
+  point_geod ans;
+  point_tm_grid gridp;
+  ans.deg_lat = -42.1634034242;
+  ans.deg_long = 146.6015625000;
+  gridp.x = 467086.882;
+  gridp.y = 5332004.203;
+  point_geod other_zone = {-37.37000, 120.230000};
+
+  utm_zone zone = utm_zone_from_geod(other_zone);
+  geop = utm_grid_to_geod(gridp,zone);
+  zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+
+  EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.00001);
+  EXPECT_NEAR(ans.deg_long, geop.deg_long, 0.00001);
+}
+
+TEST(ZoneTransfer, LagosToRio){ //sub cm accuracy
+  point_geod geop;
+  point_geod ans;
+  point_tm_grid gridp;
+  ans.deg_lat = -22.8774404649;
+  ans.deg_long = -43.4619140625;
+  gridp.x = 657780.658;
+  gridp.y = 7469223.989;
+  point_geod other_zone = {4.8500, 6.9600};
+
+  utm_zone zone = utm_zone_from_geod(other_zone);
+  geop = utm_grid_to_geod(gridp,zone);
+  zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+
+  EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.00001);
+  EXPECT_NEAR(ans.deg_long, geop.deg_long, 0.00001);
+}
+
+TEST(ZoneTransfer, RioToLagos){ //sub cm accuracy
+  point_geod geop;
+  point_geod ans;
+  point_tm_grid gridp;
+  ans.deg_lat = 4.8173123158;
+  ans.deg_long = 7.0202636719;
+  gridp.x = 280434.549;
+  gridp.y = 532788.988;
+  point_geod other_zone = {-22.8774404649, -43.4619140625};
+
+  utm_zone zone = utm_zone_from_geod(other_zone);
+  geop = utm_grid_to_geod(gridp,zone);
+  zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+
+  EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.00001);
+  EXPECT_NEAR(ans.deg_long, geop.deg_long, 0.00001);
+}
+
+
+TEST(ZoneTransfer, EquatorCrossing){ //sub cm accuracy
+  point_geod geop;
+  point_geod ans;
+  point_tm_grid gridp;
+  ans.deg_lat = -42.1634034242;
+  ans.deg_long = 146.6015625000;
+  gridp.x = 467086.882;
+  gridp.y = 5332004.203;
+  point_geod other_zone = {-32.5400, 130.7800};
+
+  utm_zone zone = utm_zone_from_geod(other_zone);
+  geop = utm_grid_to_geod(gridp,zone);
+  zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+
+  EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.00001);
+  EXPECT_NEAR(ans.deg_long, geop.deg_long, 0.00001);
+}
+
+TEST(MeterToGeodetic, Dammbron){ //sub cm accuracy
+  point_geod geop;
+  point_geod ans;
+  point_tm_grid gridp;
+  ans.deg_lat = 59.3281026485;
+  ans.deg_long = 14.5440262556;
+  gridp.x = 474053.042;
+  gridp.y = 6576676.167;
+
+  utm_zone zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+  zone = utm_zone_from_geod(ans);
+  geop = utm_grid_to_geod(gridp,zone);
+
+  EXPECT_NEAR(ans.deg_lat, geop.deg_lat, 0.00001);
+  EXPECT_NEAR(ans.deg_long, geop.deg_long, 0.00001);
 }
 
 TEST(MeterToGeodetic, AngstromCrossroad){

@@ -1,5 +1,4 @@
 # Need to have
-
 - [.] skriva
   - [ ] build/make
   - [ ] jämför exakthet
@@ -16,9 +15,10 @@
 - [ ] mäta performance
   * före och efter optimering
 
-- [ ] Tester
+- [.] Tester
   - [ ] korrekthet - paths
-  - [ ] korrekthet - zone transfer
+  - [X] korrekthet - zone transfer
+        * skriva in i funktion?
   - [ ] gör om gamla testdata till nya
   - [ ] tänka på visuella Tester
   - [ ] Bugg i UTM?
@@ -40,9 +40,16 @@
 
 - [ ] bättre karta
 
+- [ ] build zone transfer functionality into utm_grid to geod?
+
+- [ ] date line crossing
+
 # Nice to have
 
 - [ ] vinklar/quaternions?
   - [ ] skriva om
 
 - [ ] sätta koords via gui
+
+- [ ] Polar logic
+  - [ ] annars: skriv om
