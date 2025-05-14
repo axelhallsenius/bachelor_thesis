@@ -86,5 +86,10 @@ if(BUILD_BENCHMARKS)
     GIT_REPOSITORY https://github.com/google/benchmark.git
     GIT_TAG v1.8.4
   )
+
+  set(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "Disable benchmark's gtest tests" FORCE)
+  set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark's internal testing" FORCE)
+
   FetchContent_MakeAvailable(benchmark)
+  add_subdirectory(tests)
 endif()

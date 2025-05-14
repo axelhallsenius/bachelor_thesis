@@ -1,3 +1,4 @@
+#include "draw.h"
 #include <benchmark/benchmark.h>
 
 static void BM_geod_to_meter(benchmark::State& state) {
