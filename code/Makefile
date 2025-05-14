@@ -1,29 +1,28 @@
-.PHONY: all vessel_tracker
-
 all:
-	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && \
-	cmake --build build --target vessel_tracker && \
+	cmake -S . -B build \
+		-DCMAKE_BUILD_TYPE=Debug \
+		-DBUILD_TESTS=ON \
+		-DBUILD_BENCHMARKS=OFF &&\
+	cmake --build build --config Debug --target vessel_tracker && \
 	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
 	./build/Debug/vessel_tracker
 
 test:
-	cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON &&\
-	cmake --build build --target unit_tests
+	cmake -S . -B build \
+		-DCMAKE_BUILD_TYPE=Debug \
+		-DBUILD_TESTS=ON \
+		-DBUILD_BENCHMARKS=OFF &&\
+	cmake --build build --config Debug --target unit_tests && \
 	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
-	./build/Debug/unit_tests && \
-	LD_PRELOAD=$$(gcc -print-file-name=libasan.so) \
-	./build/Debug/unit_tests \
-  --gtest_filter=ProjDiffTest.* \
-  --gtest_repeat=100 \
-  --gtest_break_on_failure
-
-vessel_tracker:
-	cmake --build build --target vessel_tracker
+	./build/Debug/unit_tests 
+ 
+bench:
+	cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+	  -DBUILD_TESTS=OFF -DBUILD_BENCHMARKS=ON && \
+	cmake --build build --config Release --target benchmark_suite && \
+	./build/Release/benchmark_suite
 
 clean:
-	(find ./build/ -mindepth 1 -maxdepth 1 | grep -v deps) | xargs rm -r 
-
-deep-clean:
 	rm -rf ./build/*
 
-.PHONY: all run clean deep-clean
+.PHONY: all run clean test debug bench release_bench

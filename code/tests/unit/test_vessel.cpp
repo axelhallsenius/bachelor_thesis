@@ -1,6 +1,6 @@
 #include <limits.h>
 #include "gtest/gtest.h"
-#include "../src/c/draw.h"
+#include "draw.h"
 
 namespace {
 TEST(ProjDiffTest, Short){
