@@ -1,4 +1,4 @@
-#include "../src/c/vessel.h"
+#include "vessel.h"
 #include <limits.h>
 
 #include "gtest/gtest.h"

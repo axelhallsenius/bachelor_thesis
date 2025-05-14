@@ -4,7 +4,7 @@ project(vessel_tracker LANGUAGES C CXX)
 # Options:
 
 option(BUILD_TESTS "Build tests" ON)  # Control test compilation
-
+option(BUILD_BENCHMARKS "Build performance benchmarks" ON)
 
 # Set the output directory for built objects (for runtime and libraries)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
@@ -15,7 +15,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(SDL3IMAGE_BUILD_SHARED TRUE)
 set(SDL3IMAGE_BUILD_STATIC TRUE)
 
-
+set(CMAKE_BUILD_WITH_INSTALL_RPATH    TRUE)
+set(CMAKE_INSTALL_RPATH                "$ORIGIN")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH  TRUE)
 
 # ensure debug symbols and no optimization in Debug
 set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG}   -g -O0")
@@ -35,7 +37,20 @@ if(BUILD_TESTS)
     GIT_REPOSITORY https://github.com/google/googletest.git
     GIT_TAG v1.14.0
   )
-  FetchContent_MakeAvailable(googletest)
+
+  FetchContent_MakeAvailable(
+    googletest
+  )
+endif()
+
+if(BUILD_BENCHMARKS)
+  include(FetchContent)
+  FetchContent_Declare(
+    benchmark
+    GIT_REPOSITORY https://github.com/google/benchmark.git
+    GIT_TAG v1.8.4
+  )
+  FetchContent_MakeAvailable(benchmark)
 endif()
 
 # target_link_libraries(jk PRIVATE gtest_main)
@@ -44,7 +59,7 @@ add_subdirectory(deps/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(deps/SDL3_gfx EXCLUDE_FROM_ALL)
 add_subdirectory(deps/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(src)
-if(BUILD_TESTS)
+if(BUILD_TESTS OR BUILD_BENCHMARKS)
   add_subdirectory(tests)
 endif()
 # add_subdirectory(deps/SDL_image EXCLUDE_FROM_ALL)
@@ -78,10 +93,6 @@ PRIVATE
   SDL3_image::SDL3_image
   SDL3_gfx_Shared
   ImGui
-  gtest_main
-  # shapes
-  # translation
-  # test
 )
 
 
@@ -108,6 +119,8 @@ set(EXT_CMAKE_ARGS
     -DCMAKE_INSTALL_PREFIX=${EXT_INSTALL_DIR}
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 )
+
+# set(CMAKE_SKIP_RPATH TRUE)
 
 ### 1) SDL3
 ExternalProject_Add(
