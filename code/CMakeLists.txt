@@ -69,7 +69,13 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 
 # Tests and benchmarks
 if(BUILD_TESTS)
+  set(BUILD_GTEST ON)
+  set(INSTALL_GTEST OFF)
+  set(gtest_force_shared_crt OFF)
+  set(BUILD_SHARED_LIBS OFF)  # ✅ Force static
+
   include(FetchContent)
+
   FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
