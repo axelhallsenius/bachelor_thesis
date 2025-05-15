@@ -56,6 +56,8 @@ typedef struct{
   double y;
 } point_tm_grid;
 
+double to_degrees(double radians);
+//
 //aquires the utm_zone from a lat/long coordinate
 utm_zone utm_zone_from_geod(point_geod p);
 

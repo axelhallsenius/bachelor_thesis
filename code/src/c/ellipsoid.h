@@ -92,3 +92,29 @@
 
 #define B4 \
     ((49561.0/161280.0) * UTM_N4)
+
+// Vincenty's:
+
+#define VIN_U1 \
+  atan((1 - WGS_ELSD_F) * tan(phi1))
+
+#define VIN_U2 \
+  atan((1 - WGS_ELSD_F) * tan(phi1))
+
+#define VIN_b \
+  WGS_ELSD_A * (1 - WGS_ELSD_F)
+
+#define VIN_A(upow2) \
+  1 + (upow2 / 16384) * (4096 + upow2 * (-768 + upow2 * (320 - 175 * upow2)))
+#define VIN_B(upow2) \
+  (upow2 / 1024) * (256 + upow2 * (-128 + upow2 * (74 - 47 * upow2)))
+
+#define VIN_TAN_PHI_2(azimuth, sigma, alpha) \
+  (sin(VIN_U1) * cos(sigma) + cos(VIN_U1) * sin(sigma) * cos(azimuth)) / \
+    ((1 - WGS_ELSD_F) * \
+    sqrt(pow(sin(alpha), 2) + pow(sin(VIN_U1) * sin(sigma) - cos(VIN_U1) * cos(sigma) * cos(azimuth), 2)))
+
+
+
+
+
