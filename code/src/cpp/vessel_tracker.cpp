@@ -54,7 +54,7 @@ int main(int, char**)
   static int texture_width = 0;
   static int texture_height = 0;
 
-  SDL_Surface *surface;
+  // SDL_Surface *surface;
   // char *svg_path;
   // 
   // SDL_asprintf(&svg_path, "%sassets/maps/World_map_nations.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
@@ -87,7 +87,7 @@ int main(int, char**)
     return SDL_APP_FAILURE;
   }
 
-  SDL_DestroySurface(surface);
+  // SDL_DestroySurface(surface);
 
   // Setup Dear ImGui context
   IMGUI_CHECKVERSION();
@@ -133,12 +133,13 @@ int main(int, char**)
 
   float red_color[4] = {0.760f, 0.213f, 0.213f, 1.00f};
   point_geod null_island = {0.0, 0.0};
-
+  static char buf_lat[32];
+  static char buf_long[32];
   canvas_t canvas = {renderer, &dst_rect};
 
   move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
 
-  vessel_t *vessel = launch_vessel(null_island, move_order->len);
+  vessel_t *vessel = launch_vessel(null_island);
 
   point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
   point_local *local_path = make_path_snake(vessel->pos_snake, move_order);
@@ -219,13 +220,37 @@ int main(int, char**)
       dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
       SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
 
-      if (ImGui::Button("Move Vessel Rand")){
+      if (ImGui::Button("Create random vessel path from last position")){
         
         srand(time(NULL));
         destroy_move_order(move_order);
         move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
         free(geod_path);
         free(local_path);
+        geod_path = make_path_utm(vessel->pos_geod, move_order);
+
+        local_path = make_path_snake(vessel->pos_snake, move_order);
+        point_geod g = geod_path[move_order->len - 1];
+        point_local l = local_path[move_order->len - 1];
+        update_vessel_pos(vessel, g, l);
+
+      }
+      
+      ImGui::Text("\n");
+      ImGui::Text("Set Start Position");
+      ImGui::InputText("Latitude",buf_lat, 32, ImGuiInputTextFlags_CharsDecimal);
+      ImGui::InputText("Longitude",buf_long, 32, ImGuiInputTextFlags_CharsDecimal);
+      if (ImGui::Button("Set")){
+        srand(time(NULL));
+        destroy_move_order(move_order);
+        move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
+        free(geod_path);
+        free(local_path);
+
+        point_geod new_start = {(double) atof(buf_lat), (double) atof(buf_long)};
+
+        set_vessel_start(vessel, new_start);
+
         geod_path = make_path_utm(vessel->pos_geod, move_order);
 
         local_path = make_path_snake(vessel->pos_snake, move_order);
@@ -270,7 +295,7 @@ int main(int, char**)
 
   // Cleanup
 
-  destroy_vessel(vessel);
+  free(vessel);
   destroy_move_order(move_order);
 
   free(geod_path);

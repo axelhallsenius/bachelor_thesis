@@ -12,7 +12,8 @@
   - [ ] Multithreading
   - [ ] tidskomplexitetsanalys
   
-- [ ] mäta performance
+- [X] mäta performance
+  - [X] före
   * före och efter optimering
 
 - [.] Tester
@@ -25,20 +26,20 @@
   - [ ] Tester för grafik
   - [ ] visa diff mellan projektioner i tester
 
-- [o] Kodstruktur
+- [X] Kodstruktur
   - [X] städa kommentarer
   - [X] bort med onödiga funktioner/structer
-  - [ ] döpa om pixel-> ruta?
+  - [X] döpa om pixel-> ruta?
 
 # Should have
-- [ ] hur spara rutter?
+- [X] hur spara rutter?
   * till disk?
   * hur långa är rutter?
   * hur många waypoints?
 
 - [ ] fixa annan start
 
-- [ ] bättre karta
+- [X] bättre karta
 
 - [ ] build zone transfer functionality into utm_grid to geod?
 
@@ -51,5 +52,5 @@
 
 - [ ] sätta koords via gui
 
-- [ ] Polar logic
-  - [ ] annars: skriv om
+- [X] Polar logic
+  - [X] annars: skriv om

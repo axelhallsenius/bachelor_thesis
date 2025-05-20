@@ -45,19 +45,16 @@ typedef struct {
   point_local start_snake;
   point_local pos_snake;
 
-  int steps_snake;
-  int steps_utm;
-
 } vessel_t;
 
-vessel_t *launch_vessel(point_geod startp, int path_len);
+vessel_t *launch_vessel(point_geod startp);
 
-void destroy_vessel(vessel_t *vessel);
 
 move_order_t *create_random_move_order(int len, int scale);
 void destroy_move_order(move_order_t *order);
 void update_vessel_pos(vessel_t *vessel, point_geod g, point_local l);
 
+void set_vessel_start(vessel_t *vessel, point_geod startp);
 point_local *make_path_snake(point_local start, move_order_t *order);
 point_geod *make_path_utm(point_geod start, move_order_t *order);
 

@@ -64,6 +64,9 @@ point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z);
 
 //converts lat/long into a point in a grid
 point_tm_grid geod_to_utm_grid(point_geod p);
+
+//converts tm_grid_to_snake
+point_local utm_grid_to_snake(point_tm_grid ptg, utm_zone zone);
 #ifdef __cplusplus
 }
 #endif

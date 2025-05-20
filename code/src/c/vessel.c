@@ -30,7 +30,7 @@ void destroy_move_order(move_order_t *order){
   free(order);
 }
 
-vessel_t *launch_vessel(point_geod startp, int path_len){
+vessel_t *launch_vessel(point_geod startp){
   vessel_t *vessel = malloc(sizeof(vessel_t));
 
   //what lat/long the vessel is launched at
@@ -38,52 +38,25 @@ vessel_t *launch_vessel(point_geod startp, int path_len){
   vessel->pos_geod = startp;
   vessel->zone = utm_zone_from_geod(startp);
 
-  //TODO: make snake spawn anywhere
-  point_local p = {0.0, 0.0};
-
-  
+  point_local p = utm_grid_to_snake(geod_to_utm_grid(startp), vessel->zone);
 
   vessel->start_snake = p;
   vessel->pos_snake = p;
 
-  vessel->steps_snake = 1;
-  vessel->steps_utm = 1;
-
   return vessel;
 }
 
-void destroy_vessel(vessel_t *vessel){
-  free(vessel);
+void set_vessel_start(vessel_t *vessel, point_geod startp){
+  vessel->start_geod = startp;
+  vessel->pos_geod = startp;
+  vessel->zone = utm_zone_from_geod(startp);
+
+  point_local p = utm_grid_to_snake(geod_to_utm_grid(startp), vessel->zone);
+
+  vessel->start_snake = p;
+  vessel->pos_snake = p;
 }
 
-// void move_vessel_snake(vessel_t *vessel, point_local delta){
-//   int idx = vessel->steps_snake;
-//   point_local p;
-//   p.x = vessel->pos_snake.x + delta.x;
-//   p.y = vessel->pos_snake.y + delta.y;
-//
-//   vessel->pos_snake = p;
-//   vessel->steps_snake++;
-// }
-//
-//
-//
-// void move_vessel_utm(vessel_t *vessel, point_local delta){
-//   point_tm_grid p = geod_to_utm_grid(vessel->pos_geod);
-//   p.x = p.x + delta.x;
-//   p.y = p.y + delta.y;
-//
-//   //TODO: should detect if vessel transfers zone
-//   point_geod newpos = utm_grid_to_geod(p, vessel->zone);
-//   vessel->steps_utm++;
-//   vessel->zone = utm_zone_from_geod(newpos);
-//   
-//   vessel->pos_geod = newpos;
-// }
-//
-//translate orders to degree movement
-//call when updating order
-//TODO: something whack?
 point_geod *make_path_utm(point_geod start, move_order_t *order){
   point_geod *path = malloc(order->len * sizeof(point_geod));
 

@@ -50,7 +50,6 @@ point_geod utm_grid_to_geod(point_tm_grid p, utm_zone z){
   return coords;
 }
 
-//TODO: test
 utm_zone utm_zone_from_geod(point_geod p){
   utm_zone z;
   z.hemisphere = (p.deg_lat < 0);
@@ -69,7 +68,7 @@ utm_zone utm_zone_from_geod(point_geod p){
 point_tm_grid geod_to_utm_grid(point_geod p){
   utm_zone zone = utm_zone_from_geod(p);
   double fn = UTM_FN_N;
-  if (zone.hemisphere){
+  if (zone.hemisphere == HEM_S){
     fn = UTM_FN_S;
   }
 
@@ -120,3 +119,30 @@ point_tm_grid geod_to_utm_grid(point_geod p){
   coords.y = northing;
   return coords;
 }
+
+//not exact
+point_local utm_grid_to_snake(point_tm_grid ptg, utm_zone zone){
+  point_local pl;
+  pl.x = ptg.x;
+  pl.y = ptg.y;
+
+  if (zone.hemisphere == HEM_S){
+    pl.y -= UTM_FN_S;
+  }
+  double m_per_deg_x = EARTH_CIRC_EQ/360.0;
+
+  double meridian;
+
+  if (zone.c_meridian > 180){
+    meridian = 180 - zone.c_meridian;
+  }
+  else {
+    meridian = zone.c_meridian;
+  }
+
+  pl.x += m_per_deg_x * meridian;
+  pl.x -= UTM_FE;
+
+  return pl;
+}
+
