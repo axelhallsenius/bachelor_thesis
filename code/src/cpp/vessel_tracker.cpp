@@ -55,21 +55,33 @@ int main(int, char**)
   static int texture_height = 0;
 
   SDL_Surface *surface;
-  char *svg_path;
-  
-  SDL_asprintf(&svg_path, "%sassets/maps/World_map_nations.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
-  surface = IMG_Load(svg_path); //NOTE: consider using IMG_LoadTexture instead of going the surface route
-  if (!surface) {
-    SDL_Log("Couldn't load svg: %s", SDL_GetError());
-    return SDL_APP_FAILURE;
-  }
+  // char *svg_path;
+  // 
+  // SDL_asprintf(&svg_path, "%sassets/maps/World_map_nations.svg", SDL_GetBasePath());  /* allocate a string of the full file path */
+  // surface = IMG_Load(svg_path); //NOTE: consider using IMG_LoadTexture instead of going the surface route
+  // if (!surface) {
+  //   SDL_Log("Couldn't load svg: %s", SDL_GetError());
+  //   return SDL_APP_FAILURE;
+  // }
+  //
+  // SDL_free(svg_path);  /* done with this, the file is loaded. */
 
-  SDL_free(svg_path);  /* done with this, the file is loaded. */
+  char *map_path;
+  SDL_asprintf(&map_path, "%sassets/maps/paleblue.jpg", SDL_GetBasePath());  /* allocate a string of the full file path */
+  //
+  // surface = IMG_Load(map_path); //NOTE: consider using IMG_LoadTexture instead of going the surface route
+  // if (!surface) {
+  //   SDL_Log("Couldn't load map: %s", SDL_GetError());
+  //   return SDL_APP_FAILURE;
+  // }
+  // texture_width = surface->w;
+  // texture_height = surface->h;
+  texture_width = 8192;
+  texture_height = 4096;
 
-  texture_width = surface->w;
-  texture_height = surface->h;
-
-  SDL_Texture *map_texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_Texture *map_texture = IMG_LoadTexture(renderer, map_path);
+  // SDL_Texture *map_texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_free(map_path);
   if (!map_texture) {
     SDL_Log("Couldn't create static map_texture: %s", SDL_GetError());
     return SDL_APP_FAILURE;
