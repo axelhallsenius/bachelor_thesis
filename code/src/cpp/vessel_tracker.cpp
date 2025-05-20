@@ -216,8 +216,8 @@ int main(int, char**)
       float scale_factor = ((float) win_h) / ((float) texture_height);
       dst_rect.w = (((float)texture_width) * scale_factor) * zoom;
       dst_rect.h = (((float)texture_height) * scale_factor) * zoom;
-      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x;
-      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y;
+      dst_rect.x = ((win_w - dst_rect.w) / 2.0f) + pan_x * zoom;
+      dst_rect.y = ((win_h - dst_rect.h) / 2.0f) + pan_y * zoom;
       SDL_RenderTexture(renderer, map_texture, NULL, &dst_rect);
 
       if (ImGui::Button("Create random vessel path from last position")){
