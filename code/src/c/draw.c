@@ -69,8 +69,9 @@ SDL_FPoint geod_to_pixels(SDL_FRect *rect, point_geod p){
   double pos_long   = p.deg_long * long_scale;
 
   SDL_FPoint pixp;
-  pixp.y = equator - pos_lat;
-  pixp.x = prime_mer + pos_long;
+  pixp.y = (equator - pos_lat);
+  // pixp.x = prime_mer + pos_long;
+  pixp.x = fmod((prime_mer + pos_long), rect->w);
 
   return pixp;
 }
@@ -85,7 +86,8 @@ SDL_FPoint local_to_pixels_snake(SDL_FRect *rect, point_local p){
 
   SDL_FPoint pixp;
   pixp.y = equator - pos_lat;
-  pixp.x = prime_mer + pos_long;
+  // pixp.x = prime_mer + pos_long;
+  pixp.x = fmod((prime_mer + pos_long), rect->w);
 
   return pixp;
 }
