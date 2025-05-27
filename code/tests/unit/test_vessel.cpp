@@ -14,7 +14,7 @@ TEST(ProjDiffTest, Short){
   test_rect.y = 1000.0f;
   point_geod null_island = {0.0, 0.0};
   move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
-  vessel_t *vessel = launch_vessel(null_island, move_order->len);
+  vessel_t *vessel = launch_vessel(null_island);
   point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
   point_local *local_path = make_path_snake(vessel->pos_snake, move_order);
   point_geod g = geod_path[move_order->len - 1];
@@ -51,7 +51,7 @@ TEST(ProjDiffTest, Short){
   }
 
   destroy_move_order(move_order);
-  destroy_vessel(vessel);
+  free(vessel);
   free(local_path);
   free(geod_path);
 }
@@ -66,7 +66,7 @@ TEST(ProjDiffTest, Medium){
   test_rect.y = 10000.0f;
   point_geod null_island = {0.0, 0.0};
   move_order_t *move_order = create_random_move_order(ORDER_LEN, ORDER_SCALE);
-  vessel_t *vessel = launch_vessel(null_island, move_order->len);
+  vessel_t *vessel = launch_vessel(null_island);
   point_geod *geod_path = make_path_utm(vessel->pos_geod, move_order);
   point_local *local_path = make_path_snake(vessel->pos_snake, move_order);
   point_geod g = geod_path[move_order->len - 1];
@@ -102,7 +102,7 @@ TEST(ProjDiffTest, Medium){
   }
 
   destroy_move_order(move_order);
-  destroy_vessel(vessel);
+  free(vessel);
   free(local_path);
   free(geod_path);
 }
