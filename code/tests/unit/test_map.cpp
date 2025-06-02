@@ -11,8 +11,8 @@ TEST(GeodeticToMeter, KarlskogaDiscgolf){
   geop.deg_long = 14.57014000;
 
   gridp = geod_to_utm_grid(geop);
-  EXPECT_NEAR(475536.0, gridp.x, 0.5);
-  EXPECT_NEAR(6576222.0, gridp.y, 0.5);
+  EXPECT_NEAR(475536.148, gridp.x, 0.01);
+  EXPECT_NEAR(6576221.686, gridp.y, 0.01);
 }
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
   // printf("Discgo.17g:\t\t delta x: %.17g, delta y: %.17g\n", 475536.0 - gridp.x,6576222.0 - gridp.y);
@@ -26,8 +26,8 @@ TEST(GeodeticToMeter, AbidjanFootballField){
 
   gridp = geod_to_utm_grid(geop);
   // printf("Abidjan Football Field\n");
-  EXPECT_NEAR(390332.0, gridp.x, 0.5);
-  EXPECT_NEAR(581083.0, gridp.y, 0.5);
+  EXPECT_NEAR(390332.448, gridp.x, 0.01);
+  EXPECT_NEAR(581083.299, gridp.y, 0.01);
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
   // printf("Abidjan Football Field:\t delta x: %.17g, delta y: %.17g\n", 390332.0 - gridp.x,581083.0 - gridp.y);
 }
@@ -40,8 +40,8 @@ TEST(GeodeticToMeter, VancouverHarbour){
 
   gridp = geod_to_utm_grid(geop);
   // printf("Vancouver Harbour\n");
-  EXPECT_NEAR(491398.0, gridp.x, 0.5);
-  EXPECT_NEAR(5459788.0 , gridp.y, 0.5);
+  EXPECT_NEAR(491398.450, gridp.x, 0.01);
+  EXPECT_NEAR(5459787.963, gridp.y, 0.01);
   // printf("x: %.17g, y: %.17g\n", gridp.x, gridp.y);
   // printf("Vancouver Harbour:\t delta x: %.17g, delta y: %.17g\n", 491398.0 - gridp.x,5459788.0 - gridp.y);
   }
@@ -54,8 +54,8 @@ TEST(GeodeticToMeter, PortOfMelbourne){
 
   gridp = geod_to_utm_grid(geop);
   // printf("Lighthouse in the Port of Melbourne\n");
-  EXPECT_NEAR(317803.0, gridp.x, 0.5);
-  EXPECT_NEAR(5809723.0, gridp.y, 0.5);
+  EXPECT_NEAR(317803.468, gridp.x, 0.01);
+  EXPECT_NEAR(5809722.677, gridp.y, 0.01);
 }
 
  

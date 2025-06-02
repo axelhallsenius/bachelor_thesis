@@ -7,10 +7,11 @@
 #include <imgui_impl_sdl3.h>
 #include <imgui_impl_sdlrenderer3.h>
 #include <SDL3_image/SDL_image.h>
+#include <math.h>
 
 #include <time.h>
-#define ORDER_LEN 100
-#define ORDER_SCALE 100
+#define ORDER_LEN 1000
+#define ORDER_SCALE 10
 #define MAX_PATHS 20
 
 #include "map.h"
@@ -114,7 +115,7 @@ int main(int, char**)
   bool show_grid = false;
   bool show_vessel = true;
   bool show_observer = true;
-  bool show_vessel_path = false;
+  bool show_vessel_path = true;
   bool show_observer_path = false;
   bool show_hovering_legend = false;
   bool show_test_point = false;
@@ -164,13 +165,13 @@ int main(int, char**)
 
       if (event.type == SDL_EVENT_KEY_DOWN){
         if      (event.key.key == SDLK_RIGHT)
-          pan_x = pan_x - 20;
+          pan_x = pan_x - 20/(sqrt(zoom));
         else if (event.key.key == SDLK_LEFT)
-          pan_x = pan_x + 20;
+          pan_x = pan_x + 20/(sqrt(zoom));
         else if (event.key.key == SDLK_UP)
-          pan_y = pan_y + 20;
+          pan_y = pan_y + 20/(sqrt(zoom));
         else if (event.key.key == SDLK_DOWN)
-          pan_y = pan_y - 20;
+          pan_y = pan_y - 20/(sqrt(zoom));
       }
     }
 
@@ -210,7 +211,7 @@ int main(int, char**)
         view = compare; 
       }
 
-      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 100.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
+      ImGui::SliderFloat("Zoom Level", &zoom, 0.10f, 1000.0f, "%.3f", ImGuiSliderFlags_Logarithmic);
       ImGui::Text("\n");
 
       float scale_factor = ((float) win_h) / ((float) texture_height);
@@ -271,18 +272,20 @@ int main(int, char**)
     }
         
     if(view == utm_vessel || view == compare){
-      if (show_vessel) {
-        SDL_SetRenderDrawColorFloat(renderer, 1.0f, 0.0f, 0.0f, 1.0f);
+      SDL_SetRenderDrawColorFloat(renderer, 1.0f, 0.0f, 0.0f, 1.0f);
+      if (show_vessel_path){
         render_geod_path(&canvas, geod_path, move_order->len);
+      }
+      if (show_vessel) {
         draw_vessel_utm(&canvas, vessel);
       }
     }
     if (view == snake_vessel || view == compare) {
-      if (show_grid) {
+      SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
+      if (show_vessel_path){
+        render_snake_path(&canvas, local_path, move_order->len);
       }
       if (show_vessel) {
-        SDL_SetRenderDrawColorFloat(renderer, 0.0f, 1.0f, 0.0f, 1.0f);
-        render_snake_path(&canvas, local_path, move_order->len);
         draw_vessel_snake(&canvas, vessel);
       }
     }

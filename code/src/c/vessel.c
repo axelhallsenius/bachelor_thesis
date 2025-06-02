@@ -3,6 +3,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include "vessel.h"
+#include <time.h>
 
 move_order_t *create_random_move_order(int len, int scale){
   move_order_t *order = malloc(sizeof(move_order_t));
@@ -12,9 +13,12 @@ move_order_t *create_random_move_order(int len, int scale){
   double dx;
   double dy;
 
+  srand(time(NULL));
   for (int i = 0; i < len; i++){
-    dx = ((SDL_rand(200) - 100));
-    dy = ((SDL_rand(200) - 100));
+    // dx = ((SDL_rand(2000) - 1000))/100.0;
+    // dy = ((SDL_rand(2000) - 1000))/100.0;
+    dx = ((double)rand() / RAND_MAX*200.0) - 100.0;
+    dy = ((double)rand() / RAND_MAX*200.0) - 100.0;
     dx = dx * scale;
     dy = dy * scale;
 
