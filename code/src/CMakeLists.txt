@@ -7,6 +7,7 @@ add_library(c_code STATIC ${C_SOURCES})
 
 target_include_directories(c_code PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/c
+  ${CMAKE_SOURCE_DIR}/deps/SDL3_gfx
 )
 
 target_include_directories(c_code PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/c)
